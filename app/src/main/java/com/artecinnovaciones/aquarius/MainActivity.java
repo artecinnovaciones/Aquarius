@@ -34,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, DetallesActivity.class);
+                i.putExtra("tipo","salada");
+                startActivity(i);
+            }
+        });
+
+        LinearLayout dul= (LinearLayout)findViewById(R.id.peces_dul);
+        dul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, DetallesActivity.class);
+                i.putExtra("tipo","dulce");
                 startActivity(i);
             }
         });

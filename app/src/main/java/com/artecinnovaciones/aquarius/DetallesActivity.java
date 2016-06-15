@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 public class DetallesActivity extends AppCompatActivity {
 
     private static final String EXTRA_DRAWABLE = "com.artecinnovaciones.artecdemo.drawable";
+    String tip="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class DetallesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalles);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarScroll);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -30,11 +32,18 @@ public class DetallesActivity extends AppCompatActivity {
             }
         });
 
+        tip=getIntent().getStringExtra("tipo");
+
         CollapsingToolbarLayout collapser =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        collapser.setTitle("Peces de agua salada");
+        collapser.setTitle("Peces de agua " + tip);
 
-        loadImageParallax(R.drawable.peces_dulce);
+        if (tip=="salada"){
+            loadImageParallax(R.drawable.peces_salada);
+        }else {
+            loadImageParallax(R.drawable.peces_dulce);
+        }
+
     }
 
     private void loadImageParallax(int id) {
