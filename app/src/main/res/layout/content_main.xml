@@ -7,12 +7,13 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.artecinnovaciones.aquarius.MainActivity"
     tools:showIn="@layout/activity_main"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg_c">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="380dp"
         android:layout_centerHorizontal="true"
         android:layout_weight="1"
         android:id="@+id/linearLayout">
@@ -21,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/imageLogo"
-            android:src="@drawable/logo"
+            android:src="@drawable/logo_aquarium5"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -31,14 +32,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="7dp"
         android:layout_weight="2">
 
         <LinearLayout
+            android:id="@+id/peces_sal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="7dp"
-            android:layout_weight="1">
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_boton">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -53,6 +58,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Agua salada"
                 android:id="@+id/textView"
+                android:textColor="#FFFFFF"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"/>
         </LinearLayout>
@@ -62,7 +68,9 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="7dp"
-            android:layout_weight="1">
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_boton">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -77,6 +85,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Agua dulce"
                 android:id="@+id/textView2"
+                android:textColor="#FFFFFF"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"/>
         </LinearLayout>
@@ -87,7 +96,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:layout_below="@+id/linearLayout2">
+        android:layout_margin="10dp"
+        android:layout_below="@+id/linearLayout2"
+        android:background="@drawable/selector_boton">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -100,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Peceras"
+                android:textColor="#FFFFFF"
                 android:id="@+id/textView3"
                 android:layout_gravity="center_horizontal" />
 
