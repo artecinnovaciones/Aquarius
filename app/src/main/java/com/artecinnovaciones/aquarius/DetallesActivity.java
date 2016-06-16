@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.artecinnovaciones.aquarius.fragments.DetallesFragment;
 import com.bumptech.glide.Glide;
 
 public class DetallesActivity extends AppCompatActivity {
@@ -22,6 +24,9 @@ public class DetallesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarScroll);
         setSupportActionBar(toolbar);
 
+        DetallesFragment DetFrag = new DetallesFragment();
+        getFragmentManager().beginTransaction()
+                .add(R.id.frag_l, DetFrag).commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
