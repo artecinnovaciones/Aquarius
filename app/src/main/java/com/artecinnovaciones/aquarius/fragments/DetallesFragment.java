@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.DetallesAdapter;
-import com.artecinnovaciones.aquarius.adapters.DetallesItem;
+import com.artecinnovaciones.aquarius.objetos.DetallesItem;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
 import java.util.ArrayList;

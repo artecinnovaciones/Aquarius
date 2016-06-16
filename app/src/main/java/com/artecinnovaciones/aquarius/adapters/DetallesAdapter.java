@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.R;
+import com.artecinnovaciones.aquarius.objetos.DetallesItem;
 
 import java.util.ArrayList;
 
@@ -48,4 +49,11 @@ public class DetallesAdapter extends ArrayAdapter<DetallesItem> {
 
         return item;
     }
+
+    public class Holder {
+
+        public TextView titulos, descripciones;
+
+    }
+
 }

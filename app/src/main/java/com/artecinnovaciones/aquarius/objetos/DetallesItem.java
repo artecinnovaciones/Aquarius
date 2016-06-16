@@ -1,4 +1,4 @@
-package com.artecinnovaciones.aquarius.adapters;
+package com.artecinnovaciones.aquarius.objetos;
 
 /**
  * Created by LAP-NIDIA on 16/06/2016.
