@@ -13,7 +13,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_weight="1"
         android:id="@+id/linearLayout">
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="7dp"
-        android:layout_weight="2">
+        android:layout_weight="1">
 
         <LinearLayout
             android:id="@+id/peces_dul"
@@ -96,17 +96,19 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:layout_margin="10dp"
         android:layout_below="@+id/linearLayout2"
-
         android:background="@drawable/selector_boton">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:id="@+id/imageView3"
-                android:src="@drawable/peceras"/>
+                android:src="@drawable/peceras"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -115,6 +117,7 @@
                 android:text="Peceras"
                 android:textColor="#FFFFFF"
                 android:id="@+id/textView3"
+                android:layout_weight="1"
                 android:layout_gravity="center_horizontal" />
 
     </LinearLayout>

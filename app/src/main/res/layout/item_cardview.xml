@@ -41,6 +41,7 @@
             </RelativeLayout>
             <!--Texto de ejemplo-->
             <TextView
+                android:id="@+id/descrp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Los peces de agua salada, también conocidos como peces marinos, precisan de un cuidado diferente al que reciben los peces de agua dulce" />
