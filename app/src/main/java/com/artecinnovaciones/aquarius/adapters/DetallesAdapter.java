@@ -38,7 +38,6 @@ public class DetallesAdapter extends ArrayAdapter<DetallesItem> {
             holder = new Holder();
             holder.titulos = (TextView) item.findViewById(R.id.titulo);
             holder.descripciones = (TextView) item.findViewById(R.id.descrp);
-
             item.setTag(holder);
         }
 
