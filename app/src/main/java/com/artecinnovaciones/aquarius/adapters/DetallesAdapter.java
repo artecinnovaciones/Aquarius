@@ -1,58 +1,77 @@
 package com.artecinnovaciones.aquarius.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.objetos.DetallesItem;
+import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LAP-NIDIA on 16/06/2016.
  */
-public class DetallesAdapter extends ArrayAdapter<DetallesItem> {
+public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosViewHolder> {
 
-    private Context context;
-    private ArrayList<DetallesItem> datos;
+    CustomItemClickListener listener;
+    List<DetallesItem> datos;
 
-    public DetallesAdapter(Context context, ArrayList<DetallesItem> datos) {
-        super(context, R.layout.item_cardview,datos);
+    public static class DatosViewHolder extends RecyclerView.ViewHolder {
 
-        this.datos=datos;
-        this.context=context;
+        CardView cv;
+        TextView titulo;
+        TextView descrip;
+
+        public DatosViewHolder(View itemView) {
+            super(itemView);
+            cv = (CardView)itemView.findViewById(R.id.cv);
+            titulo = (TextView)itemView.findViewById(R.id.titulo);
+            descrip = (TextView)itemView.findViewById(R.id.descrp);
+        }
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View item = convertView;
-        Holder holder;
-
-        if (item == null) {
-            item = LayoutInflater.from(context).inflate(R.layout.item_cardview, null);
-
-            holder = new Holder();
-            holder.titulos = (TextView) item.findViewById(R.id.titulo);
-            holder.descripciones = (TextView) item.findViewById(R.id.descrp);
-            item.setTag(holder);
-        }
-
-        holder = (Holder) item.getTag();
-
-        holder.titulos.setText(datos.get(position).getTitulo());
-        holder.descripciones.setText(datos.get(position).getDescripcion());
-
-        return item;
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public class Holder {
+    public DetallesAdapter(List<DetallesItem> datos, CustomItemClickListener listener){
+        this.datos = datos;
+        this.listener = listener;
+    }
 
-        public TextView titulos, descripciones;
+    @Override
+    public DatosViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview, parent, false);
+        final DatosViewHolder pvh = new DatosViewHolder(v);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(v, pvh.getPosition());
+            }
+        });
+        return pvh;
+    }
 
+    @Override
+    public void onBindViewHolder(DatosViewHolder holder, int position) {
+        holder.titulo.setText(datos.get(position).titulo);
+        holder.descrip.setText(datos.get(position).descripcion);
+    }
+
+    @Override
+    public int getItemCount() {
+        return datos.size();
     }
 
 }

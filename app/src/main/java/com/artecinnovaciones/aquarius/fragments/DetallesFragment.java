@@ -2,6 +2,9 @@ package com.artecinnovaciones.aquarius.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.widget.ListView;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.DetallesAdapter;
 import com.artecinnovaciones.aquarius.objetos.DetallesItem;
+import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
 import java.util.ArrayList;
@@ -19,7 +23,7 @@ import java.util.ArrayList;
  */
 public class DetallesFragment extends Fragment {
 
-    ListView ld;
+    RecyclerView rv;
     ArrayList<DetallesItem> listD;
 
     public DetallesFragment(){ }
@@ -32,18 +36,33 @@ public class DetallesFragment extends Fragment {
     }
 
     public void metodo(View view){
-        ld= ViewUtil.findViewById(view, R.id.list_detalles);
-        listD = agregar();
+        listD = new ArrayList<DetallesItem>();
+        listD.add(new DetallesItem("Enfermedades","Diferentes tipos de enfermedades"));
+        listD.add(new DetallesItem("Cuidados", "Como cuidar a tu pez"));
+        listD.add(new DetallesItem("Datos curiosos", "Cosas que no sabías hacerca de los peces"));
 
-        DetallesAdapter adapter= new DetallesAdapter(getActivity(),listD);
-        ld.setAdapter(adapter);
+        rv = ViewUtil.findViewById(view, R.id.rv);
+
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rv.setLayoutManager(llm);
+        rv.setHasFixedSize(true);
+
+        initializeAdapter();
     }
 
-    private ArrayList<DetallesItem> agregar(){
-        ArrayList<DetallesItem> datos = new ArrayList<DetallesItem>();
-        datos.add(new DetallesItem("Enfermedades","Diferentes tipos de enfermedades"));
-        datos.add(new DetallesItem("Cuidados","Como cuidar a tu pez"));
-        datos.add(new DetallesItem("Datos curiosos","Cosas que no sabías hacerca de los peces"));
-        return  datos;
+    /*private void agregar(){
+        listD.add(new DetallesItem("Enfermedades","Diferentes tipos de enfermedades"));
+        listD.add(new DetallesItem("Cuidados", "Como cuidar a tu pez"));
+        listD.add(new DetallesItem("Datos curiosos", "Cosas que no sabías hacerca de los peces"));
+    }*/
+
+    private void initializeAdapter() {
+        DetallesAdapter adapter = new DetallesAdapter(listD, new CustomItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+
+            }
+        });
+        rv.setAdapter(adapter);
     }
 }
