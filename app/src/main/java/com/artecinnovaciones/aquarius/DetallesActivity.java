@@ -24,7 +24,9 @@ public class DetallesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarScroll);
         setSupportActionBar(toolbar);
 
-        DetallesFragment DetFrag = new DetallesFragment();
+        tip=getIntent().getStringExtra("tipo");
+
+        DetallesFragment DetFrag = new DetallesFragment(tip);
         getFragmentManager().beginTransaction()
                 .add(R.id.frag_l, DetFrag).commit();
 
@@ -37,13 +39,11 @@ public class DetallesActivity extends AppCompatActivity {
             }
         });
 
-        tip=getIntent().getStringExtra("tipo");
-
         CollapsingToolbarLayout collapser =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        collapser.setTitle("Peces de agua " + tip);
+        collapser.setTitle("");
 
-        if (tip=="salada"){
+        if (tip.equals("salada")){
             loadImageParallax(R.drawable.peces_salada);
         }else {
             loadImageParallax(R.drawable.peces_dulce);

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/app_bar"
+        android:background="@color/primary_light"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -51,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
-                android:icon="@drawable/ic_sort_24dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_sort_by_size"
+        android:src="@drawable/buscar"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
 
