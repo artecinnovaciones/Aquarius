@@ -28,13 +28,13 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
 
     public static class DatosViewHolder extends RecyclerView.ViewHolder {
 
-        CardView cv;
+        //CardView cv;
         TextView titulo;
         TextView descrip;
 
         public DatosViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
+            //cv = (CardView)itemView.findViewById(R.id.cv);
             titulo = (TextView)itemView.findViewById(R.id.titulo);
             descrip = (TextView)itemView.findViewById(R.id.descrp);
         }
