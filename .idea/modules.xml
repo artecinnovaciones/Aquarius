@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Aquarius.iml" filepath="$PROJECT_DIR$/Aquarius.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/greendaodb/greendaodb.iml" filepath="$PROJECT_DIR$/greendaodb/greendaodb.iml" />
     </modules>
   </component>
 </project>

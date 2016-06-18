@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
-import com.artecinnovaciones.artecdemo.Activitys.PrincipalActivity;
-import com.artecinnovaciones.artecdemo.R;
+
+import com.artecinnovaciones.aquarius.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +39,7 @@ public class GCMService extends IntentService {
     private void sendNotification(String msg) {
         mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, PrincipalActivity.class), 0);
+     //PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, PrincipalActivity.class), 0);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -48,7 +48,7 @@ public class GCMService extends IntentService {
                         .bigText(msg))
                 .setContentText(msg);
 
-        mBuilder.setContentIntent(contentIntent);
+      //  mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 }
