@@ -1,1 +1,1 @@
-include ':app', ':greendaodb'
+include ':greendaodb', ':app'
