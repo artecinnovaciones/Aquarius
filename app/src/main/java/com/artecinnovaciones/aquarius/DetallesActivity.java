@@ -40,8 +40,9 @@ public class DetallesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                 //       .setAction("Action", null).show();
+                inflater.inflate(R.menu.menu_detalles, menu);
             }
         });
 
@@ -67,8 +68,9 @@ public class DetallesActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_detalles, menu);
+       inflater = getMenuInflater();
+       this.menu=menu;
+      //  inflater.inflate(R.menu.menu_detalles, menu);
 /*
         final MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
@@ -95,4 +97,7 @@ public class DetallesActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
+    private MenuInflater inflater;
+    private Menu menu;
 }
