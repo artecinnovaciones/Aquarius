@@ -11,7 +11,8 @@ public class Greendaodb {
 
             Entity PecesAguaDulce = schema.addEntity("PecesDulce");
             PecesAguaDulce.addIdProperty();
-            PecesAguaDulce.addStringProperty("Nombre");
+            PecesAguaDulce.addStringProperty("NombreCientifico");
+            PecesAguaDulce.addStringProperty("NombreComun");
             PecesAguaDulce.addStringProperty("Informacion");
             PecesAguaDulce.addStringProperty("Enfermedades");
             PecesAguaDulce.addStringProperty("Cuidados");
