@@ -17,10 +17,13 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
+
 import com.artecinnovaciones.aquarius.fragments.DetallesFragment;
 import com.bumptech.glide.Glide;
 
-public class DetallesActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
+public class DetallesActivity extends AppCompatActivity implements OnQueryTextListener, OnActionExpandListener {
 
     private static final String EXTRA_DRAWABLE = "com.artecinnovaciones.artecdemo.drawable";
     String tip="";
@@ -82,7 +85,7 @@ public class DetallesActivity extends AppCompatActivity implements SearchView.On
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
 
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint("Buscar");
         searchView.setOnQueryTextListener(this);
 
