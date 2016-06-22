@@ -7,7 +7,7 @@ import de.greenrobot.daogenerator.Schema;
 public class Greendaodb {
 
         public static void main(String args[]) throws Exception {
-            Schema schema = new Schema(1000, "com.artecinnovaciones.aquarius.modeldao");
+            Schema schema = new Schema(1000, "com.artecinnovaciones.aquarius.modelodao");
 
             Entity PecesAguaDulce = schema.addEntity("PecesDulce");
             PecesAguaDulce.addIdProperty();
