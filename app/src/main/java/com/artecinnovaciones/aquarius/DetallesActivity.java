@@ -12,16 +12,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.artecinnovaciones.aquarius.fragments.DetallesFragment;
 import com.bumptech.glide.Glide;
 
-public class DetallesActivity extends AppCompatActivity {
+public class DetallesActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
 
     private static final String EXTRA_DRAWABLE = "com.artecinnovaciones.artecdemo.drawable";
     String tip="";
+    TextView txtB;
+    RelativeLayout bus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,9 @@ public class DetallesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         tip=getIntent().getStringExtra("tipo");
+
+        txtB = (TextView) findViewById(R.id.text_buscar);
+        bus=(RelativeLayout) findViewById(R.id.layout_buscar);
 
         DetallesFragment DetFrag = new DetallesFragment(tip);
         getFragmentManager().beginTransaction()
@@ -42,7 +49,9 @@ public class DetallesActivity extends AppCompatActivity {
             public void onClick(View view) {
                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                  //       .setAction("Action", null).show();
+                bus.setVisibility(View.VISIBLE);
                 inflater.inflate(R.menu.menu_detalles, menu);
+
             }
         });
 
@@ -70,6 +79,14 @@ public class DetallesActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
        inflater = getMenuInflater();
        this.menu=menu;
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setQueryHint("Buscar");
+        searchView.setOnQueryTextListener(this);
+
+        MenuItemCompat.setOnActionExpandListener(searchItem, this);
       //  inflater.inflate(R.menu.menu_detalles, menu);
 /*
         final MenuItem searchItem = menu.findItem(R.id.action_search);
@@ -96,6 +113,30 @@ public class DetallesActivity extends AppCompatActivity {
 
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        Toast.makeText(getApplicationContext(), "EXPAND", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        Toast.makeText(getApplicationContext(), "COLLAPSE", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        txtB.setText("Texto a buscar\n\n" + s);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        txtB.setText("Escribiendo texto...\n\n" + s);
+        return false;
     }
 
     private MenuInflater inflater;
