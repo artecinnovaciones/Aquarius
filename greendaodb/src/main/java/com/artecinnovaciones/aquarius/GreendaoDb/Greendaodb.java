@@ -9,12 +9,15 @@ public class Greendaodb {
         public static void main(String args[]) throws Exception {
             Schema schema = new Schema(1000, "com.artecinnovaciones.aquarius.modeldao");
 
-            Entity person = schema.addEntity("Login");
-            person.addIdProperty();
-            person.addStringProperty("name");
-            person.addStringProperty("password");
-
-
+            Entity PecesAguaDulce = schema.addEntity("PecesDulce");
+            PecesAguaDulce.addIdProperty();
+            PecesAguaDulce.addStringProperty("Nombre");
+            PecesAguaDulce.addStringProperty("Informacion");
+            PecesAguaDulce.addStringProperty("Enfermedades");
+            PecesAguaDulce.addStringProperty("Cuidados");
+            PecesAguaDulce.addStringProperty("Alimentacion");
+            PecesAguaDulce.addIntProperty("MasBuscado");
+            PecesAguaDulce.addByteArrayProperty("Imagen");
             new DaoGenerator().generateAll(schema, "../app/src/main/java");
         }
     }
