@@ -12,5 +12,5 @@ import retrofit2.http.GET;
 public interface PecesWebService {
 
     @GET(ConstantsService.GET.VALIDATE_LOGIN)
-    PecesResponse getListPeces();
+    Call<PecesResponse> getListPeces();
 }
