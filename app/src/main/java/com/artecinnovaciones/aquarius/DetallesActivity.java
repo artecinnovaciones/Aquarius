@@ -40,7 +40,7 @@ public class DetallesActivity extends AppCompatActivity {
                  //       .setAction("Action", null).show();
                 if (menu != null) menu.clear();
                 inflater.inflate(R.menu.menu_detalles, menu);
-                
+
 
             }
         });
