@@ -11,6 +11,7 @@ public class PecesService  extends BaseService<PecesWebService> {
 
     public PecesService(String baseUrl) {
         super(baseUrl, PecesWebService.class);
+
     }
 
     }
