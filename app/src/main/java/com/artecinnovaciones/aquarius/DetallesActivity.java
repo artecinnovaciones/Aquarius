@@ -40,7 +40,7 @@ public class DetallesActivity extends AppCompatActivity {
                  //       .setAction("Action", null).show();
                 if (menu != null) menu.clear();
                 inflater.inflate(R.menu.menu_detalles, menu);
-                searchItem.expandActionView();
+                
 
             }
         });
@@ -71,7 +71,7 @@ public class DetallesActivity extends AppCompatActivity {
        this.menu=menu;
 
         searchItem = menu.findItem(R.id.action_search);
-        searchItem.setIcon(R.drawable.buscar);
+        //searchItem.setIcon(R.drawable.buscar);
 
         return super.onCreateOptionsMenu(menu);
     }
