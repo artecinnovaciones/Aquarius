@@ -4,7 +4,7 @@
     tools:context="com.artecinnovaciones.aquarius.DetallesActivity">
     <item
         android:id="@+id/action_search"
-        android:icon="@null"
+        android:icon="@drawable/ic_cast_light"
         android:title=""
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always"/>
