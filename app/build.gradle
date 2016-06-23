@@ -34,5 +34,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.0.2'
     compile 'org.greenrobot:greendao:2.2.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
 
 }
