@@ -93,14 +93,14 @@ public class SplashActivity extends Activity {
         mpecesAsyncTask = new AsyncTask<Void, Integer, PecesResponse>() {
             @Override
             protected PecesResponse doInBackground(Void... params) {
-                PecesResponse s = null;
+                PecesResponse mPecesResponse = null;
                 try {
-                    s = PecesControlator.getInstance(getApplicationContext()).getListPeces();
+                    mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
 
                 } catch (Exception e) {
                     e.getMessage();
                 }
-                return s;
+                return mPecesResponse;
             }
 
             @Override
