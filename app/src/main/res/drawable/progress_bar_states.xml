@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
-        <shape>
-            <gradient android:angle="270" android:centercolor="@color/colorAccent" android:centery="0.75" android:endcolor="#0d1522" android:startcolor="#000001">
-            </gradient>
-        </shape>
+    <shape>
+        <gradient android:angle="270" android:centercolor="#0b131e" android:centery="0.75" android:endcolor="#0d1522" android:startcolor="#000001">
+        </gradient>
+    </shape>
 
-        <item android:id="@android:id/secondaryProgress">
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape>
+                <gradient android:angle="270" android:centercolor="#234" android:centery="0.75" android:endcolor="#a24" android:startcolor="#234">
+                </gradient>
+            </shape>
+        </clip>
+
+        <item android:id="@android:id/progress">
             <clip>
                 <shape>
-                    <gradient android:angle="270" android:centercolor="#234" android:centery="0.75" android:endcolor="#a24" android:startcolor="#234">
+                    <gradient android:angle="270" android:centercolor="#0b1f3c" android:centery="0.75" android:endcolor="#06101d" android:startcolor="#144281">
                     </gradient>
                 </shape>
             </clip>
 
-            <item android:id="@android:id/progress">
-                <clip>
-                    <shape>
-                        <gradient android:angle="270" android:centercolor="@color/divider" android:centery="0.75" android:endcolor="#06101d" android:startcolor="@color/icons">
-                        </gradient>
-                    </shape>
-                </clip>
-
-            </item>
         </item>
-    </item>
+    </item></item>
 </layer-list>
