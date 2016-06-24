@@ -53,15 +53,15 @@ public class MainActivity extends AppCompatActivity {
         dul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getListPeces();
-            /*    Intent i = new Intent(MainActivity.this, DetallesActivity.class);
+                //getListPeces();
+                Intent i = new Intent(MainActivity.this, DetallesActivity.class);
                 i.putExtra("tipo", "dulce");
-                startActivity(i);*/
+                startActivity(i);
             }
         });
     }
 
-
+/*
     public void getListPeces() {
         mpecesAsyncTask = new AsyncTask<Void, Void, PecesResponse>() {
             @Override
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private AsyncTask<Void, Void, PecesResponse> mpecesAsyncTask;
+    private AsyncTask<Void, Void, PecesResponse> mpecesAsyncTask; */
 
 
 }

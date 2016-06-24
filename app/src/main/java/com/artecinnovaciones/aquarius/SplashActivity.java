@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControlator;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
+
 public class SplashActivity extends Activity {
 
     ProgressBar h;
@@ -30,7 +33,7 @@ public class SplashActivity extends Activity {
         pez=(ImageView)findViewById(R.id.pez);
 
         h=(ProgressBar)findViewById(R.id.progressBar);
-        h.setVisibility(View.GONE);
+        //h.setVisibility(View.GONE);
         h.setProgress(0);
 
         anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.robotar);
@@ -38,8 +41,9 @@ public class SplashActivity extends Activity {
         logo.startAnimation(anim);
 
         animate();
+        getListPeces();
 
-        new AsyncTask_load().execute();
+        //new AsyncTask_load().execute();
     }
 
     private void animate(){
@@ -53,7 +57,7 @@ public class SplashActivity extends Activity {
             frame.start();
         }
     }
-
+/*
     public class AsyncTask_load extends AsyncTask<Void,Integer,Void>{
         int progreso;
 
@@ -83,5 +87,37 @@ public class SplashActivity extends Activity {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();
         }
+    } */
+
+    public void getListPeces() {
+        mpecesAsyncTask = new AsyncTask<Void, Integer, PecesResponse>() {
+            @Override
+            protected PecesResponse doInBackground(Void... params) {
+                PecesResponse s = null;
+                try {
+                    s = PecesControlator.getInstance(getApplicationContext()).getListPeces();
+
+                } catch (Exception e) {
+                    e.getMessage();
+                }
+                return s;
+            }
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                h.setProgress(values[0]);
+                p.setText(values[0] + " %");
+            }
+
+            @Override
+            protected void onPostExecute(PecesResponse pecesResponse) {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
+            }
+        }.execute();
+
     }
+
+
+    private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
 }
