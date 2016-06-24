@@ -41,7 +41,7 @@ public class PecesControlator {
 
     public void initWebServiceController() {
         try {
-            String url = "http://artecinnovaciones.com/";
+            String url = "http://artecinnovaciones.com";
             mPecesService = new PecesService(url);
         } catch (Exception e) {
             e.getStackTrace();
