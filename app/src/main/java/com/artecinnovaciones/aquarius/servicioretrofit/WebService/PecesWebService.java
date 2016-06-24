@@ -4,6 +4,7 @@ import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsServic
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.GET;
 
 /**
@@ -12,5 +13,7 @@ import retrofit2.http.GET;
 public interface PecesWebService {
 
     @GET(ConstantsService.GET.VALIDATE_LOGIN)
-    PecesResponse getListPeces();
+    void getListPeces(Callback<PecesResponse>peces);
+   // Call<PecesResponse> getListPeces();
 }
+
