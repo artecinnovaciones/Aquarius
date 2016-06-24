@@ -1,9 +1,8 @@
 package com.artecinnovaciones.aquarius.servicioretrofit;
 
+
 import com.artecinnovaciones.aquarius.servicioretrofit.WebService.PecesWebService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,41 +21,24 @@ public class PecesService extends BaseService<PecesWebService> {
 
     }
 
-    public PecesResponse getlistPeces() {
-        Call<PecesResponse> result = null;
-        /*try {
-           // ss = (PecesResponse) getWebServiceClient().getListPeces();
-
-           result = getWebServiceClient().getListPeces();
-
-        } catch (Exception e) {
-            e.getMessage();
-        }*/
+    public void getlistPeces() {
 
 
-        result = getWebServiceClient().getListPeces();
-        result.enqueue(new Callback<PecesResponse>() {
-
+        getWebServiceClient().getListPeces(new Callback<PecesResponse>() {
             @Override
             public void onResponse(Call<PecesResponse> call, Response<PecesResponse> response) {
+                if (call != null && response != null) {
 
-                if (response != null) {
-                    PecesResponse = response;
-                    System.out.print(response);
                 }
-
             }
-
 
             @Override
             public void onFailure(Call<PecesResponse> call, Throwable t) {
-                t.printStackTrace();
+                t.getMessage();
             }
         });
 
-        return null;
-
     }
 
-    public Response PecesResponse;
+    public PecesResponse PecesResponse;
 }

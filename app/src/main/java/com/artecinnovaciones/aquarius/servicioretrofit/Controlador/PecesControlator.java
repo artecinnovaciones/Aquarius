@@ -26,10 +26,10 @@ public class PecesControlator {
         initWebServiceController();
         try {
 
-            PecesResponse user = mPecesService.getlistPeces();
+             mPecesService.getlistPeces();
 
 
-                return user;
+                return null;
 
 
         } catch (RuntimeException e) {
