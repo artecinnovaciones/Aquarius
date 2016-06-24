@@ -21,7 +21,7 @@ public class SplashActivity extends Activity {
 
     ProgressBar h;
     Animation anim;
-    ImageView logo,pez;
+    ImageView logo, pez;
     TextView p;
 
     @Override
@@ -29,18 +29,20 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        p=(TextView)findViewById(R.id.porcent);
-        pez=(ImageView)findViewById(R.id.pez);
+        p = (TextView) findViewById(R.id.porcent);
+        pez = (ImageView) findViewById(R.id.pez);
 
-        h=(ProgressBar)findViewById(R.id.progressBar);
+        h = (ProgressBar) findViewById(R.id.progressBar);
         //h.setVisibility(View.GONE);
         h.setProgress(0);
 
-        anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.robotar);
-        logo = (ImageView)findViewById(R.id.logo_splash);
+        anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.robotar);
+        logo = (ImageView) findViewById(R.id.logo_splash);
         logo.startAnimation(anim);
 
-        animate();
+          animate();
+      //  pez.setBackgroundResource(R.drawable.animacion_pez);
+       // frame = (AnimationDrawable)pez.getBackground();
         getListPeces();
 
         //new AsyncTask_load().execute();
@@ -48,7 +50,8 @@ public class SplashActivity extends Activity {
 
     private void animate(){
         pez.setBackgroundResource(R.drawable.animacion_pez);
-        AnimationDrawable frame = (AnimationDrawable) pez.getBackground();
+        AnimationDrawable frame = (AnimationDrawable)
+                pez.getBackground();
             frame.stop();
             frame.start();
     }
@@ -85,7 +88,16 @@ public class SplashActivity extends Activity {
     } */
 
     public void getListPeces() {
+
         mpecesAsyncTask = new AsyncTask<Void, Integer, PecesResponse>() {
+       /*     @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                if (pez != null && frame != null) {
+                    frame.start();
+                }
+            }*/
+
             @Override
             protected PecesResponse doInBackground(Void... params) {
                 PecesResponse mPecesResponse = null;
@@ -106,7 +118,10 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
-                if(pecesResponse!=null ){
+                if (frame != null) {
+                    frame.stop();
+                }
+                if (pecesResponse != null) {
 
                 }
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
@@ -118,4 +133,5 @@ public class SplashActivity extends Activity {
 
 
     private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
+    private AnimationDrawable frame;
 }
