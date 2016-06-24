@@ -111,6 +111,9 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
+                if(pecesResponse!=null ){
+
+                }
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }

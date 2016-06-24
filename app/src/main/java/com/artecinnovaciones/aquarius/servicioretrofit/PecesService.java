@@ -24,16 +24,21 @@ public class PecesService extends BaseService<PecesWebService> {
 
     }
 
-    public void getlistPeces() {
+    public PecesResponse getlistPeces() {
         Call<PecesResponse> call = null;
 
         call = getWebServiceClient().getListPeces();
 
+        return getResponse(call);
+    }
+
+    private PecesResponse getResponse(Call<PecesResponse> call) {
+        mPecesResponse = null;
         call.enqueue(new Callback<PecesResponse>() {
             @Override
             public void onResponse(Call<PecesResponse> call, Response<PecesResponse> response) {
                 if (response != null) {
-
+                    mPecesResponse = response.body();
                 }
             }
 
@@ -44,8 +49,8 @@ public class PecesService extends BaseService<PecesWebService> {
             }
         });
 
-
+        return mPecesResponse;
     }
 
-    public PecesResponse PecesResponse;
+    public PecesResponse mPecesResponse;
 }
