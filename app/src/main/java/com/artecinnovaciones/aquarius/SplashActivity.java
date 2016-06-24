@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControlator;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
 
     ProgressBar h;
     Animation anim;
