@@ -48,14 +48,9 @@ public class SplashActivity extends Activity {
 
     private void animate(){
         pez.setBackgroundResource(R.drawable.animacion_pez);
-
         AnimationDrawable frame = (AnimationDrawable) pez.getBackground();
-        if(frame.isRunning()){
-            frame.stop();
-        }else{
             frame.stop();
             frame.start();
-        }
     }
 /*
     public class AsyncTask_load extends AsyncTask<Void,Integer,Void>{

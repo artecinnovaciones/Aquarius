@@ -32,8 +32,7 @@
             android:id="@+id/progressBar"
             android:max="100"
             android:indeterminate="false"
-            android:progressBackgroundTint="@color/primary_light"
-            android:secondaryProgressTint="@color/icons"
+            android:progressDrawable="@drawable/progress_bar_states"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
