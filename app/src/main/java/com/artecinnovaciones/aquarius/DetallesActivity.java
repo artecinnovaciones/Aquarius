@@ -66,7 +66,7 @@ public class DetallesActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(image);
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
        inflater = getMenuInflater();
@@ -85,5 +85,5 @@ public class DetallesActivity extends AppCompatActivity {
 
     private MenuInflater inflater;
     private Menu menu;
-    MenuItem searchItem;
+    MenuItem searchItem; */
 }
