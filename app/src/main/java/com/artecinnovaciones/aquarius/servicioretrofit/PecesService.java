@@ -1,6 +1,8 @@
 package com.artecinnovaciones.aquarius.servicioretrofit;
 
 
+import android.graphics.Bitmap;
+
 import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.WebService.PecesWebService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
@@ -40,7 +42,21 @@ public class PecesService extends BaseService<PecesWebService> {
         }
         return registrationResponse;
     }
+    public Bitmap getImage(String image) {
+        Bitmap registrationResponse = null;
+        try {
+            Call<ResponseBody> call = getWebServiceClient().getImagePeces(image);
+            Response<ResponseBody> response = call.execute();
+            if (response != null && response.errorBody() != null) {
 
+                return registrationResponse;
+            }
+           // registrationResponse = response.body();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return registrationResponse;
+    }
     @Deprecated//metodo Asyncrono
     private PecesResponse getResponse(Call<PecesResponse> call) {
         mPecesResponse = null;

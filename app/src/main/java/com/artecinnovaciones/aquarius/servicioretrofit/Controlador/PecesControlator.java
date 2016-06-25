@@ -1,12 +1,14 @@
 package com.artecinnovaciones.aquarius.servicioretrofit.Controlador;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.PecesService;
+import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 
 import java.util.List;
@@ -60,15 +62,33 @@ public class PecesControlator {
                         mPeces.getCuidados(),
                         mPeces.getAlimentacion(),
                         mPeces.getMasBuscado(),
-                        mPeces.getImagen());
+                        descargadeimagen(mPeces.getImagen()));
 
                 saveModelClient(mPecesDulce);
+
             }
         } else {
             mPecesDulceDao.deleteAll();
-           guardarpecesbd(mPecesResponse);
+            guardarpecesbd(mPecesResponse);
         }
     }
+
+    private String descargadeimagen(String image) {
+        initWebServiceController();
+        Bitmap mByteStream = null;
+        try {
+            mByteStream = mPecesService.getImage(image);
+            mByteStream.toString();
+            return null;
+
+
+        } catch (RuntimeException e) {
+
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private void saveModelClient(PecesDulce mPeces) {
         mPecesDulceDao.insert(mPeces);
     }
