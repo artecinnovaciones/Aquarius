@@ -7,6 +7,7 @@ import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesRespon
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,13 +26,22 @@ public class PecesService extends BaseService<PecesWebService> {
     }
 
     public PecesResponse getlistPeces() {
-        Call<PecesResponse> call = null;
+        PecesResponse registrationResponse = null;
+        try {
+            Call<PecesResponse> call = getWebServiceClient().getListPeces();
+            Response<PecesResponse> response = call.execute();
+            if (response != null && response.errorBody() != null) {
 
-        call = getWebServiceClient().getListPeces();
-
-        return getResponse(call);
+                return registrationResponse;
+            }
+            registrationResponse = response.body();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return registrationResponse;
     }
 
+    @Deprecated//metodo Asyncrono
     private PecesResponse getResponse(Call<PecesResponse> call) {
         mPecesResponse = null;
         call.enqueue(new Callback<PecesResponse>() {

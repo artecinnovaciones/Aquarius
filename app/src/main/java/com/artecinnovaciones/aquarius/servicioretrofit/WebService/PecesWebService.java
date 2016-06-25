@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.http.GET;
 
 /**
@@ -16,8 +17,6 @@ import retrofit2.http.GET;
 public interface PecesWebService {
 
     @GET(ConstantsService.GET.VALIDATE_LOGIN)
-        // void getListPeces(Callback<PecesResponse>peces);
-        // Call<PecesResponse> getListPeces();
     Call<PecesResponse> getListPeces();
 }
 

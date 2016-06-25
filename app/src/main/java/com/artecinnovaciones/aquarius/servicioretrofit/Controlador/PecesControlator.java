@@ -5,6 +5,7 @@ import android.content.Context;
 import com.artecinnovaciones.aquarius.servicioretrofit.PecesService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 
+
 /**
  * Created by Geovany.Chin on 23/06/2016.
  */
@@ -24,17 +25,19 @@ public class PecesControlator {
 
     public PecesResponse getListPeces() {
         initWebServiceController();
+        PecesResponse mPecesResponse = null;
         try {
-
-        return   mPecesService.getlistPeces();
+            mPecesResponse = mPecesService.getlistPeces();
+            return mPecesResponse;
 
 
         } catch (RuntimeException e) {
 
             e.printStackTrace();
         }
-        return null;
+        return mPecesResponse;
     }
+
 
     public void initWebServiceController() {
         try {
@@ -47,6 +50,6 @@ public class PecesControlator {
 
     private static PecesControlator INSTANCE;
     private Context mContext;
-    PecesService mPecesService;
+    private PecesService mPecesService;
 
 }

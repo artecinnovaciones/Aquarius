@@ -43,27 +43,27 @@ public class SplashActivity extends Activity {
         pez2 = (ImageView) findViewById(R.id.imageViewProgress);
         LL = (LinearLayout) findViewById(R.id.LL);
 
-          animate();
-      //  pez.setBackgroundResource(R.drawable.animacion_pez);
-       // frame = (AnimationDrawable)pez.getBackground();
+        //   animate();
+        pez2.setBackgroundResource(R.drawable.animacion_pez);
+        frame = (AnimationDrawable) pez2.getBackground();
         getListPeces();
 
-       // new AsyncTask_load().execute();
+        // new AsyncTask_load().execute();
     }
 
-    private void animate(){
+  /*  private void animate(){
         pez2.setBackgroundResource(R.drawable.animacion_pez);
         AnimationDrawable frame = (AnimationDrawable)
                 pez2.getBackground();
             frame.stop();
             frame.start();
-    }
+    }*/
 
-    public void mover(int mov){
+    public void mover(int mov) {
         LL.removeAllViews();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez2.getLayoutParams());
-        params.setMargins((int)(mov*4.3)-pez2.getWidth()/2, 0, 0, 0);
-        LL.addView(pez2,params);
+        params.setMargins((int) (mov * 4.3) - pez2.getWidth() / 2, 0, 0, 0);
+        LL.addView(pez2, params);
     }
 
   /*  public class AsyncTask_load extends AsyncTask<Void,Integer,Void>{
@@ -101,20 +101,25 @@ public class SplashActivity extends Activity {
     public void getListPeces() {
 
         mpecesAsyncTask = new AsyncTask<Void, Integer, PecesResponse>() {
-       /*     @Override
+            @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                if (pez != null && frame != null) {
+                if (pez2 != null && frame != null) {
                     frame.start();
                 }
-            } */
+            }
+
 
             @Override
             protected PecesResponse doInBackground(Void... params) {
                 PecesResponse mPecesResponse = null;
                 try {
+               //     int i = 0;
+               //     Thread.sleep(1000);
+               //     publishProgress(i++);
                     mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
-
+                    String s = "string" + mPecesResponse.toString();
+                    publishProgress(Integer.valueOf(s));
                 } catch (Exception e) {
                     e.getMessage();
                 }
@@ -123,9 +128,11 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onProgressUpdate(Integer... values) {
+
                 progress.setProgress(values[0]);
                 mover(values[0]);
-                porcentaje.setText(values[0]+" %");
+                porcentaje.setText(values[0] + " %");
+
             }
 
             @Override
@@ -134,10 +141,10 @@ public class SplashActivity extends Activity {
                     frame.stop();
                 }
                 if (pecesResponse != null) {
-
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    finish();
                 }
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
+
             }
         }.execute();
 
