@@ -2,8 +2,14 @@ package com.artecinnovaciones.aquarius.servicioretrofit.Controlador;
 
 import android.content.Context;
 
+import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
+import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
+import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
+import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.PecesService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
+
+import java.util.List;
 
 
 /**
@@ -39,9 +45,38 @@ public class PecesControlator {
         return mPecesResponse;
     }
 
+
     private void guardarpecesbd(PecesResponse mPecesResponse) {
+        initPecesDao();
+        PecesDulce mPecesDulce = null;
+        List listPeces = mPecesDulceDao.queryBuilder().list();
+        if (listPeces.size() == 0) {
+            for (Peces mPeces : mPecesResponse.getmListPeces()) {
+
+                mPecesDulce = new PecesDulce(null,
+                        mPeces.getNombreCientifico(),
+                        mPeces.getNombreComun(),
+                        mPeces.getInformacion(),
+                        mPeces.getCuidados(),
+                        mPeces.getAlimentacion(),
+                        mPeces.getMasBuscado(),
+                        mPeces.getImagen());
+
+                saveModelClient(mPecesDulce);
+            }
+        } else {
+            mPecesDulceDao.deleteAll();
+           guardarpecesbd(mPecesResponse);
+        }
+    }
+    private void saveModelClient(PecesDulce mPeces) {
+        mPecesDulceDao.insert(mPeces);
     }
 
+
+    private void initPecesDao() {
+        mPecesDulceDao = BdController.getInstance(mContext).pecesdulce();
+    }
 
     public void initWebServiceController() {
         try {
@@ -55,6 +90,7 @@ public class PecesControlator {
     private static PecesControlator INSTANCE;
     private Context mContext;
     private PecesService mPecesService;
+    private PecesDulceDao mPecesDulceDao;
 
 
 }

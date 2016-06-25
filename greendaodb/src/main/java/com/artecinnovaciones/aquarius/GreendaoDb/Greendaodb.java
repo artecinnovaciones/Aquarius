@@ -14,11 +14,10 @@ public class Greendaodb {
             PecesAguaDulce.addStringProperty("NombreCientifico");
             PecesAguaDulce.addStringProperty("NombreComun");
             PecesAguaDulce.addStringProperty("Informacion");
-            PecesAguaDulce.addStringProperty("Enfermedades");
             PecesAguaDulce.addStringProperty("Cuidados");
             PecesAguaDulce.addStringProperty("Alimentacion");
             PecesAguaDulce.addIntProperty("MasBuscado");
-            PecesAguaDulce.addByteArrayProperty("Imagen");
+            PecesAguaDulce.addStringProperty("Imagen");
             new DaoGenerator().generateAll(schema, "../app/src/main/java");
         }
     }
