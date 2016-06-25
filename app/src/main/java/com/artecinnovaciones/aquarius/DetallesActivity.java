@@ -74,12 +74,6 @@ public class DetallesActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_detalles, menu);
         //searchItem = menu.findItem(R.id.action_search);
         //searchItem.setIcon(R.drawable.buscar);
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
 
         return super.onCreateOptionsMenu(menu);
     }
