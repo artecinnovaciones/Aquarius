@@ -1,5 +1,7 @@
 package com.artecinnovaciones.aquarius;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.artecinnovaciones.aquarius.fragments.DetallesFragment;
 import com.bumptech.glide.Glide;
@@ -38,9 +41,8 @@ public class DetallesActivity extends AppCompatActivity {
             public void onClick(View view) {
                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                  //       .setAction("Action", null).show();
-                if (menu != null) menu.clear();
-                inflater.inflate(R.menu.menu_detalles, menu);
-
+                //if (menu != null) menu.clear();
+                onSearchRequested();
 
             }
         });
@@ -69,9 +71,15 @@ public class DetallesActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
        inflater = getMenuInflater();
        this.menu=menu;
-
-        searchItem = menu.findItem(R.id.action_search);
+        inflater.inflate(R.menu.menu_detalles, menu);
+        //searchItem = menu.findItem(R.id.action_search);
         //searchItem.setIcon(R.drawable.buscar);
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
 
         return super.onCreateOptionsMenu(menu);
     }
