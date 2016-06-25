@@ -28,6 +28,7 @@ public class PecesControlator {
         PecesResponse mPecesResponse = null;
         try {
             mPecesResponse = mPecesService.getlistPeces();
+            guardarpecesbd(mPecesResponse);
             return mPecesResponse;
 
 
@@ -36,6 +37,9 @@ public class PecesControlator {
             e.printStackTrace();
         }
         return mPecesResponse;
+    }
+
+    private void guardarpecesbd(PecesResponse mPecesResponse) {
     }
 
 
@@ -51,5 +55,6 @@ public class PecesControlator {
     private static PecesControlator INSTANCE;
     private Context mContext;
     private PecesService mPecesService;
+
 
 }

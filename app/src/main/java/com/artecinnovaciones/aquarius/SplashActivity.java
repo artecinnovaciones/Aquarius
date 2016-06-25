@@ -114,12 +114,10 @@ public class SplashActivity extends Activity {
             protected PecesResponse doInBackground(Void... params) {
                 PecesResponse mPecesResponse = null;
                 try {
-               //     int i = 0;
-               //     Thread.sleep(1000);
-               //     publishProgress(i++);
+
                     mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
-                    String s = "string" + mPecesResponse.toString();
-                    publishProgress(Integer.valueOf(s));
+                    publishProgress(mPecesResponse.getmListPeces().size());
+                    SystemClock.sleep(5000);
                 } catch (Exception e) {
                     e.getMessage();
                 }
@@ -128,11 +126,11 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onProgressUpdate(Integer... values) {
-
-                progress.setProgress(values[0]);
-                mover(values[0]);
-                porcentaje.setText(values[0] + " %");
-
+                for (int i = 0; i < values.length; i++) {
+                    progress.setProgress(values[0]);
+                    mover(values[0]);
+                    porcentaje.setText(values[0] + " %");
+                }
             }
 
             @Override
