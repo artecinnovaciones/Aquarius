@@ -8,21 +8,21 @@
         android:paddingTop="8dip"
         android:paddingBottom="8dip">
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/progressBar2"
             android:progressDrawable="@drawable/progress_bar_states"
             android:layout_width="fill_parent"
-            android:layout_height="8dip"
+            android:layout_height="15dip"
             style="?android:attr/progressBarStyleHorizontal"
             android:indeterminateOnly="false"
             android:max="100"
-            />
+            android:indeterminate="false" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/LL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <ImageView android:layout_width="24dip" android:src="@drawable/progresstip"
-            android:layout_height="24dip" android:id="@+id/imageView" />
+        <ImageView android:layout_width="35dip"
+            android:layout_height="35dip" android:id="@+id/imageViewProgress" />
     </LinearLayout>
 </merge>

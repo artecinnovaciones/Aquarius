@@ -2,11 +2,13 @@ package com.artecinnovaciones.aquarius.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.DetallesAdapter;
@@ -24,6 +26,7 @@ public class DetallesFragment extends Fragment {
     RecyclerView rv;
     ArrayList<DetallesItem> listD;
     String tipo;
+    TextView titulo,descrp;
 
     public DetallesFragment(String tipo){ this.tipo=tipo;}
 
@@ -36,15 +39,22 @@ public class DetallesFragment extends Fragment {
 
     public void metodo(View view){
         listD = new ArrayList<DetallesItem>();
+        titulo = ViewUtil.findViewById(view,R.id.tipo);
+        descrp = ViewUtil.findViewById(view,R.id.info_tipo);
+
         if (tipo.equals("salada")){
+            titulo.setText("Peces de agua Salada");
+            descrp.setText("Los peces de agua salada son una excelente opción para aquellas personas que no tienen mucho tiempo para dedicar a sus mascotas pero quieren disfrutar de la belleza de los peces.");
             salada();
         }else {
+            titulo.setText("Peces de agua Dulce");
+            descrp.setText("Existe una gran variedad de peces de agua dulce para elegir cuando estás construyendo y habitando un acuario; dependiendo del tamaño y del equipamiento que instale algunos peces se adaptarán mejores que otros.");
             dulce();
         }
 
         rv = ViewUtil.findViewById(view, R.id.rv);
 
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        GridLayoutManager llm = new GridLayoutManager(getActivity(),2);
         rv.setLayoutManager(llm);
         rv.setHasFixedSize(true);
 

@@ -7,10 +7,12 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,44 +21,52 @@ import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesRespon
 
 public class SplashActivity extends Activity {
 
-    ProgressBar h;
+    ProgressBar progress;
     Animation anim;
-    ImageView logo, pez;
-    TextView p;
+    ImageView logo, pez2;
+    TextView porcentaje;
+
+    LinearLayout LL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        p = (TextView) findViewById(R.id.porcent);
-        pez = (ImageView) findViewById(R.id.pez);
-
-        h = (ProgressBar) findViewById(R.id.progressBar);
-        //h.setVisibility(View.GONE);
-        h.setProgress(0);
+        porcentaje = (TextView) findViewById(R.id.porcent);
 
         anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.robotar);
         logo = (ImageView) findViewById(R.id.logo_splash);
         logo.startAnimation(anim);
+
+        progress = (ProgressBar) findViewById(R.id.progressBar2);
+        pez2 = (ImageView) findViewById(R.id.imageViewProgress);
+        LL = (LinearLayout) findViewById(R.id.LL);
 
           animate();
       //  pez.setBackgroundResource(R.drawable.animacion_pez);
        // frame = (AnimationDrawable)pez.getBackground();
         getListPeces();
 
-        //new AsyncTask_load().execute();
+       // new AsyncTask_load().execute();
     }
 
     private void animate(){
-        pez.setBackgroundResource(R.drawable.animacion_pez);
+        pez2.setBackgroundResource(R.drawable.animacion_pez);
         AnimationDrawable frame = (AnimationDrawable)
-                pez.getBackground();
+                pez2.getBackground();
             frame.stop();
             frame.start();
     }
-/*
-    public class AsyncTask_load extends AsyncTask<Void,Integer,Void>{
+
+    public void mover(int mov){
+        LL.removeAllViews();
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez2.getLayoutParams());
+        params.setMargins((int)(mov*4.3)-pez2.getWidth()/2, 0, 0, 0);
+        LL.addView(pez2,params);
+    }
+
+  /*  public class AsyncTask_load extends AsyncTask<Void,Integer,Void>{
         int progreso;
 
         @Override
@@ -76,8 +86,9 @@ public class SplashActivity extends Activity {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            h.setProgress(values[0]);
-            p.setText(values[0]+" %");
+            progress.setProgress(values[0]);
+            mover(values[0]);
+            porcentaje.setText(values[0] + " %");
         }
 
         @Override
@@ -96,7 +107,7 @@ public class SplashActivity extends Activity {
                 if (pez != null && frame != null) {
                     frame.start();
                 }
-            }*/
+            } */
 
             @Override
             protected PecesResponse doInBackground(Void... params) {
@@ -112,8 +123,9 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onProgressUpdate(Integer... values) {
-                h.setProgress(values[0]);
-                p.setText(values[0] + " %");
+                progress.setProgress(values[0]);
+                mover(values[0]);
+                porcentaje.setText(values[0]+" %");
             }
 
             @Override

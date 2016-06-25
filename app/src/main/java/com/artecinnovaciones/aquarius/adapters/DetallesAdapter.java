@@ -35,8 +35,8 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
         public DatosViewHolder(View itemView) {
             super(itemView);
             //cv = (CardView)itemView.findViewById(R.id.cv);
-            titulo = (TextView)itemView.findViewById(R.id.titulo);
-            descrip = (TextView)itemView.findViewById(R.id.descrp);
+            titulo = (TextView)itemView.findViewById(R.id.text_item);
+            //descrip = (TextView)itemView.findViewById(R.id.descrp);
         }
     }
 
@@ -52,7 +52,7 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
 
     @Override
     public DatosViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_peces, parent, false);
         final DatosViewHolder pvh = new DatosViewHolder(v);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +66,7 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
     @Override
     public void onBindViewHolder(DatosViewHolder holder, int position) {
         holder.titulo.setText(datos.get(position).titulo);
-        holder.descrip.setText(datos.get(position).descripcion);
+        //holder.descrip.setText(datos.get(position).descripcion);
     }
 
     @Override
