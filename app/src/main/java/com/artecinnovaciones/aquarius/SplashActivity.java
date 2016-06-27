@@ -52,55 +52,17 @@ public class SplashActivity extends Activity {
         frame2 = (AnimationDrawable) pez.getBackground();
         getListPeces();
 
-        // new AsyncTask_load().execute();
     }
 
-  /*  private void animate(){
-        pez2.setBackgroundResource(R.drawable.animacion_pez);
-        AnimationDrawable frame = (AnimationDrawable)
-                pez2.getBackground();
-            frame.stop();
-            frame.start();
-    }*/
 
     public void mover(int mov) {
-        LL.removeAllViews();
+
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez2.getLayoutParams());
         params.setMargins((int) (mov * 4.3) - pez2.getWidth() / 2, 0, 0, 0);
-        LL.addView(pez2, params);
+
     }
 
-  /*  public class AsyncTask_load extends AsyncTask<Void,Integer,Void>{
-        int progreso;
 
-        @Override
-        protected void onPreExecute() {
-            progreso= 0;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            while (progreso < 100){
-                progreso++;
-                publishProgress(progreso);
-                SystemClock.sleep(80);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            progress.setProgress(values[0]);
-            mover(values[0]);
-            porcentaje.setText(values[0] + " %");
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            finish();
-        }
-    } */
 
     public void tiempo (){
         frame = (AnimationDrawable) pez2.getBackground();
@@ -125,7 +87,7 @@ public class SplashActivity extends Activity {
                         jumpTime += 5;
                         progress.setProgress(jumpTime);
                         mover(jumpTime);
-                        porcentaje.setText(jumpTime + " %");
+                      //  porcentaje.setText(jumpTime + " %");
                     }
                     catch (InterruptedException e) {
                         // TODO Auto-generated catch block
@@ -135,7 +97,7 @@ public class SplashActivity extends Activity {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
-        };
+        }.start();
     }
 
     public void getListPeces() {
@@ -168,24 +130,10 @@ public class SplashActivity extends Activity {
                 return mPecesResponse;
             }
 
-            @Override
-            protected void onProgressUpdate(Integer... values) {
-                /*for (int i = 0; i < values.length; i++) {
-                    progress.setProgress(values[0]);
-                    mover(values[0]);
-                    porcentaje.setText(values[0] + " %");
-                } */
-            }
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
-              /*  if (frame != null) {
-                    frame.stop();
-                }
-                if (pecesResponse != null) {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                    finish();
-                } */
+
                 tiempo();
             }
         }.execute();
