@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,10 +21,10 @@ public class SplashActivity extends Activity {
 
     ProgressBar progress;
     Animation anim;
-    ImageView logo, pez, pez2;
+    ImageView logo, pez, pez_progress;
     TextView porcentaje,descarga;
 
-    LinearLayout LL;
+    LinearLayout Pez_Layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +39,15 @@ public class SplashActivity extends Activity {
         logo.startAnimation(anim);
 
         progress = (ProgressBar) findViewById(R.id.progressBar2);
-        pez2 = (ImageView) findViewById(R.id.imageViewProgress);
-        LL = (LinearLayout) findViewById(R.id.LL);
+        pez_progress = (ImageView) findViewById(R.id.imageViewProgress);
+        Pez_Layout = (LinearLayout) findViewById(R.id.LL);
 
         pez = (ImageView) findViewById(R.id.descargaimg);
 
         //   animate();
-        pez2.setBackgroundResource(R.drawable.animacion_pez);
+        pez_progress.setBackgroundResource(R.drawable.animacion_pez);
         pez.setBackgroundResource(R.drawable.animacion_pez);
-        frame2 = (AnimationDrawable) pez.getBackground();
+        animar_pez = (AnimationDrawable) pez.getBackground();
         getListPeces();
 
     }
@@ -57,20 +55,18 @@ public class SplashActivity extends Activity {
 
     public void mover(int mov) {
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez2.getLayoutParams());
-        params.setMargins((int) (mov * 4.3) - pez2.getWidth() / 2, 0, 0, 0);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez_progress.getLayoutParams());
+        params.setMargins((int) (mov * 4.3) - pez_progress.getWidth() / 2, 0, 0, 0);
 
     }
 
-
-
     public void tiempo (){
-        frame = (AnimationDrawable) pez2.getBackground();
-        frame2.stop();
-        frame.start();
+        animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
+        animar_pez.stop();
+        animar_pez_progress.start();
         progress.setVisibility(View.VISIBLE);
-        pez2.setVisibility(View.VISIBLE);
-        LL.setVisibility(View.VISIBLE);
+        pez_progress.setVisibility(View.VISIBLE);
+        Pez_Layout.setVisibility(View.VISIBLE);
         porcentaje.setVisibility(View.VISIBLE);
 
         pez.setVisibility(View.GONE);
@@ -87,7 +83,7 @@ public class SplashActivity extends Activity {
                         jumpTime += 5;
                         progress.setProgress(jumpTime);
                         mover(jumpTime);
-                      //  porcentaje.setText(jumpTime + " %");
+                        porcentaje.setText(jumpTime + " %");
                     }
                     catch (InterruptedException e) {
                         // TODO Auto-generated catch block
@@ -106,21 +102,19 @@ public class SplashActivity extends Activity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                if (pez != null && frame2 != null) {
-                    frame2.start();
+                if (pez != null && animar_pez != null) {
+                    animar_pez.start();
                 }
                 progress.setVisibility(View.GONE);
-                pez2.setVisibility(View.GONE);
-                LL.setVisibility(View.GONE);
+                pez_progress.setVisibility(View.GONE);
+                Pez_Layout.setVisibility(View.GONE);
                 porcentaje.setVisibility(View.GONE);
             }
-
 
             @Override
             protected PecesResponse doInBackground(Void... params) {
                 PecesResponse mPecesResponse = null;
                 try {
-
                     mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
                     publishProgress(mPecesResponse.getmListPeces().size());
                     SystemClock.sleep(5000);
@@ -142,5 +136,5 @@ public class SplashActivity extends Activity {
 
 
     private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
-    private AnimationDrawable frame,frame2;
+    private AnimationDrawable animar_pez_progress, animar_pez;
 }
