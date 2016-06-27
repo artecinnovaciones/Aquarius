@@ -46,25 +46,21 @@ public class PecesService extends BaseService<PecesWebService> {
         return registrationResponse;
     }
 
-    public Bitmap getImage(String image) {
-        Bitmap registrationResponse = null;
+    public String getImage(String image) {
+        String registrationImageBd = null;
         try {
 
             Call<ResponseBody> call = getWebServiceClient().getImagePeces("/aquarius/uploads/" + image);
             Response<ResponseBody> response = call.execute();
 
             if (response != null) {
-                ViewUtil s = new ViewUtil();
-                s.makeFile(response.body(), "IMG_TEMP_"
-                        + System.currentTimeMillis() + image);
-
-                return registrationResponse;
+                new ViewUtil().makeFile(response.body(), "IMG_TEMP_" + image);
+                return new ViewUtil().TEMP_DIRECTORY_PATH + "IMG_TEMP_" + image;
             }
-            // registrationResponse = response.body();
         } catch (Exception e) {
             e.getMessage();
         }
-        return registrationResponse;
+        return registrationImageBd;
     }
 
     @Deprecated//metodo Asyncrono
