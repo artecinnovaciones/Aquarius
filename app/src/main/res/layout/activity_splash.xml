@@ -40,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
             android:id="@+id/porcent"
             android:textColor="@color/icons"
             android:layout_alignParentBottom="true"
@@ -61,7 +60,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Preparando descarga"
             android:id="@+id/descarga"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="27dp"
             android:layout_alignBottom="@+id/descargaimg"
             android:layout_centerHorizontal="true" />
 

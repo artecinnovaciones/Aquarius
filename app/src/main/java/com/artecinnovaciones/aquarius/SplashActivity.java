@@ -83,7 +83,7 @@ public class SplashActivity extends Activity {
                         jumpTime += 5;
                         progress.setProgress(jumpTime);
                         mover(jumpTime);
-                        porcentaje.setText(jumpTime + " %");
+                        //porcentaje.setText(jumpTime + " %");
                     }
                     catch (InterruptedException e) {
                         // TODO Auto-generated catch block

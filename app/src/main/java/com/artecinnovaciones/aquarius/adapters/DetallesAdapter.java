@@ -1,19 +1,16 @@
 package com.artecinnovaciones.aquarius.adapters;
 
-import android.app.Activity;
-import android.content.Context;
-import android.support.v7.widget.CardView;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
-import com.artecinnovaciones.aquarius.objetos.DetallesItem;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 
 import java.util.ArrayList;
@@ -32,12 +29,14 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
         //CardView cv;
         TextView titulo;
         TextView descrip;
+        ImageView img;
 
         public DatosViewHolder(View itemView) {
             super(itemView);
             //cv = (CardView)itemView.findViewById(R.id.cv);
             titulo = (TextView)itemView.findViewById(R.id.text_item);
             //descrip = (TextView)itemView.findViewById(R.id.descrp);
+            img = (ImageView) itemView.findViewById(R.id.image_item);
         }
     }
 
@@ -66,8 +65,10 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
 
     @Override
     public void onBindViewHolder(DatosViewHolder holder, int position) {
-        holder.titulo.setText(datos.get(position).getAlimentacion());
+        holder.titulo.setText(datos.get(position).getNombreComun());
         //holder.descrip.setText(datos.get(position).descripcion);
+        Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
+        holder.img.setImageBitmap(bMap);
     }
 
     @Override
