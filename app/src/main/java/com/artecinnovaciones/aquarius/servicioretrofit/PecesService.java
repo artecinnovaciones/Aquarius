@@ -5,8 +5,11 @@ import android.graphics.Bitmap;
 
 import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.WebService.PecesWebService;
+import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
+import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
+import java.io.File;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -42,21 +45,28 @@ public class PecesService extends BaseService<PecesWebService> {
         }
         return registrationResponse;
     }
+
     public Bitmap getImage(String image) {
         Bitmap registrationResponse = null;
         try {
-            Call<ResponseBody> call = getWebServiceClient().getImagePeces(image);
+
+            Call<ResponseBody> call = getWebServiceClient().getImagePeces("/aquarius/uploads/" + image);
             Response<ResponseBody> response = call.execute();
-            if (response != null && response.errorBody() != null) {
+
+            if (response != null) {
+                ViewUtil s = new ViewUtil();
+                s.makeFile(response.body(), "IMG_TEMP_"
+                        + System.currentTimeMillis() + image);
 
                 return registrationResponse;
             }
-           // registrationResponse = response.body();
+            // registrationResponse = response.body();
         } catch (Exception e) {
             e.getMessage();
         }
         return registrationResponse;
     }
+
     @Deprecated//metodo Asyncrono
     private PecesResponse getResponse(Call<PecesResponse> call) {
         mPecesResponse = null;

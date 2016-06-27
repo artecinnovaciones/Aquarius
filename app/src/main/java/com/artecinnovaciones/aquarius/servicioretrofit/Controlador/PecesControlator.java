@@ -107,6 +107,7 @@ public class PecesControlator {
         }
     }
 
+
     private static PecesControlator INSTANCE;
     private Context mContext;
     private PecesService mPecesService;

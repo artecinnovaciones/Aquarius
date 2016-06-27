@@ -14,6 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 /**
  * Created by Geovany.Chin on 23/06/2016.
@@ -23,8 +24,7 @@ public interface PecesWebService {
     @GET(ConstantsService.GET.VALIDATE_LOGIN)
     Call<PecesResponse> getListPeces();
 
-
-    @GET(ConstantsService.GET.IMAGEDESCARGADA)
-    Call<ResponseBody> getImagePeces(@Path("image") String image);
+    @GET
+    Call<ResponseBody> getImagePeces(@Url String fileUrl);
 }
 
