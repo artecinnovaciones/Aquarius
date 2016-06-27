@@ -1,6 +1,7 @@
 package com.artecinnovaciones.aquarius.fragments;
 
 import android.app.Fragment;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +12,17 @@ import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.DetallesAdapter;
+import com.artecinnovaciones.aquarius.modelodao.DaoMaster;
+import com.artecinnovaciones.aquarius.modelodao.DaoSession;
+import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.artecinnovaciones.aquarius.objetos.DetallesItem;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import de.greenrobot.dao.query.CloseableListIterator;
 
 /**
  * Created by LAP-NIDIA on 16/06/2016.
@@ -26,6 +33,8 @@ public class DetallesFragment extends Fragment {
     ArrayList<DetallesItem> listD;
     String tipo;
     TextView titulo,descrp;
+
+    List leaseList;
 
     public DetallesFragment(String tipo){ this.tipo=tipo;}
 
@@ -41,6 +50,17 @@ public class DetallesFragment extends Fragment {
         titulo = ViewUtil.findViewById(view,R.id.tipo);
         descrp = ViewUtil.findViewById(view,R.id.info_tipo);
 
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getContext(), "pecesdulce-db", null);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        DaoSession daoSession = daoMaster.newSession();
+
+        PecesDulceDao leaseDao = daoSession.getPecesDulceDao();
+        leaseList = leaseDao.loadAll();
+
+
+
+
         if (tipo.equals("salada")){
             titulo.setText("Peces de agua Salada");
             descrp.setText("Los peces de agua salada son una excelente opción para aquellas personas que no tienen mucho tiempo para dedicar a sus mascotas pero quieren disfrutar de la belleza de los peces.");
@@ -48,7 +68,10 @@ public class DetallesFragment extends Fragment {
         }else {
             titulo.setText("Peces de agua Dulce");
             descrp.setText("Existe una gran variedad de peces de agua dulce para elegir cuando estás construyendo y habitando un acuario; dependiendo del tamaño y del equipamiento que instale algunos peces se adaptarán mejores que otros.");
-            dulce();
+            //dulce();
+            for (int c=0; c<leaseList.size(); c++){
+                listD.add(new DetallesItem(leaseList.get(c).toString(),""));
+            }
         }
 
         rv = ViewUtil.findViewById(view, R.id.rv);
