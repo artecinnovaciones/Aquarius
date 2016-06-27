@@ -23,8 +23,8 @@ public class SplashActivity extends Activity {
 
     ProgressBar progress;
     Animation anim;
-    ImageView logo, pez2;
-    TextView porcentaje;
+    ImageView logo, pez, pez2;
+    TextView porcentaje,descarga;
 
     LinearLayout LL;
 
@@ -34,6 +34,7 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
 
         porcentaje = (TextView) findViewById(R.id.porcent);
+        descarga = (TextView) findViewById(R.id.descarga);
 
         anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.robotar);
         logo = (ImageView) findViewById(R.id.logo_splash);
@@ -43,9 +44,12 @@ public class SplashActivity extends Activity {
         pez2 = (ImageView) findViewById(R.id.imageViewProgress);
         LL = (LinearLayout) findViewById(R.id.LL);
 
+        pez = (ImageView) findViewById(R.id.descargaimg);
+
         //   animate();
         pez2.setBackgroundResource(R.drawable.animacion_pez);
-        frame = (AnimationDrawable) pez2.getBackground();
+        pez.setBackgroundResource(R.drawable.animacion_pez);
+        frame2 = (AnimationDrawable) pez.getBackground();
         getListPeces();
 
         // new AsyncTask_load().execute();
@@ -98,15 +102,53 @@ public class SplashActivity extends Activity {
         }
     } */
 
+    public void tiempo (){
+        frame = (AnimationDrawable) pez2.getBackground();
+        frame2.stop();
+        frame.start();
+        progress.setVisibility(View.VISIBLE);
+        pez2.setVisibility(View.VISIBLE);
+        LL.setVisibility(View.VISIBLE);
+
+        pez.setVisibility(View.GONE);
+        descarga.setVisibility(View.GONE);
+
+        final Thread t = new Thread() {
+            @Override
+            public void run() {
+                int jumpTime = 0;
+
+                while(jumpTime < 100) {
+                    try {
+                        sleep(80);
+                        jumpTime += 5;
+                        progress.setProgress(jumpTime);
+                        mover(jumpTime);
+                        porcentaje.setText(jumpTime + " %");
+                    }
+                    catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
+            }
+        };
+    }
+
     public void getListPeces() {
 
         mpecesAsyncTask = new AsyncTask<Void, Integer, PecesResponse>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                if (pez2 != null && frame != null) {
-                    frame.start();
+                if (pez != null && frame2 != null) {
+                    frame2.start();
                 }
+                progress.setVisibility(View.GONE);
+                pez2.setVisibility(View.GONE);
+                LL.setVisibility(View.GONE);
             }
 
 
@@ -126,23 +168,23 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onProgressUpdate(Integer... values) {
-                for (int i = 0; i < values.length; i++) {
+                /*for (int i = 0; i < values.length; i++) {
                     progress.setProgress(values[0]);
                     mover(values[0]);
                     porcentaje.setText(values[0] + " %");
-                }
+                } */
             }
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
-                if (frame != null) {
+              /*  if (frame != null) {
                     frame.stop();
                 }
                 if (pecesResponse != null) {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
-                }
-
+                } */
+                tiempo();
             }
         }.execute();
 
@@ -150,5 +192,5 @@ public class SplashActivity extends Activity {
 
 
     private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
-    private AnimationDrawable frame;
+    private AnimationDrawable frame,frame2;
 }
