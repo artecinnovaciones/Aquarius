@@ -55,7 +55,7 @@
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-                <category android:name="com.artecinnovaciones.artecdemo" />
+                <category android:name="com.artecinnovaciones.aquarius" />
             </intent-filter>
         </receiver>
 

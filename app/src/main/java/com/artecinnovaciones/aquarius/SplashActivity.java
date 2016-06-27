@@ -114,7 +114,7 @@ public class SplashActivity extends Activity {
         pez.setVisibility(View.GONE);
         descarga.setVisibility(View.GONE);
 
-        final Thread t = new Thread() {
+        new Thread() {
             @Override
             public void run() {
                 int jumpTime = 0;
