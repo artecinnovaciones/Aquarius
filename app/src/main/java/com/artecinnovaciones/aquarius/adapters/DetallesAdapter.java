@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.R;
+import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.objetos.DetallesItem;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 
@@ -24,7 +25,7 @@ import java.util.List;
 public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosViewHolder> {
 
     CustomItemClickListener listener;
-    List<DetallesItem> datos;
+    List<PecesDulce> datos;
 
     public static class DatosViewHolder extends RecyclerView.ViewHolder {
 
@@ -45,7 +46,7 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public DetallesAdapter(List<DetallesItem> datos, CustomItemClickListener listener){
+    public DetallesAdapter(List<PecesDulce> datos, CustomItemClickListener listener){
         this.datos = datos;
         this.listener = listener;
     }
@@ -65,7 +66,7 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
 
     @Override
     public void onBindViewHolder(DatosViewHolder holder, int position) {
-        holder.titulo.setText(datos.get(position).titulo);
+        holder.titulo.setText(datos.get(position).getAlimentacion());
         //holder.descrip.setText(datos.get(position).descripcion);
     }
 
