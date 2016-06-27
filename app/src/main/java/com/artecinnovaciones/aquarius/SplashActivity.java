@@ -109,6 +109,7 @@ public class SplashActivity extends Activity {
         progress.setVisibility(View.VISIBLE);
         pez2.setVisibility(View.VISIBLE);
         LL.setVisibility(View.VISIBLE);
+        porcentaje.setVisibility(View.VISIBLE);
 
         pez.setVisibility(View.GONE);
         descarga.setVisibility(View.GONE);
@@ -149,6 +150,7 @@ public class SplashActivity extends Activity {
                 progress.setVisibility(View.GONE);
                 pez2.setVisibility(View.GONE);
                 LL.setVisibility(View.GONE);
+                porcentaje.setVisibility(View.GONE);
             }
 
 
