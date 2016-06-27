@@ -75,18 +75,18 @@ public class PecesControlator {
 
     private String descargadeimagen(String image) {
         initWebServiceController();
-        Bitmap mByteStream = null;
+        String rutaBd = null;
         try {
-            mByteStream = mPecesService.getImage(image);
-            mByteStream.toString();
-            return null;
+            rutaBd = mPecesService.getImage(image);
+
+            return rutaBd.toString();
 
 
         } catch (RuntimeException e) {
 
             e.printStackTrace();
         }
-        return null;
+        return rutaBd;
     }
 
     private void saveModelClient(PecesDulce mPeces) {
