@@ -74,10 +74,22 @@ public class SplashActivity extends Activity {
 
         pez.setVisibility(View.GONE);
         descarga.setVisibility(View.GONE);
+        int t=0;
+        while (t<100){
+            try {
+                t++;
+                Thread.sleep ( 1000 );
+                progress.setProgress(t);
+                mover(t);
+                porcentaje.setText(t+" %");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
-        new Thread() {
+   /*     new Thread() {
             @Override
-            public void run() {
+            public void SplashActivity.runOnUiThread() {
                 int jumpTime = 0;
 
                 while(jumpTime < 100) {
@@ -97,7 +109,7 @@ public class SplashActivity extends Activity {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
-        }.start();
+        }.start(); */
     }
 
     public void getListPeces() {
