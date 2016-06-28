@@ -10,18 +10,24 @@
         android:layout_weight="1"
         android:background="@drawable/selector_boton">
 
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="180dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/image_item"
-            android:src="@drawable/pezd"
-            android:scaleType="centerInside"
-            android:layout_weight="10"/>
+            android:src="@drawable/peces_dulce"
+            android:scaleType="centerCrop"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="85dp"
         android:padding="3dp">
 
         <TextView
