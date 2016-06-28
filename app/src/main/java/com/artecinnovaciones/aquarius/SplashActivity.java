@@ -170,6 +170,16 @@ public class SplashActivity extends Activity {
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
                 //tiempo();
+                animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
+                animar_pez.stop();
+                animar_pez_progress.start();
+                progress.setVisibility(View.VISIBLE);
+                pez_progress.setVisibility(View.VISIBLE);
+                Pez_Layout.setVisibility(View.VISIBLE);
+                porcentaje.setVisibility(View.VISIBLE);
+
+                pez.setVisibility(View.GONE);
+                descarga.setVisibility(View.GONE);
                 new moverProgress();
             }
         }.execute();
@@ -178,21 +188,6 @@ public class SplashActivity extends Activity {
 
     class moverProgress extends AsyncTask<Void,Integer, Void>{
         int progess=0;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
-            animar_pez.stop();
-            animar_pez_progress.start();
-            progress.setVisibility(View.VISIBLE);
-            pez_progress.setVisibility(View.VISIBLE);
-            Pez_Layout.setVisibility(View.VISIBLE);
-            porcentaje.setVisibility(View.VISIBLE);
-
-            pez.setVisibility(View.GONE);
-            descarga.setVisibility(View.GONE);
-        }
 
         @Override
         protected Void doInBackground(Void... params) {
