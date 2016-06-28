@@ -22,7 +22,7 @@ public class SplashActivity extends Activity {
     ProgressBar progress;
     Animation anim;
     ImageView logo, pez, pez_progress;
-    TextView porcentaje,descarga;
+    TextView porcentaje, descarga;
 
     LinearLayout Pez_Layout;
 
@@ -44,10 +44,11 @@ public class SplashActivity extends Activity {
 
         pez = (ImageView) findViewById(R.id.descargaimg);
 
-        //   animate();
         pez_progress.setBackgroundResource(R.drawable.animacion_pez);
         pez.setBackgroundResource(R.drawable.animacion_pez);
+
         animar_pez = (AnimationDrawable) pez.getBackground();
+        animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
         getListPeces();
 
     }
@@ -56,87 +57,10 @@ public class SplashActivity extends Activity {
 
         Pez_Layout.removeAllViews();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez_progress.getLayoutParams());
-        params.setMargins((int) (mov * 4.3) - pez_progress.getWidth() / 2, 0, 0, 0);
+        params.setMargins((int) (mov * 5.4) - pez_progress.getWidth() / 2, 0, 0, 0);
         Pez_Layout.addView(pez_progress, params);
 
-        //porcentaje.setText(mov+" %");
-
     }
-
-  /*   public void tiempo (){
-        animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
-        animar_pez.stop();
-        animar_pez_progress.start();
-        progress.setVisibility(View.VISIBLE);
-        pez_progress.setVisibility(View.VISIBLE);
-        Pez_Layout.setVisibility(View.VISIBLE);
-        porcentaje.setVisibility(View.VISIBLE);
-
-        pez.setVisibility(View.GONE);
-        descarga.setVisibility(View.GONE);
-
-       new Thread(){
-            @Override
-            public void run() {
-                try {
-                    synchronized (this) {
-                        wait(1000);
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                int jumpTime = 0;
-
-                                while(jumpTime < 100) {
-                                    try {
-                                        sleep(80);
-                                        jumpTime ++;
-                                        progress.setProgress(jumpTime);
-                                        mover(jumpTime);
-                                        String porcent=""+jumpTime+" %";
-                                        porcentaje.setText(porcent);
-                                    }
-                                    catch (InterruptedException e) {
-                                        // TODO Auto-generated catch block
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-                        });
-
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
-            };
-        }.start();
-
-        new Thread() {
-            @Override
-            public void run() {
-                int jumpTime = 0;
-
-                while(jumpTime < 100) {
-                    try {
-                        sleep(80);
-                        jumpTime += 1;
-                        progress.setProgress(jumpTime);
-                        mover(jumpTime);
-
-                        //porcentaje.setText(jumpTime+" %");
-                    }
-                    catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
-            }
-        }.start();
-    } */
 
     public void getListPeces() {
 
@@ -147,10 +71,6 @@ public class SplashActivity extends Activity {
                 if (pez != null && animar_pez != null) {
                     animar_pez.start();
                 }
-                progress.setVisibility(View.GONE);
-                pez_progress.setVisibility(View.GONE);
-                Pez_Layout.setVisibility(View.GONE);
-                porcentaje.setVisibility(View.GONE);
             }
 
             @Override
@@ -158,8 +78,6 @@ public class SplashActivity extends Activity {
                 PecesResponse mPecesResponse = null;
                 try {
                     mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
-                    //publishProgress(mPecesResponse.getmListPeces().size());
-                    //SystemClock.sleep(5000);
                 } catch (Exception e) {
                     e.getMessage();
                 }
@@ -169,58 +87,66 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
-                //tiempo();
-                animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
                 animar_pez.stop();
+                getVisivility();
                 animar_pez_progress.start();
-                progress.setVisibility(View.VISIBLE);
-                pez_progress.setVisibility(View.VISIBLE);
-                Pez_Layout.setVisibility(View.VISIBLE);
-                porcentaje.setVisibility(View.VISIBLE);
-
-                pez.setVisibility(View.GONE);
-                descarga.setVisibility(View.GONE);
-                new moverProgress();
+                moverProgress();
             }
         }.execute();
 
     }
 
-    class moverProgress extends AsyncTask<Void,Integer, Void>{
-        int progess=0;
+    private void getVisivility() {
+        pez.setVisibility(View.GONE);
+        descarga.setVisibility(View.GONE);
+        pez_progress.setVisibility(View.VISIBLE);
+        Pez_Layout.setVisibility(View.VISIBLE);
+        porcentaje.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.VISIBLE);
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+    }
 
-        @Override
-        protected Void doInBackground(Void... params) {
-            while (progess<100){
-                progess++;
-                SystemClock.sleep(1000);
-                publishProgress(progess);
+
+    private void moverProgress() {
+        mMoverPezAsyncTask = new AsyncTask<Void, Integer, Void>() {
+            int progess = 0;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
             }
-            return null;
-        }
 
-        @Override
-        protected void onProgressUpdate(Integer... values) {
+            @Override
+            protected Void doInBackground(Void... params) {
+                while (progess < 100) {
+                    progess++;
+                    SystemClock.sleep(100);
+                    publishProgress(progess);
+                }
+                return null;
+            }
 
-            progress.setProgress(values[0]);
-            mover(values[0]);
-            String porcent=""+values[0]+" %";
-            porcentaje.setText(porcent);
-        }
+            @Override
+            protected void onProgressUpdate(Integer... values) {
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
+                progress.setProgress(values[0]);
+                mover(values[0]);
+                String porcent = "" + values[0] + " %";
+                porcentaje.setText(porcent);
+            }
 
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            finish();
-        }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
+            }
+        }.execute();
+
+
     }
 
     private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
+    private AsyncTask<Void, Integer, Void> mMoverPezAsyncTask;
     private AnimationDrawable animar_pez_progress, animar_pez;
 }
