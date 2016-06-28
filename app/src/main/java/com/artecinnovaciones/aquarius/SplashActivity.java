@@ -52,12 +52,14 @@ public class SplashActivity extends Activity {
 
     }
 
-  /*  public void mover(int mov) {
+    public void mover(int mov) {
 
+        Pez_Layout.removeAllViews();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez_progress.getLayoutParams());
         params.setMargins((int) (mov * 4.3) - pez_progress.getWidth() / 2, 0, 0, 0);
+        Pez_Layout.addView(pez_progress, params);
 
-    } */
+    }
 
     public void tiempo (){
         animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
@@ -81,13 +83,9 @@ public class SplashActivity extends Activity {
                         sleep(80);
                         jumpTime += 1;
                         progress.setProgress(jumpTime);
-                        //Mover pez
-                        Pez_Layout.removeAllViews();
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez_progress.getLayoutParams());
-                        params.setMargins((int) (jumpTime * 4.3) - pez_progress.getWidth() / 2, 0, 0, 0);
-                        Pez_Layout.addView(pez_progress, params);
-                        String porcent=""+jumpTime+" %";
-                        porcentaje.setText(porcent);
+                        mover(jumpTime);
+
+                        //porcentaje.setText(jumpTime+" %");
                     }
                     catch (InterruptedException e) {
                         // TODO Auto-generated catch block
