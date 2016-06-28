@@ -52,13 +52,12 @@ public class SplashActivity extends Activity {
 
     }
 
-
-    public void mover(int mov) {
+  /*  public void mover(int mov) {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez_progress.getLayoutParams());
         params.setMargins((int) (mov * 4.3) - pez_progress.getWidth() / 2, 0, 0, 0);
 
-    }
+    } */
 
     public void tiempo (){
         animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
@@ -80,10 +79,15 @@ public class SplashActivity extends Activity {
                 while(jumpTime < 100) {
                     try {
                         sleep(80);
-                        jumpTime += 5;
+                        jumpTime += 1;
                         progress.setProgress(jumpTime);
-                        mover(jumpTime);
-                        //porcentaje.setText(jumpTime + " %");
+                        //Mover pez
+                        Pez_Layout.removeAllViews();
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez_progress.getLayoutParams());
+                        params.setMargins((int) (jumpTime * 4.3) - pez_progress.getWidth() / 2, 0, 0, 0);
+                        Pez_Layout.addView(pez_progress, params);
+                        String porcent=""+jumpTime+" %";
+                        porcentaje.setText(porcent);
                     }
                     catch (InterruptedException e) {
                         // TODO Auto-generated catch block
@@ -116,8 +120,8 @@ public class SplashActivity extends Activity {
                 PecesResponse mPecesResponse = null;
                 try {
                     mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
-                    publishProgress(mPecesResponse.getmListPeces().size());
-                    SystemClock.sleep(5000);
+                    //publishProgress(mPecesResponse.getmListPeces().size());
+                    //SystemClock.sleep(5000);
                 } catch (Exception e) {
                     e.getMessage();
                 }
