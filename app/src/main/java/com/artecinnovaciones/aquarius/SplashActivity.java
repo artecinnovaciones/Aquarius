@@ -63,7 +63,7 @@ public class SplashActivity extends Activity {
 
     }
 
-    public void tiempo (){
+  /*   public void tiempo (){
         animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
         animar_pez.stop();
         animar_pez_progress.start();
@@ -75,12 +75,12 @@ public class SplashActivity extends Activity {
         pez.setVisibility(View.GONE);
         descarga.setVisibility(View.GONE);
 
-        new Thread(){
+       new Thread(){
             @Override
             public void run() {
-                /*try {
+                try {
                     synchronized (this) {
-                        wait(1000); */
+                        wait(1000);
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -104,16 +104,16 @@ public class SplashActivity extends Activity {
                             }
                         });
 
-                /*    }
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }*/
+                }
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             };
         }.start();
 
-   /*     new Thread() {
+        new Thread() {
             @Override
             public void run() {
                 int jumpTime = 0;
@@ -128,14 +128,15 @@ public class SplashActivity extends Activity {
                         //porcentaje.setText(jumpTime+" %");
                     }
                     catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
-        }.start(); */
-    }
+        }.start();
+    } */
 
     public void getListPeces() {
 
@@ -168,13 +169,61 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
-
-                tiempo();
+                //tiempo();
+                new moverProgress();
             }
         }.execute();
 
     }
 
+    class moverProgress extends AsyncTask<Void,Integer, Void>{
+        int progess=0;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
+            animar_pez.stop();
+            animar_pez_progress.start();
+            progress.setVisibility(View.VISIBLE);
+            pez_progress.setVisibility(View.VISIBLE);
+            Pez_Layout.setVisibility(View.VISIBLE);
+            porcentaje.setVisibility(View.VISIBLE);
+
+            pez.setVisibility(View.GONE);
+            descarga.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            while (progess<100){
+                try {
+                    progess++;
+                    Thread.sleep(1000);
+                    publishProgress(progess);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            progress.setProgress(values[0]);
+            mover(values[0]);
+            String porcent=""+values[0]+" %";
+            porcentaje.setText(porcent);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
+        }
+    }
 
     private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
     private AnimationDrawable animar_pez_progress, animar_pez;
