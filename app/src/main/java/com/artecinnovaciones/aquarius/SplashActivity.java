@@ -190,6 +190,11 @@ public class SplashActivity extends Activity {
         int progess=0;
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
         protected Void doInBackground(Void... params) {
             while (progess<100){
                 progess++;
