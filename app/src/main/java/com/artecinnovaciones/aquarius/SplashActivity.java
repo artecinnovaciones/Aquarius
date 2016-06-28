@@ -78,9 +78,9 @@ public class SplashActivity extends Activity {
         new Thread(){
             @Override
             public void run() {
-                try {
+                /*try {
                     synchronized (this) {
-                        wait(1000);
+                        wait(1000); */
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -104,10 +104,10 @@ public class SplashActivity extends Activity {
                             }
                         });
 
-                    }
+                /*    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                }*/
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             };
