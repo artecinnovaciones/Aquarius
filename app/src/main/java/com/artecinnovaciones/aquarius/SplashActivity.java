@@ -59,7 +59,7 @@ public class SplashActivity extends Activity {
         params.setMargins((int) (mov * 4.3) - pez_progress.getWidth() / 2, 0, 0, 0);
         Pez_Layout.addView(pez_progress, params);
 
-        porcentaje.setText(mov+" %");
+        //porcentaje.setText(mov+" %");
 
     }
 
