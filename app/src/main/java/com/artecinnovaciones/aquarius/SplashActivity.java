@@ -194,7 +194,7 @@ public class SplashActivity extends Activity {
             while (progess<100){
                 try {
                     progess++;
-                    Thread.sleep(1000);
+                    Thread.sleep(80);
                     publishProgress(progess);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -205,7 +205,7 @@ public class SplashActivity extends Activity {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
+
             progress.setProgress(values[0]);
             mover(values[0]);
             String porcent=""+values[0]+" %";
@@ -214,7 +214,7 @@ public class SplashActivity extends Activity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();
         }
