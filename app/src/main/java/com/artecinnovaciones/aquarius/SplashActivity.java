@@ -74,22 +74,48 @@ public class SplashActivity extends Activity {
 
         pez.setVisibility(View.GONE);
         descarga.setVisibility(View.GONE);
-        int t=0;
-        while (t<100){
-            try {
-                t++;
-                Thread.sleep ( 1000 );
-                progress.setProgress(t);
-                mover(t);
-                porcentaje.setText(t+" %");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    synchronized (this) {
+                        wait(1000);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                int jumpTime = 0;
+
+                                while(jumpTime < 100) {
+                                    try {
+                                        sleep(80);
+                                        jumpTime ++;
+                                        progress.setProgress(jumpTime);
+                                        mover(jumpTime);
+                                        String porcent=""+jumpTime+" %";
+                                        porcentaje.setText(porcent);
+                                    }
+                                    catch (InterruptedException e) {
+                                        // TODO Auto-generated catch block
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
+            };
+        }.start();
 
    /*     new Thread() {
             @Override
-            public void SplashActivity.runOnUiThread() {
+            public void run() {
                 int jumpTime = 0;
 
                 while(jumpTime < 100) {
@@ -102,7 +128,6 @@ public class SplashActivity extends Activity {
                         //porcentaje.setText(jumpTime+" %");
                     }
                     catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
