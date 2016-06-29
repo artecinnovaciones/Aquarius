@@ -28,7 +28,6 @@ import java.util.List;
 public class DetallesFragment extends Fragment {
 
     String tipo;
-    TextView titulo,info;
     RecyclerView recycler;
 
     public DetallesFragment(String tipo) {
@@ -45,25 +44,11 @@ public class DetallesFragment extends Fragment {
     }
 
     public void detalles(View view) {
-        titulo=ViewUtil.findViewById(view,R.id.tipo);
-        info=ViewUtil.findViewById(view,R.id.info_tipo);
-        recycler=ViewUtil.findViewById(view,R.id.rv);
+        recycler=ViewUtil.findViewById(view,R.id.recycler_peces);
 
         GridLayoutManager gridRecycler = new GridLayoutManager(getActivity(),2);
         recycler.setLayoutManager(gridRecycler);
         recycler.setHasFixedSize(true);
-
-        if (tipo.equals("salada")){
-            titulo.setText("Peces de agua Salada");
-            info.setText("Los peces de agua salada son una excelente opción para aquellas personas que no tienen mucho tiempo para dedicar a sus mascotas pero quieren disfrutar de la belleza de los peces.\n" +
-                    "\n" +
-                    "Se trata de animales poco complejos que habitan en un acuario aunque, eso si, necesitarás mucha información al respecto si eres un principiante en los peces de agua salada.");
-        }else {
-            titulo.setText("Peces de agua Dulce");
-            info.setText("Existe una gran variedad de peces de agua dulce para elegir cuando estás construyendo y habitando un acuario; dependiendo del tamaño y del equipamiento que instale algunos peces se adaptarán mejores que otros.\n" +
-                    "\n" +
-                    "Por ejemplo, existen peces de agua dulce que no pueden vivir en un acuario demasiado pequeño, y  por raro que parezca, algunos no pueden estar sólos en un acuario de grandes dimensiones.");
-        }
 
         cargarBd();
     }
@@ -90,7 +75,6 @@ public class DetallesFragment extends Fragment {
             });
             recycler.setAdapter(adapter);
         }
-
 
     }
 

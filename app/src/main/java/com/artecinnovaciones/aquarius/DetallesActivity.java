@@ -1,18 +1,12 @@
 package com.artecinnovaciones.aquarius;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SearchView;
 
 import com.artecinnovaciones.aquarius.fragments.DetallesFragment;
 import com.bumptech.glide.Glide;
@@ -20,7 +14,7 @@ import com.bumptech.glide.Glide;
 public class DetallesActivity extends AppCompatActivity {
 
     private static final String EXTRA_DRAWABLE = "com.artecinnovaciones.artecdemo.drawable";
-    String tip="";
+    String tipo ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +23,9 @@ public class DetallesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarScroll);
         setSupportActionBar(toolbar);
 
-        tip=getIntent().getStringExtra("tipo");
+        tipo =getIntent().getStringExtra("tipo");
 
-        DetallesFragment DetFrag = new DetallesFragment(tip);
+        DetallesFragment DetFrag = new DetallesFragment(tipo);
         getFragmentManager().beginTransaction()
                 .add(R.id.frag_l, DetFrag).commit();
 
@@ -39,9 +33,6 @@ public class DetallesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                 //       .setAction("Action", null).show();
-                //if (menu != null) menu.clear();
                 onSearchRequested();
 
             }
@@ -51,7 +42,7 @@ public class DetallesActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         collapser.setTitle("");
 
-        if (tip.equals("salada")){
+        if (tipo.equals("salada")){
             loadImageParallax(R.drawable.peces_salada);
         }else {
             loadImageParallax(R.drawable.peces_dulce);
@@ -66,24 +57,4 @@ public class DetallesActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(image);
     }
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-       inflater = getMenuInflater();
-       this.menu=menu;
-        inflater.inflate(R.menu.menu_detalles, menu);
-        //searchItem = menu.findItem(R.id.action_search);
-        //searchItem.setIcon(R.drawable.buscar);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    private MenuInflater inflater;
-    private Menu menu;
-    MenuItem searchItem; */
 }
