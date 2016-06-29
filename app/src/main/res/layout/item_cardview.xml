@@ -10,9 +10,10 @@
         android:layout_marginTop="7dp">
 
         <LinearLayout
-            style="@style/Widget.CardContent"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="16dp">
             <!--Etiqueta Perfil -->
 
             <RelativeLayout

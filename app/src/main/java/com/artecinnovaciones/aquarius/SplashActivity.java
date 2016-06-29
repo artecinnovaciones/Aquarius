@@ -57,7 +57,7 @@ public class SplashActivity extends Activity {
 
         Pez_Layout.removeAllViews();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez_progress.getLayoutParams());
-        params.setMargins((int) (mov * 5.4) - pez_progress.getWidth() / 2, 0, 0, 0);
+        params.setMargins((int) (mov * 4.3) - pez_progress.getWidth() / 2, 0, 0, 0);
         Pez_Layout.addView(pez_progress, params);
 
     }
