@@ -4,50 +4,28 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
-import com.artecinnovaciones.aquarius.adapters.DetallesAdapter;
-import com.artecinnovaciones.aquarius.adapters.SearchAdapter;
 import com.artecinnovaciones.aquarius.fragments.DetallesFragment;
-import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
-import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
-import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
-
 import com.bumptech.glide.Glide;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DetallesActivity extends AppCompatActivity {
 
     private static final String EXTRA_DRAWABLE = "com.artecinnovaciones.artecdemo.drawable";
-    String tip = "";
-    AutoCompleteTextView autocomplete;
+    String tipo ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarScroll);
+        setSupportActionBar(toolbar);
 
-        cargarBd();
+        tipo =getIntent().getStringExtra("tipo");
 
-
-        autocomplete = (AutoCompleteTextView) findViewById(R.id.toolbarSearch);
-        autocomplete.setVisibility(View.VISIBLE);
-
-        adapter = new SearchAdapter(getBaseContext(), mListpeces);
-
-        autocomplete.setThreshold(2);
-        autocomplete.setAdapter(adapter);
-
-
-        tip = getIntent().getStringExtra("tipo");
-
-        DetallesFragment DetFrag = new DetallesFragment(tip);
+        DetallesFragment DetFrag = new DetallesFragment(tipo);
         getFragmentManager().beginTransaction()
                 .add(R.id.frag_l, DetFrag).commit();
 
@@ -55,7 +33,7 @@ public class DetallesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                onSearchRequested();
 
             }
         });
@@ -64,9 +42,9 @@ public class DetallesActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         collapser.setTitle("");
 
-        if (tip.equals("salada")) {
+        if (tipo.equals("salada")){
             loadImageParallax(R.drawable.peces_salada);
-        } else {
+        }else {
             loadImageParallax(R.drawable.peces_dulce);
         }
     }
@@ -79,25 +57,4 @@ public class DetallesActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(image);
     }
-
-    public void cargarBd() {
-        if (ArrayListPeces == null) {
-            try {
-                PecesDulceDao mPeces = BdController.getInstance(getBaseContext()).pecesdulce();
-                List listpeces = mPeces.queryBuilder().list();
-                ArrayListPeces = new ArrayList<PecesDulce>();
-                for (Object peces : listpeces) {
-                    ArrayListPeces.add((PecesDulce) peces);
-                }
-                mListpeces = ArrayListPeces;
-            } catch (Exception e) {
-                e.getStackTrace();
-            }
-        }
-
-    }
-
-    private ArrayList<PecesDulce> ArrayListPeces;
-    private List<PecesDulce> mListpeces;
-    private SearchAdapter adapter;
 }

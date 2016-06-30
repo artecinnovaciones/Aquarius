@@ -7,9 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.artecinnovaciones.aquarius.MainActivity;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.DetallesAdapter;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
@@ -27,13 +26,7 @@ import java.util.List;
  */
 public class DetallesFragment extends Fragment {
 
-    String tipo;
     RecyclerView recycler;
-
-    public DetallesFragment(String tipo) {
-        this.tipo = tipo;
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +47,8 @@ public class DetallesFragment extends Fragment {
     }
 
     public void cargarBd() {
-        if (ArrayListPeces == null) {
+       // if (ArrayListPeces == null && MainActivity.tipo_pez.equals("salada")) {
+        
             try {
                 PecesDulceDao mPeces = BdController.getInstance(getActivity()).pecesdulce();
                 List listpeces = mPeces.queryBuilder().list();
@@ -70,12 +64,20 @@ public class DetallesFragment extends Fragment {
             DetallesAdapter adapter = new DetallesAdapter(mListpeces, new CustomItemClickListener() {
                 @Override
                 public void onItemClick(View v, int position) {
-
+                    tipos(position);
                 }
             });
             recycler.setAdapter(adapter);
-        }
+        //}
 
+    }
+
+    private void tipos(int position) {
+        TiposFragment tiposFragment = new TiposFragment(mListpeces.get(position).getInformacion()
+                ,mListpeces.get(position).getCuidados()
+                ,mListpeces.get(position).getAlimentacion());
+        getFragmentManager().beginTransaction()
+                .replace(R.id.frag_l,tiposFragment).addToBackStack(null).commit();
     }
 
     private ArrayList<PecesDulce> ArrayListPeces;

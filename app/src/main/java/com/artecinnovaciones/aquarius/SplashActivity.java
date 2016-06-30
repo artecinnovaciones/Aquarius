@@ -1,6 +1,7 @@
 package com.artecinnovaciones.aquarius;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
@@ -23,6 +24,8 @@ public class SplashActivity extends Activity {
     Animation anim;
     ImageView logo, pez, pez_progress;
     TextView porcentaje, descarga;
+
+    ProgressDialog mProgressDialog;
 
     LinearLayout Pez_Layout;
 
@@ -51,6 +54,12 @@ public class SplashActivity extends Activity {
         animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
         getListPeces();
 
+        mProgressDialog = new ProgressDialog(SplashActivity.this);
+        mProgressDialog.setMessage("Descargando datos");
+        //mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setCancelable(true);
+
     }
 
     public void mover(int mov) {
@@ -71,19 +80,31 @@ public class SplashActivity extends Activity {
                 if (pez != null && animar_pez != null) {
                     animar_pez.start();
                 }
+             //   mProgressDialog.show();
             }
 
             @Override
             protected PecesResponse doInBackground(Void... params) {
+                int total = 0;
                 PecesResponse mPecesResponse = null;
                 try {
                     mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
+                    for(Object cantidad : mPecesResponse.getmListPeces()){
+                        total++;
+                        publishProgress((int) (total * 100 / mPecesResponse.getmListPeces().size()));
+                    }
                 } catch (Exception e) {
                     e.getMessage();
                 }
                 return mPecesResponse;
             }
 
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                mProgressDialog.setIndeterminate(false);
+                mProgressDialog.setMax(100);
+                mProgressDialog.setProgress(values[0]);
+            }
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
@@ -91,6 +112,7 @@ public class SplashActivity extends Activity {
                 getVisivility();
                 animar_pez_progress.start();
                 moverProgress();
+                mProgressDialog.dismiss();
             }
         }.execute();
 
