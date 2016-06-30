@@ -23,7 +23,7 @@ import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesRespon
 
 public class MainActivity extends AppCompatActivity {
 
-    boolean click = false;
+    public static String tipo_pez;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         sal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tipo_pez="salada";
                 Intent i = new Intent(MainActivity.this, DetallesActivity.class);
-                i.putExtra("tipo", "salada");
                 startActivity(i);
             }
         });
@@ -53,34 +53,12 @@ public class MainActivity extends AppCompatActivity {
         dul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //getListPeces();
+                tipo_pez="dulce";
                 Intent i = new Intent(MainActivity.this, DetallesActivity.class);
-                i.putExtra("tipo", "dulce");
                 startActivity(i);
             }
         });
     }
-
-/*
-    public void getListPeces() {
-        mpecesAsyncTask = new AsyncTask<Void, Void, PecesResponse>() {
-            @Override
-            protected PecesResponse doInBackground(Void... params) {
-                PecesResponse s = null;
-                try {
-                     s = PecesControlator.getInstance(getApplicationContext()).getListPeces();
-
-                } catch (Exception e) {
-                    e.getMessage();
-                }
-                return s;
-            }
-        }.execute();
-
-    }
-
-
-    private AsyncTask<Void, Void, PecesResponse> mpecesAsyncTask; */
 
 
 }
