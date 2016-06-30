@@ -48,7 +48,7 @@ public class DetallesFragment extends Fragment {
 
     public void cargarBd() {
        // if (ArrayListPeces == null && MainActivity.tipo_pez.equals("salada")) {
-        
+
             try {
                 PecesDulceDao mPeces = BdController.getInstance(getActivity()).pecesdulce();
                 List listpeces = mPeces.queryBuilder().list();
