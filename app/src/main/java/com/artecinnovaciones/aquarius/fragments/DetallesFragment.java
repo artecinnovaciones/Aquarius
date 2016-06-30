@@ -20,13 +20,13 @@ import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Created by LAP-NIDIA on 16/06/2016.
  */
 public class DetallesFragment extends Fragment {
 
     RecyclerView recycler;
+    String variable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

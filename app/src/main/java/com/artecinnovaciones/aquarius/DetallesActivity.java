@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 public class DetallesActivity extends AppCompatActivity {
 
     private static final String EXTRA_DRAWABLE = "com.artecinnovaciones.artecdemo.drawable";
-    String tipo ="";
+    String Variable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +23,7 @@ public class DetallesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarScroll);
         setSupportActionBar(toolbar);
 
-        tipo =getIntent().getStringExtra("tipo");
-
-        DetallesFragment DetFrag = new DetallesFragment(tipo);
+        DetallesFragment DetFrag = new DetallesFragment();
         getFragmentManager().beginTransaction()
                 .add(R.id.frag_l, DetFrag).commit();
 
@@ -42,7 +40,7 @@ public class DetallesActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         collapser.setTitle("");
 
-        if (tipo.equals("salada")){
+        if (MainActivity.tipo_pez.equals("salada")){
             loadImageParallax(R.drawable.peces_salada);
         }else {
             loadImageParallax(R.drawable.peces_dulce);
