@@ -17,13 +17,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_weight="1"
         android:src="@drawable/logo_aquarium5" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/frameLayout1"
@@ -47,25 +45,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/icons"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/descargaimg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:id="@+id/descarga"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/descargaimg"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="27dp"
-            android:text="Preparando descarga"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textColor="@color/icons" />
 
     </RelativeLayout>
 </LinearLayout>
