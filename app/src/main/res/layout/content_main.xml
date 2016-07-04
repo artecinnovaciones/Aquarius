@@ -8,7 +8,7 @@
     tools:context="com.artecinnovaciones.aquarius.MainActivity"
     tools:showIn="@layout/activity_main"
     android:orientation="vertical"
-    android:background="@drawable/bg_c">
+    android:background="@drawable/bg_peces">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -50,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView"
                 android:src="@drawable/pezs"
+                android:layout_gravity="center"
                 android:layout_weight="10"/>
 
             <TextView
@@ -76,6 +77,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:id="@+id/imageView2"
                 android:src="@drawable/pezd"
                 android:layout_weight="10"/>
@@ -93,33 +95,72 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayout3"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_margin="10dp"
         android:layout_below="@+id/linearLayout2"
-        android:background="@drawable/selector_boton">
+        android:padding="7dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/peceras_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="7dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_boton">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView3"
+                    android:src="@drawable/peceras"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Peceras"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/textView3"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/enfermedades_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="7dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_boton">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:id="@+id/imageView3"
-                android:src="@drawable/peceras"
-                android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal"
+                android:src="@drawable/pez_enfermo"
+                android:layout_gravity="center"
                 android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Peceras"
+                android:text="Enfermedades"
                 android:textColor="#FFFFFF"
-                android:id="@+id/textView3"
                 android:layout_weight="1"
                 android:layout_gravity="center_horizontal" />
 
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
