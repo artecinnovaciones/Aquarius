@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         sal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tipo_pez="salada";
+                tipo_pez = "salada";
                 Intent i = new Intent(MainActivity.this, DetallesActivity.class);
                 startActivity(i);
             }
@@ -45,6 +45,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tipo_pez="dulce";
+                Intent i = new Intent(MainActivity.this, DetallesActivity.class);
+                startActivity(i);
+            }
+        });
+
+        LinearLayout enfermedades = (LinearLayout) findViewById(R.id.enfermedades_btn);
+        enfermedades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tipo_pez="enfermedades";
                 Intent i = new Intent(MainActivity.this, DetallesActivity.class);
                 startActivity(i);
             }

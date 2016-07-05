@@ -3,6 +3,7 @@ package com.artecinnovaciones.aquarius.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import com.artecinnovaciones.aquarius.MainActivity;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.DetallesAdapter;
+import com.artecinnovaciones.aquarius.adapters.EnfermedadesAdapter;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
@@ -26,7 +28,6 @@ import java.util.List;
 public class DetallesFragment extends Fragment {
 
     RecyclerView recycler;
-    String variable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,9 +40,15 @@ public class DetallesFragment extends Fragment {
     public void detalles(View view) {
         recycler=ViewUtil.findViewById(view,R.id.recycler_peces);
 
-        GridLayoutManager gridRecycler = new GridLayoutManager(getActivity(),2);
-        recycler.setLayoutManager(gridRecycler);
-        recycler.setHasFixedSize(true);
+        if(MainActivity.tipo_pez.equals("salada") || MainActivity.tipo_pez.equals("dulce")){
+            GridLayoutManager layoutRecycler = new GridLayoutManager(getActivity(),2);
+            recycler.setLayoutManager(layoutRecycler);
+            recycler.setHasFixedSize(true);
+        }else{
+            LinearLayoutManager layoutRecycler = new LinearLayoutManager(getActivity());
+            recycler.setLayoutManager(layoutRecycler);
+            recycler.setHasFixedSize(true);
+        }
 
         cargarBd();
     }
@@ -61,6 +68,7 @@ public class DetallesFragment extends Fragment {
                 e.getStackTrace();
             }
 
+        if(MainActivity.tipo_pez.equals("salada") || MainActivity.tipo_pez.equals("dulce")){
             DetallesAdapter adapter = new DetallesAdapter(mListpeces, new CustomItemClickListener() {
                 @Override
                 public void onItemClick(View v, int position) {
@@ -68,6 +76,16 @@ public class DetallesFragment extends Fragment {
                 }
             });
             recycler.setAdapter(adapter);
+        }else{
+            EnfermedadesAdapter adapter = new EnfermedadesAdapter(mListpeces, new CustomItemClickListener() {
+                @Override
+                public void onItemClick(View v, int position) {
+                    tipos(position);
+                }
+            });
+            recycler.setAdapter(adapter);
+        }
+
         //}
 
     }

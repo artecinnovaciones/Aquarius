@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 public class DetallesActivity extends AppCompatActivity {
 
     private static final String EXTRA_DRAWABLE = "com.artecinnovaciones.artecdemo.drawable";
-    String Variable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by LAP-NIDIA on 29/06/2016.
  */
-public class TiposAdapter extends RecyclerView.Adapter<TiposAdapter.DatosViewHolder> {
+public class EnfermedadesAdapter extends RecyclerView.Adapter<EnfermedadesAdapter.DatosViewHolder> {
 
     CustomItemClickListener listener;
     List<PecesDulce> datos;
@@ -32,7 +32,7 @@ public class TiposAdapter extends RecyclerView.Adapter<TiposAdapter.DatosViewHol
 
     }
 
-    public TiposAdapter (List<PecesDulce> datos, CustomItemClickListener listener){
+    public EnfermedadesAdapter(List<PecesDulce> datos, CustomItemClickListener listener){
         this.datos = datos;
         this.listener = listener;
     }
@@ -57,8 +57,8 @@ public class TiposAdapter extends RecyclerView.Adapter<TiposAdapter.DatosViewHol
 
     @Override
     public void onBindViewHolder(DatosViewHolder holder, int position) {
-        holder.titulo.setText(datos.get(position).getNombreComun());
-        holder.descrip.setText(datos.get(position).getInformacion());
+        holder.titulo.setText(datos.get(position).getNombreCientifico());
+        holder.descrip.setText(datos.get(position).getNombreComun());
     }
 
     @Override
