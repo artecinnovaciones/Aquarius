@@ -68,10 +68,10 @@ public class EnfermedadesAdapter extends RecyclerView.Adapter<EnfermedadesAdapte
         holder.titulo.setText(datos.get(position).getNombreCientifico());
         holder.descrip.setText(datos.get(position).getNombreComun());
         Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
-        RoundedBitmapDrawable roundedDrawable =
+      /*  RoundedBitmapDrawable roundedDrawable =
                 RoundedBitmapDrawableFactory.create(Resources.getSystem(), bMap);
-        roundedDrawable.setCornerRadius(bMap.getHeight());
-        holder.img.setImageDrawable(roundedDrawable);
+        roundedDrawable.setCornerRadius(bMap.getWidth()); */
+        holder.img.setImageBitmap(bMap);
     }
 
     @Override
