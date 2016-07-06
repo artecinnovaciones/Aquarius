@@ -1,9 +1,15 @@
 package com.artecinnovaciones.aquarius.adapters;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.R;
@@ -23,11 +29,13 @@ public class EnfermedadesAdapter extends RecyclerView.Adapter<EnfermedadesAdapte
     public static class DatosViewHolder extends RecyclerView.ViewHolder {
 
         TextView titulo,descrip;
+        ImageView img;
 
         public DatosViewHolder(View itemView) {
             super(itemView);
             titulo=(TextView)itemView.findViewById(R.id.titulo);
             descrip=(TextView)itemView.findViewById(R.id.descrp);
+            img=(ImageView)itemView.findViewById(R.id.image_enfermedades);
         }
 
     }
@@ -59,6 +67,11 @@ public class EnfermedadesAdapter extends RecyclerView.Adapter<EnfermedadesAdapte
     public void onBindViewHolder(DatosViewHolder holder, int position) {
         holder.titulo.setText(datos.get(position).getNombreCientifico());
         holder.descrip.setText(datos.get(position).getNombreComun());
+        Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
+        RoundedBitmapDrawable roundedDrawable =
+                RoundedBitmapDrawableFactory.create(Resources.getSystem(), bMap);
+        roundedDrawable.setCornerRadius(bMap.getHeight());
+        holder.img.setImageDrawable(roundedDrawable);
     }
 
     @Override
