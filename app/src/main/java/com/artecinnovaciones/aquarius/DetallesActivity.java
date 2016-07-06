@@ -19,8 +19,8 @@ public class DetallesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarScroll);
-        setSupportActionBar(toolbar);
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarScroll);
+       // setSupportActionBar(toolbar);
 
         DetallesFragment DetFrag = new DetallesFragment();
         getFragmentManager().beginTransaction()
@@ -30,7 +30,7 @@ public class DetallesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSearchRequested();
+     //           onSearchRequested();
 
             }
         });

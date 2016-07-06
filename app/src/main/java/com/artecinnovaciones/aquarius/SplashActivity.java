@@ -28,7 +28,7 @@ public class SplashActivity extends Activity {
     ImageView logo, pez_progress;
     TextView porcentaje;
 
-    int ancho=0;
+    int ancho = 0;
 
     LinearLayout Pez_Layout;
 
@@ -56,7 +56,7 @@ public class SplashActivity extends Activity {
 
     public void mover(int mov) {
 
-        ancho= (progress.getWidth())/100;
+        ancho = (progress.getWidth()) / 100;
 
         Pez_Layout.removeAllViews();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(pez_progress.getLayoutParams());
@@ -74,15 +74,32 @@ public class SplashActivity extends Activity {
                 if (pez_progress != null && animar_pez_progress != null) {
                     animar_pez_progress.start();
                 }
-             //   mProgressDialog.show();
+                //   mProgressDialog.show();
             }
 
             @Override
             protected PecesResponse doInBackground(Void... params) {
                 int total = 0;
+                int progess = 0;
+                int banderaparawebservie = 0;
                 PecesResponse mPecesResponse = null;
                 try {
-                    mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
+                    for (int i = 0; i < 100; i++) {
+                        if (mPecesResponse == null) {
+                            if (banderaparawebservie > 1) {
+                                mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
+                                banderaparawebservie = 1;
+                            }
+                            while (progess < 100) {
+                                if (mPecesResponse == null) {
+                                    progess++;
+                                    SystemClock.sleep(100);
+                                    publishProgress(progess);
+                                }
+                            }
+                        }
+                    }
+
                 } catch (Exception e) {
                     e.getMessage();
                 }
@@ -91,17 +108,22 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onProgressUpdate(Integer... values) {
+                progress.setProgress(values[0]);
+                mover(values[0]);
+                String porcent = "" + values[0] + " %";
+                porcentaje.setText(porcent);
             }
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
-                moverProgress();
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
             }
         }.execute();
 
     }
 
-    private void moverProgress() {
+   /* private void moverProgress() {
         mMoverPezAsyncTask = new AsyncTask<Void, Integer, Void>() {
             int progess = 0;
 
@@ -137,8 +159,7 @@ public class SplashActivity extends Activity {
             }
         }.execute();
 
-
-    }
+    }*/
 
     private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
     private AsyncTask<Void, Integer, Void> mMoverPezAsyncTask;
