@@ -1,12 +1,16 @@
 package com.artecinnovaciones.aquarius.servicioretrofit;
 
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.artecinnovaciones.aquarius.SplashActivity;
 import com.artecinnovaciones.aquarius.objetos.Peces;
+import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControlator;
 import com.artecinnovaciones.aquarius.servicioretrofit.WebService.PecesWebService;
 import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
+import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
 import java.io.File;
@@ -30,7 +34,7 @@ public class PecesService extends BaseService<PecesWebService> {
 
     }
 
-    public PecesResponse getlistPeces() {
+   /* public PecesResponse getlistPeces() {
         PecesResponse registrationResponse = null;
         try {
             Call<PecesResponse> call = getWebServiceClient().getListPeces();
@@ -44,6 +48,26 @@ public class PecesService extends BaseService<PecesWebService> {
             e.getMessage();
         }
         return registrationResponse;
+    }*/
+
+    public PecesResponse getlistPeces(final Context mContext) {
+        mPecesResponse = null;
+
+        Call<PecesResponse> call = getWebServiceClient().getListPeces();
+        call.enqueue(new Callback<PecesResponse>() {
+            @Override
+            public void onResponse(Call<PecesResponse> call, Response<PecesResponse> response) {
+                mPecesResponse = response.body();
+
+                PecesControlator.getInstance(mContext).guardarpecesbd(mPecesResponse);
+            }
+
+            @Override
+            public void onFailure(Call<PecesResponse> call, Throwable t) {
+
+            }
+        });
+        return mPecesResponse;
     }
 
     public String getImage(String image) {
