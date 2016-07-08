@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControlator;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
+import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 
 public class SplashActivity extends Activity {
 
@@ -28,7 +29,7 @@ public class SplashActivity extends Activity {
     ImageView logo, pez_progress;
     TextView porcentaje;
 
-    float ancho = 0;
+    int ancho = 0;
 
     LinearLayout Pez_Layout;
 
@@ -84,20 +85,21 @@ public class SplashActivity extends Activity {
                 PecesResponse mPecesResponse = null;
                 try {
                     for (int i = 0; i < 100; i++) {
-                        if (mPecesResponse == null) {
+                        if (mPecesResponse == null && SharedUtils.getInstance(getApplicationContext()).getIfDowload() == 0) {
                             if (banderaparawebservie < 1) {
-                                mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
+                                mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces(getApplicationContext());
                                 banderaparawebservie = 1;
                             }
-                            while (progess < 100) {
-                                if (mPecesResponse == null) {
+                         //   while (progess < 100) {
+                          //      if (mPecesResponse == null) {
                                     progess++;
                                     SystemClock.sleep(100);
                                     publishProgress(progess);
-                                }
-                            }
+                         //       }
+                         //   }
                         }
                     }
+                    publishProgress(100);
 
                 } catch (Exception e) {
                     e.getMessage();
@@ -116,6 +118,7 @@ public class SplashActivity extends Activity {
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                SharedUtils.getInstance(getBaseContext()).getclear();
                 finish();
             }
         }.execute();
@@ -163,4 +166,5 @@ public class SplashActivity extends Activity {
     private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
     private AsyncTask<Void, Integer, Void> mMoverPezAsyncTask;
     private AnimationDrawable animar_pez_progress;
+
 }

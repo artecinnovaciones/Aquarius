@@ -2,6 +2,7 @@ package com.artecinnovaciones.aquarius.servicioretrofit.Controlador;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
@@ -10,6 +11,7 @@ import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.PecesService;
 import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
+import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 
 import java.util.List;
 
@@ -31,12 +33,12 @@ public class PecesControlator {
         return INSTANCE;
     }
 
-    public PecesResponse getListPeces() {
+    public PecesResponse getListPeces(Context mContext) {
         initWebServiceController();
         PecesResponse mPecesResponse = null;
         try {
-            mPecesResponse = mPecesService.getlistPeces();
-            guardarpecesbd(mPecesResponse);
+            mPecesResponse = mPecesService.getlistPeces(mContext);
+            //  guardarpecesbd(mPecesResponse);
             return mPecesResponse;
 
 
@@ -48,9 +50,23 @@ public class PecesControlator {
     }
 
 
-    private void guardarpecesbd(PecesResponse mPecesResponse) {
+    public void guardarpecesbd(PecesResponse mPecesResponse) {
         initPecesDao();
-        PecesDulce mPecesDulce = null;
+        List listPeces = mPecesDulceDao.queryBuilder().list();
+        if (listPeces.size() == 0) {
+            for (Peces mPeces : mPecesResponse.getmListPeces()) {
+                descargaImagenes(mPeces, mPeces.getImagen());
+
+            }
+
+            SharedUtils.getInstance(mContext).saveBandObject(1);
+        } else {
+            mPecesDulceDao.deleteAll();
+            guardarpecesbd(mPecesResponse);
+
+        }
+      /*  initPecesDao();
+        mPecesDulce = null;
         List listPeces = mPecesDulceDao.queryBuilder().list();
         if (listPeces.size() == 0) {
             for (Peces mPeces : mPecesResponse.getmListPeces()) {
@@ -62,18 +78,61 @@ public class PecesControlator {
                         mPeces.getCuidados(),
                         mPeces.getAlimentacion(),
                         mPeces.getMasBuscado(),
-                        descargadeimagen(mPeces.getImagen()));
+                        descargaImagenes(mPeces, mPeces.getImagen()));
 
                 saveModelClient(mPecesDulce);
 
             }
+            SharedUtils.getInstance(mContext).saveBandObject(1);
         } else {
             mPecesDulceDao.deleteAll();
             guardarpecesbd(mPecesResponse);
-        }
+        }*/
+}
+
+    private String descargaImagenes(final Peces pez, final String image) {
+
+        mpecesImagenesAsyncTask = new AsyncTask<Void, Integer, String>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                initWebServiceController();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                String rutaBd = null;
+                try {
+                    rutaBd = mPecesService.getImage(image);
+                } catch (RuntimeException e) {
+
+                    e.printStackTrace();
+                }
+                return rutaBd;
+            }
+
+            @Override
+            protected void onPostExecute(String imagen) {
+                super.onPostExecute(imagen);
+                initPecesDao();
+
+                    mPecesDulce = new PecesDulce(null,
+                            pez.getNombreCientifico(),
+                            pez.getNombreComun(),
+                            pez.getInformacion(),
+                            pez.getCuidados(),
+                            pez.getAlimentacion(),
+                            pez.getMasBuscado(),
+                            imagen);
+
+                    saveModelClient(mPecesDulce);
+
+            }
+        }.execute();
+        return "";
     }
 
-    private String descargadeimagen(String image) {
+   /* private String descargadeimagen(String image) {
         initWebServiceController();
         String rutaBd = null;
         try {
@@ -87,7 +146,7 @@ public class PecesControlator {
             e.printStackTrace();
         }
         return rutaBd;
-    }
+    }*/
 
     private void saveModelClient(PecesDulce mPeces) {
         mPecesDulceDao.insert(mPeces);
@@ -112,6 +171,8 @@ public class PecesControlator {
     private Context mContext;
     private PecesService mPecesService;
     private PecesDulceDao mPecesDulceDao;
+    private AsyncTask<Void, Integer, String> mpecesImagenesAsyncTask;
+    private PecesDulce mPecesDulce;
 
 
 }
