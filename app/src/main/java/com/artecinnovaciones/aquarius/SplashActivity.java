@@ -28,7 +28,7 @@ public class SplashActivity extends Activity {
     ImageView logo, pez_progress;
     TextView porcentaje;
 
-    int ancho = 0;
+    float ancho = 0;
 
     LinearLayout Pez_Layout;
 
@@ -79,14 +79,13 @@ public class SplashActivity extends Activity {
 
             @Override
             protected PecesResponse doInBackground(Void... params) {
-                int total = 0;
                 int progess = 0;
                 int banderaparawebservie = 0;
                 PecesResponse mPecesResponse = null;
                 try {
                     for (int i = 0; i < 100; i++) {
                         if (mPecesResponse == null) {
-                            if (banderaparawebservie > 1) {
+                            if (banderaparawebservie < 1) {
                                 mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
                                 banderaparawebservie = 1;
                             }
