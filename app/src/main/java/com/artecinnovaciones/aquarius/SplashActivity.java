@@ -83,23 +83,27 @@ public class SplashActivity extends Activity {
                 int progess = 0;
                 int banderaparawebservie = 0;
                 PecesResponse mPecesResponse = null;
+                int i=0;
                 try {
-                    for (int i = 0; i < 100; i++) {
+                    while (true) {
                         if (mPecesResponse == null && SharedUtils.getInstance(getApplicationContext()).getIfDowload() == 0) {
                             if (banderaparawebservie < 1) {
                                 mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces(getApplicationContext());
                                 banderaparawebservie = 1;
                             }
-                         //   while (progess < 100) {
-                          //      if (mPecesResponse == null) {
-                                    progess++;
-                                    SystemClock.sleep(100);
-                                    publishProgress(progess);
-                         //       }
-                         //   }
+                            i++;
+                            SystemClock.sleep(50);
+                            publishProgress(i);
+                        }else{
+                            while (i < 100) {
+                                i++;
+                                SystemClock.sleep(100);
+                                publishProgress(i);
+                            }
+                            break;
                         }
                     }
-                    publishProgress(100);
+                   // publishProgress(100);
 
                 } catch (Exception e) {
                     e.getMessage();

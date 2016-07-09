@@ -7,15 +7,17 @@
     android:layout_marginRight="16dp"
     android:layout_marginLeft="16dp"
     android:layout_marginTop="7dp"
+    android:layout_marginBottom="3dp"
     app:cardCornerRadius="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_ir">
 
         <ImageView
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
             android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"
@@ -71,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/ic_right"
-            android:background="@drawable/selector_btn_ir"
+            android:background="@null"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
