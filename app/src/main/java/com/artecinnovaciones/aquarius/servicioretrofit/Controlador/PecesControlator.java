@@ -54,12 +54,12 @@ public class PecesControlator {
         initPecesDao();
         List listPeces = mPecesDulceDao.queryBuilder().list();
         if (listPeces.size() == 0) {
+            int cantidadeimagenesdescargadas = 1;
             for (Peces mPeces : mPecesResponse.getmListPeces()) {
-                descargaImagenes(mPeces, mPeces.getImagen());
-
+                descargaImagenes(mPeces, mPeces.getImagen(), cantidadeimagenesdescargadas, mPecesResponse);
+                cantidadeimagenesdescargadas++;
             }
 
-            SharedUtils.getInstance(mContext).saveBandObject(1);
         } else {
             mPecesDulceDao.deleteAll();
             guardarpecesbd(mPecesResponse);
@@ -88,9 +88,9 @@ public class PecesControlator {
             mPecesDulceDao.deleteAll();
             guardarpecesbd(mPecesResponse);
         }*/
-}
+    }
 
-    private String descargaImagenes(final Peces pez, final String image) {
+    private void descargaImagenes(final Peces pez, final String image, final int cantidadeimagenesdescargadas, final PecesResponse mPecesResponse) {
 
         mpecesImagenesAsyncTask = new AsyncTask<Void, Integer, String>() {
             @Override
@@ -116,20 +116,22 @@ public class PecesControlator {
                 super.onPostExecute(imagen);
                 initPecesDao();
 
-                    mPecesDulce = new PecesDulce(null,
-                            pez.getNombreCientifico(),
-                            pez.getNombreComun(),
-                            pez.getInformacion(),
-                            pez.getCuidados(),
-                            pez.getAlimentacion(),
-                            pez.getMasBuscado(),
-                            imagen);
+                mPecesDulce = new PecesDulce(null,
+                        pez.getNombreCientifico(),
+                        pez.getNombreComun(),
+                        pez.getInformacion(),
+                        pez.getCuidados(),
+                        pez.getAlimentacion(),
+                        pez.getMasBuscado(),
+                        imagen);
 
-                    saveModelClient(mPecesDulce);
+                saveModelClient(mPecesDulce);
+                if (mPecesResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {
+                    SharedUtils.getInstance(mContext).saveBandObject(1);
+                }
 
             }
-        }.execute();
-        return "";
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
    /* private String descargadeimagen(String image) {
