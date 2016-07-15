@@ -48,8 +48,8 @@ public class FilterPez extends Filter {
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
         if (results.values != null) {
-            adapter.filterpeces.clear();
-            adapter.filterpeces.addAll((List) results.values);
+      //      adapter.filterpeces.clear();
+        //    adapter.filterpeces.addAll((List) results.values);
             adapter.notifyDataSetChanged();
         }
 

@@ -6,10 +6,22 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView;
+import com.artecinnovaciones.aquarius.adapters.SearchAdapter;
+import com.artecinnovaciones.aquarius.filter.CustomAutoCompleteTextChangedListener;
 import com.artecinnovaciones.aquarius.fragments.DetallesFragment;
+import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
+import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
+import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetallesActivity extends AppCompatActivity {
 
@@ -19,8 +31,18 @@ public class DetallesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarScroll);
-       // setSupportActionBar(toolbar);
+        cargarBd();
+
+        mCustomAutoCompleteView = (CustomAutoCompleteView) findViewById(R.id.autocomplete);
+
+        mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
+
+        mCustomAutoCompleteView.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
+
+
+        mSearchAdapter = new SearchAdapter(this, R.layout.list_view_row, ArrayListPeces);
+        mCustomAutoCompleteView.setAdapter(mSearchAdapter);
+
 
         DetallesFragment DetFrag = new DetallesFragment();
         getFragmentManager().beginTransaction()
@@ -30,7 +52,7 @@ public class DetallesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-     //           onSearchRequested();
+                //           onSearchRequested();
 
             }
         });
@@ -39,9 +61,9 @@ public class DetallesActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         collapser.setTitle("");
 
-        if (MainActivity.tipo_pez.equals("salada")){
+        if (MainActivity.tipo_pez.equals("salada")) {
             loadImageParallax(R.drawable.peces_salada);
-        }else {
+        } else {
             loadImageParallax(R.drawable.peces_dulce);
         }
     }
@@ -54,4 +76,32 @@ public class DetallesActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(image);
     }
+
+    AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            RelativeLayout rl = (RelativeLayout) view;
+            TextView tv = (TextView) rl.getChildAt(0);
+            mCustomAutoCompleteView.setText(tv.getText().toString());
+        }
+    };
+
+    public void cargarBd() {
+        try {
+            PecesDulceDao mPeces = BdController.getInstance(getApplication()).pecesdulce();
+            List listpeces = mPeces.queryBuilder().list();
+            ArrayListPeces = new ArrayList<PecesDulce>();
+            for (Object peces : listpeces) {
+                ArrayListPeces.add((PecesDulce) peces);
+            }
+            mListpeces = ArrayListPeces;
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    public CustomAutoCompleteView mCustomAutoCompleteView;
+    public ArrayList<PecesDulce> ArrayListPeces;
+    private List<PecesDulce> mListpeces;
+    public SearchAdapter mSearchAdapter;
 }
