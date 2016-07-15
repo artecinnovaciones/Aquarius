@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="Item name here..."
+        android:text="Escribe lo que quieres buscar"
         android:textSize="15dp" />
 
 </RelativeLayout>

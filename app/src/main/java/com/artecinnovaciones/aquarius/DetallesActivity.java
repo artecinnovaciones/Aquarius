@@ -34,11 +34,8 @@ public class DetallesActivity extends AppCompatActivity {
         cargarBd();
 
         mCustomAutoCompleteView = (CustomAutoCompleteView) findViewById(R.id.autocomplete);
-
         mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
-
         mCustomAutoCompleteView.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
-
 
         mSearchAdapter = new SearchAdapter(this, R.layout.list_view_row, ArrayListPeces);
         mCustomAutoCompleteView.setAdapter(mSearchAdapter);

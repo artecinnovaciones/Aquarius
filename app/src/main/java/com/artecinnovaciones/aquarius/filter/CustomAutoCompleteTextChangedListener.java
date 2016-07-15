@@ -1,11 +1,9 @@
 package com.artecinnovaciones.aquarius.filter;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.DetallesActivity;
 import com.artecinnovaciones.aquarius.R;
@@ -47,12 +45,7 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher {
     public void onTextChanged(CharSequence userInput, int start, int before, int count) {
 
         try {
-
-            // if you want to see in the logcat what the user types
-
             DetallesActivity mainActivity = ((DetallesActivity) context);
-
-            // update the adapater
             mainActivity.mSearchAdapter.notifyDataSetChanged();
             mainActivity.mSearchAdapter = new SearchAdapter(mainActivity, R.layout.list_view_row, read(userInput));
 
