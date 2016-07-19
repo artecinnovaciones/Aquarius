@@ -20,6 +20,8 @@ import com.artecinnovaciones.aquarius.adapters.EnfermedadesAdapter;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
+import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedades;
+import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedadesDao;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
@@ -68,6 +70,8 @@ public class DetallesFragment extends Fragment {
     public void cargarBd() {
        // if (ArrayListPeces == null && MainActivity.tipo_pez.equals("salada")) {
 
+        if(MainActivity.tipo_pez.equals("salada") || MainActivity.tipo_pez.equals("dulce")){
+
             try {
                 PecesDulceDao mPeces = BdController.getInstance(getActivity()).pecesdulce();
                 List listpeces = mPeces.queryBuilder().list();
@@ -80,7 +84,6 @@ public class DetallesFragment extends Fragment {
                 e.getStackTrace();
             }
 
-        if(MainActivity.tipo_pez.equals("salada") || MainActivity.tipo_pez.equals("dulce")){
             DetallesAdapter adapter = new DetallesAdapter(mListpeces, new CustomItemClickListener() {
                 @Override
                 public void onItemClick(View v, int position) {
@@ -89,7 +92,20 @@ public class DetallesFragment extends Fragment {
             });
             recycler.setAdapter(adapter);
         }else{
-            EnfermedadesAdapter adapter = new EnfermedadesAdapter(mListpeces, new CustomItemClickListener() {
+
+            try {
+                PecesEnfermedadesDao mEnfermedades = BdController.getInstance(getActivity()).pecesenfermedades();
+                List listenfermedades = mEnfermedades.queryBuilder().list();
+                ArrayListEnfermedades = new ArrayList<PecesEnfermedades>();
+                for (Object enfermedades : listenfermedades) {
+                    ArrayListEnfermedades.add((PecesEnfermedades) enfermedades);
+                }
+                mListEnfermedades = ArrayListEnfermedades;
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+
+            EnfermedadesAdapter adapter = new EnfermedadesAdapter(mListEnfermedades, new CustomItemClickListener() {
                 @Override
                 public void onItemClick(View v, int position) {
                     tipos(position);
@@ -119,5 +135,7 @@ public class DetallesFragment extends Fragment {
     }
 
     private ArrayList<PecesDulce> ArrayListPeces;
+    private ArrayList<PecesEnfermedades> ArrayListEnfermedades;
     private List<PecesDulce> mListpeces;
+    private List<PecesEnfermedades> mListEnfermedades;
 }

@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.R;
-import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
+import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedades;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
 public class EnfermedadesAdapter extends RecyclerView.Adapter<EnfermedadesAdapter.DatosViewHolder> {
 
     CustomItemClickListener listener;
-    List<PecesDulce> datos;
+    List<PecesEnfermedades> datos;
 
     public static class DatosViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,7 +40,7 @@ public class EnfermedadesAdapter extends RecyclerView.Adapter<EnfermedadesAdapte
 
     }
 
-    public EnfermedadesAdapter(List<PecesDulce> datos, CustomItemClickListener listener){
+    public EnfermedadesAdapter(List<PecesEnfermedades> datos, CustomItemClickListener listener){
         this.datos = datos;
         this.listener = listener;
     }
@@ -65,9 +65,9 @@ public class EnfermedadesAdapter extends RecyclerView.Adapter<EnfermedadesAdapte
 
     @Override
     public void onBindViewHolder(DatosViewHolder holder, int position) {
-        holder.titulo.setText(datos.get(position).getNombreCientifico());
-        holder.descrip.setText(datos.get(position).getNombreComun());
-        Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
+        holder.titulo.setText(datos.get(position).getNombre());
+        holder.descrip.setText(datos.get(position).getSintomas());
+        Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImg());
       /*  RoundedBitmapDrawable roundedDrawable =
                 RoundedBitmapDrawableFactory.create(Resources.getSystem(), bMap);
         roundedDrawable.setCornerRadius(bMap.getWidth()); */
