@@ -18,6 +18,18 @@ public class Greendaodb {
             PecesAguaDulce.addStringProperty("Alimentacion");
             PecesAguaDulce.addIntProperty("MasBuscado");
             PecesAguaDulce.addStringProperty("Imagen");
+
+
+
+            Entity PecesEnfermedades = schema.addEntity("PecesEnfermedades");
+            PecesEnfermedades.addIdProperty();
+            PecesEnfermedades.addStringProperty("Nombre");
+            PecesEnfermedades.addStringProperty("Sintomas");
+            PecesEnfermedades.addStringProperty("Causas");
+            PecesEnfermedades.addStringProperty("Tratamiento");
+            PecesEnfermedades.addStringProperty("img");
+
+
             new DaoGenerator().generateAll(schema, "../app/src/main/java");
         }
     }
