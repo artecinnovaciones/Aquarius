@@ -40,6 +40,8 @@ public class DetallesFragment extends Fragment {
 
     int Agresivosvisible=0;
 
+    public static String tipo_Clic;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalles, container, false);
@@ -88,6 +90,7 @@ public class DetallesFragment extends Fragment {
             DetallesAdapter adapter = new DetallesAdapter(mListpeces, new CustomItemClickListener() {
                 @Override
                 public void onItemClick(View v, int position) {
+                    tipo_Clic="pez";
                     tipos(position);
                 }
             });
@@ -128,6 +131,7 @@ public class DetallesFragment extends Fragment {
             EnfermedadesAdapter adapter = new EnfermedadesAdapter(mListEnfermedades, new CustomItemClickListener() {
                 @Override
                 public void onItemClick(View v, int position) {
+                    tipo_Clic="enfermedad";
                     tipos(position);
                 }
             });
@@ -139,11 +143,20 @@ public class DetallesFragment extends Fragment {
     }
 
     private void tipos(int position) {
-        TiposFragment tiposFragment = new TiposFragment(mListpeces.get(position).getInformacion()
-                ,mListpeces.get(position).getCuidados()
-                ,mListpeces.get(position).getAlimentacion());
-        getFragmentManager().beginTransaction()
-                .replace(R.id.frag_l,tiposFragment).addToBackStack(null).commit();
+        if (tipo_Clic.equalsIgnoreCase("pez")){
+            TiposFragment tiposFragment = new TiposFragment(mListpeces.get(position).getInformacion()
+                    ,mListpeces.get(position).getCuidados()
+                    ,mListpeces.get(position).getAlimentacion());
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.frag_l,tiposFragment).addToBackStack(null).commit();
+        }else{
+            TiposFragment tiposFragment = new TiposFragment(mListEnfermedades.get(position).getSintomas()
+                    ,mListEnfermedades.get(position).getCausas()
+                    ,mListEnfermedades.get(position).getTratamiento());
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.frag_l,tiposFragment).addToBackStack(null).commit();
+        }
+
     }
 
     private ArrayList<PecesDulce> ArrayListPeces;
