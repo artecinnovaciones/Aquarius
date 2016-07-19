@@ -138,7 +138,7 @@ public class PecesControlator {
 
                 saveModelClient(mPecesDulce);
                 if (mPecesResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {
-                    SharedUtils.getInstance(mContext).saveBandObject(1);
+                    SharedUtils.getInstance(mContext).saveBandObjectEnfermedades(1);
                 }
 
             }
