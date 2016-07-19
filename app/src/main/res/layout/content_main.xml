@@ -36,35 +36,6 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/peces_dul"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="7dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/selector_boton">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView"
-                android:src="@drawable/pezs"
-                android:layout_gravity="center"
-                android:layout_weight="10"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Agua dulce"
-                android:id="@+id/textView"
-                android:textColor="#FFFFFF"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"/>
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/peces_sal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -91,6 +62,34 @@
                 android:textColor="#FFFFFF"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/enfermedades_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="7dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_boton">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/pez_enfermo"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Enfermedades"
+                android:textColor="#FFFFFF"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -131,34 +130,6 @@
                     android:id="@+id/textView3"
                     android:layout_weight="1"
                     android:layout_gravity="center_horizontal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/enfermedades_btn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="7dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/selector_boton">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/pez_enfermo"
-                android:layout_gravity="center"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Enfermedades"
-                android:textColor="#FFFFFF"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
     </LinearLayout>

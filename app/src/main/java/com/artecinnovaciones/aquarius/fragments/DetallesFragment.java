@@ -52,19 +52,18 @@ public class DetallesFragment extends Fragment {
         recycler=ViewUtil.findViewById(view,R.id.recycler_peces);
         Cardagresivos=ViewUtil.findViewById(view,R.id.card_agresivos);
 
-        aparecer= AnimationUtils.loadAnimation(this.getActivity().getApplicationContext(),R.anim.transparencia);
+        aparecer= AnimationUtils.loadAnimation(this.getActivity().getApplicationContext(), R.anim.transparencia);
 
-        if(MainActivity.tipo_pez.equals("salada") || MainActivity.tipo_pez.equals("dulce")){
+        if(MainActivity.tipo_pez.equals("dulce")){
             GridLayoutManager layoutRecycler = new GridLayoutManager(getActivity(),2);
             recycler.setLayoutManager(layoutRecycler);
-            recycler.setItemAnimator(new DefaultItemAnimator());
-            recycler.setHasFixedSize(true);
         }else{
             LinearLayoutManager layoutRecycler = new LinearLayoutManager(getActivity());
             recycler.setLayoutManager(layoutRecycler);
-            recycler.setItemAnimator(new DefaultItemAnimator());
-            recycler.setHasFixedSize(true);
         }
+
+        recycler.setItemAnimator(new DefaultItemAnimator());
+        recycler.setHasFixedSize(true);
 
         cargarBd();
     }
@@ -72,7 +71,7 @@ public class DetallesFragment extends Fragment {
     public void cargarBd() {
        // if (ArrayListPeces == null && MainActivity.tipo_pez.equals("salada")) {
 
-        if(MainActivity.tipo_pez.equals("salada") || MainActivity.tipo_pez.equals("dulce")){
+        if(MainActivity.tipo_pez.equals("dulce")){
 
             try {
                 PecesDulceDao mPeces = BdController.getInstance(getActivity()).pecesdulce();

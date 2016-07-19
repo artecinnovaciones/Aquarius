@@ -30,16 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinearLayout sal = (LinearLayout) findViewById(R.id.peces_sal);
-        sal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tipo_pez = "salada";
-                Intent i = new Intent(MainActivity.this, DetallesActivity.class);
-                startActivity(i);
-            }
-        });
-
         LinearLayout dul = (LinearLayout) findViewById(R.id.peces_dul);
         dul.setOnClickListener(new View.OnClickListener() {
             @Override
