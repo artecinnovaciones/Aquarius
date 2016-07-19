@@ -9,6 +9,8 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.artecinnovaciones.aquarius.DetallesActivity;
+import com.artecinnovaciones.aquarius.MainActivity;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.filter.FilterPez;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
@@ -21,6 +23,48 @@ import java.util.List;
  */
 
 public class SearchAdapter extends ArrayAdapter<PecesDulce> {
+
+    final String TAG = "AutocompleteCustomArrayAdapter.java";
+
+    Context mContext;
+    int layoutResourceId;
+    private ArrayList<PecesDulce> pecesList;
+
+    public SearchAdapter(DetallesActivity mContext, int layoutResourceId, ArrayList<PecesDulce> arrayListPeces) {
+        super(mContext, layoutResourceId, arrayListPeces);
+        this.layoutResourceId = layoutResourceId;
+        this.mContext = mContext;
+        this.pecesList = arrayListPeces;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        try {
+            if (convertView == null) {
+                LayoutInflater inflater = ((DetallesActivity) mContext).getLayoutInflater();
+                convertView = inflater.inflate(layoutResourceId, parent, false);
+            }
+
+            TextView textViewItem = (TextView) convertView.findViewById(R.id.textViewItem);
+            textViewItem.setText(pecesList.get(position).getNombreComun());
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return convertView;
+
+    }
+}
+
+
+
+/*
+
+        extends ArrayAdapter<PecesDulce> {
 
     private final List<PecesDulce> pecesList;
     public List<PecesDulce> filterpeces = new ArrayList<>(1);
@@ -51,3 +95,4 @@ public class SearchAdapter extends ArrayAdapter<PecesDulce> {
         return convertView;
     }
 }
+*/
