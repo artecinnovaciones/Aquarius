@@ -22,7 +22,11 @@ public class SharedUtils {
         editor.putInt(VALOR, object);
         editor.commit();
     }
-
+    public void saveBandObjectEnfermedades(int object) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(ENFERMEDADES, object);
+        editor.commit();
+    }
     public int getIfDowload() {
 
         return mPreferences.getInt(VALOR, 0);
@@ -47,6 +51,7 @@ public class SharedUtils {
     private Context mContext;
     private static final String UTILS_PREFS = TAG + "UtilsPreference";
     private static final String VALOR = "valor";
+    private static final String ENFERMEDADES = "valor";
     private SharedPreferences mPreferences;
 
 }

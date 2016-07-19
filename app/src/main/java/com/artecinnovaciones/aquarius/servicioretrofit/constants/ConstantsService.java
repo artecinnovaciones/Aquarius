@@ -7,6 +7,7 @@ public class ConstantsService {
 
     public static class GET {
         public static final String VALIDATE_LOGIN = "/aquarius/descarga_json.php";
+        public static final String PECESENFERMEDADES = "/aquarius/descarga_json_enfermedades.php";
      //   public static final String IMAGEDESCARGADA = "/aquarius/uploads";
 
     }

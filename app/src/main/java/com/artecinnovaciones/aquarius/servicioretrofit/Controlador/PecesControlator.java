@@ -10,6 +10,7 @@ import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.PecesService;
 import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnfermedadesResponse;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 
@@ -37,6 +38,7 @@ public class PecesControlator {
         initWebServiceController();
         PecesResponse mPecesResponse = null;
         try {
+            descargarEnfermedades();
             mPecesResponse = mPecesService.getlistPeces(mContext);
             //  guardarpecesbd(mPecesResponse);
             return mPecesResponse;
@@ -47,6 +49,15 @@ public class PecesControlator {
             e.printStackTrace();
         }
         return mPecesResponse;
+    }
+
+    private void descargarEnfermedades() {
+        mpecesEnfermedadesAsynkTask = new AsyncTask<Void, Integer, PecesEnfermedadesResponse>() {
+            @Override
+            protected PecesEnfermedadesResponse doInBackground(Void... params) {
+                return EnfermedadesControlator.getInstance(mContext).getListPecesEnfermedades(mContext);
+            }
+        }.execute();
     }
 
 
@@ -174,6 +185,7 @@ public class PecesControlator {
     private PecesService mPecesService;
     private PecesDulceDao mPecesDulceDao;
     private AsyncTask<Void, Integer, String> mpecesImagenesAsyncTask;
+    private AsyncTask<Void, Integer, PecesEnfermedadesResponse> mpecesEnfermedadesAsynkTask;
     private PecesDulce mPecesDulce;
 
 

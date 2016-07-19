@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnfermedadesResponse;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 
 import java.util.List;
@@ -26,5 +27,13 @@ public interface PecesWebService {
 
     @GET
     Call<ResponseBody> getImagePeces(@Url String fileUrl);
+
+
+
+    @GET(ConstantsService.GET.PECESENFERMEDADES)
+    Call<PecesEnfermedadesResponse> getListPecesEnfermedades();
+
+
+
 }
 
