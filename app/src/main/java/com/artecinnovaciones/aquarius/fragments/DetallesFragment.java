@@ -2,6 +2,8 @@ package com.artecinnovaciones.aquarius.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +30,7 @@ import java.util.List;
 public class DetallesFragment extends Fragment {
 
     RecyclerView recycler;
+    CardView Cardagresivos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,14 +42,17 @@ public class DetallesFragment extends Fragment {
 
     public void detalles(View view) {
         recycler=ViewUtil.findViewById(view,R.id.recycler_peces);
+        Cardagresivos=ViewUtil.findViewById(view,R.id.card_agresivos);
 
         if(MainActivity.tipo_pez.equals("salada") || MainActivity.tipo_pez.equals("dulce")){
             GridLayoutManager layoutRecycler = new GridLayoutManager(getActivity(),2);
             recycler.setLayoutManager(layoutRecycler);
+            recycler.setItemAnimator(new DefaultItemAnimator());
             recycler.setHasFixedSize(true);
         }else{
             LinearLayoutManager layoutRecycler = new LinearLayoutManager(getActivity());
             recycler.setLayoutManager(layoutRecycler);
+            recycler.setItemAnimator(new DefaultItemAnimator());
             recycler.setHasFixedSize(true);
         }
 
@@ -85,6 +91,13 @@ public class DetallesFragment extends Fragment {
             });
             recycler.setAdapter(adapter);
         }
+
+        Cardagresivos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recycler.setVisibility(View.VISIBLE);
+            }
+        });
 
         //}
 
