@@ -32,6 +32,11 @@ public class SharedUtils {
         return mPreferences.getInt(VALOR, 0);
     }
 
+    public int getIfDowloadEnfermedades() {
+
+        return mPreferences.getInt(ENFERMEDADES, 0);
+    }
+
     public void getclear() {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.remove(VALOR).commit();

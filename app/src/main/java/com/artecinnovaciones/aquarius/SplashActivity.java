@@ -86,7 +86,7 @@ public class SplashActivity extends Activity {
                 int i=0;
                 try {
                     while (true) {
-                        if (mPecesResponse == null && SharedUtils.getInstance(getApplicationContext()).getIfDowload() == 0) {
+                        if (mPecesResponse == null && SharedUtils.getInstance(getApplicationContext()).getIfDowload() == 0 &&SharedUtils.getInstance(getApplicationContext()).getIfDowloadEnfermedades() == 0) {
                             if (banderaparawebservie < 1) {
                                 mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces(getApplicationContext());
                                 banderaparawebservie = 1;

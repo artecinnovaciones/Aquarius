@@ -35,6 +35,7 @@ public class DetallesActivity extends AppCompatActivity {
 
         mCustomAutoCompleteView = (CustomAutoCompleteView) findViewById(R.id.autocomplete);
         mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
+        mCustomAutoCompleteView.setVisibility(View.GONE);
         mCustomAutoCompleteView.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
 
         mSearchAdapter = new SearchAdapter(this, R.layout.list_view_row, ArrayListPeces);
@@ -49,7 +50,7 @@ public class DetallesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //           onSearchRequested();
+                mCustomAutoCompleteView.setVisibility(View.VISIBLE);
 
             }
         });
