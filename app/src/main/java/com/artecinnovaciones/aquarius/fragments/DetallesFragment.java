@@ -38,6 +38,8 @@ public class DetallesFragment extends Fragment {
 
     Animation aparecer;
 
+    int Agresivosvisible=0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalles, container, false);
@@ -91,7 +93,26 @@ public class DetallesFragment extends Fragment {
                 }
             });
             recycler.setAdapter(adapter);
+
+            Cardagresivos.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Agresivosvisible == 0){
+                        Agresivosvisible=1;
+                        recycler.startAnimation(aparecer);
+                        recycler.setVisibility(View.VISIBLE);
+                    }else{
+                        Agresivosvisible=0;
+                        recycler.startAnimation(aparecer);
+                        recycler.setVisibility(View.GONE);
+                    }
+
+                }
+            });
         }else{
+
+            recycler.setVisibility(View.VISIBLE);
+            Cardagresivos.setVisibility(View.GONE);
 
             try {
                 PecesEnfermedadesDao mEnfermedades = BdController.getInstance(getActivity()).pecesenfermedades();
@@ -113,14 +134,6 @@ public class DetallesFragment extends Fragment {
             });
             recycler.setAdapter(adapter);
         }
-
-        Cardagresivos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recycler.startAnimation(aparecer);
-                recycler.setVisibility(View.VISIBLE);
-            }
-        });
 
         //}
 
