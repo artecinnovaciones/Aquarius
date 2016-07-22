@@ -107,7 +107,7 @@ public class SplashActivity extends Activity {
 
                             publishProgress(i);
                         }else{
-                            while (i <= 100) {
+                            while (i < 100) {
                                 i++;
                                 SystemClock.sleep(100);
                                 publishProgress(i);
