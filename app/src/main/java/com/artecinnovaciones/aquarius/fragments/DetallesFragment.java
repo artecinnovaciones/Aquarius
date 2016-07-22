@@ -34,7 +34,7 @@ import java.util.List;
 public class DetallesFragment extends Fragment {
 
     RecyclerView recycler;
-    CardView Cardagresivos;
+    CardView Cardagresivos,Cardpacificos;
 
     Animation aparecer;
 
@@ -53,6 +53,7 @@ public class DetallesFragment extends Fragment {
     public void detalles(View view) {
         recycler=ViewUtil.findViewById(view,R.id.recycler_peces);
         Cardagresivos=ViewUtil.findViewById(view,R.id.card_agresivos);
+        Cardpacificos=ViewUtil.findViewById(view,R.id.card_pacificos);
 
         aparecer= AnimationUtils.loadAnimation(this.getActivity().getApplicationContext(), R.anim.transparencia);
 
@@ -115,6 +116,7 @@ public class DetallesFragment extends Fragment {
 
             recycler.setVisibility(View.VISIBLE);
             Cardagresivos.setVisibility(View.GONE);
+            Cardpacificos.setVisibility(View.GONE);
 
             try {
                 PecesEnfermedadesDao mEnfermedades = BdController.getInstance(getActivity()).pecesenfermedades();

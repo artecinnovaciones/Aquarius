@@ -92,10 +92,22 @@ public class SplashActivity extends Activity {
                                 banderaparawebservie = 1;
                             }
                             i++;
-                            SystemClock.sleep(100);
+
+                            if (i>=50){
+                                SystemClock.sleep(200);
+                                if (i>=70){
+                                    SystemClock.sleep(300);
+                                    if (i>=85){
+                                        SystemClock.sleep(400);
+                                    }
+                                }
+                            }else {
+                                SystemClock.sleep(100);
+                            }
+
                             publishProgress(i);
                         }else{
-                            while (i < 100) {
+                            while (i <= 100) {
                                 i++;
                                 SystemClock.sleep(100);
                                 publishProgress(i);

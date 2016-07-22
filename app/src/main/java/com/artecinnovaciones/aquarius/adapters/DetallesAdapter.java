@@ -65,7 +65,7 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
 
     @Override
     public void onBindViewHolder(DatosViewHolder holder, int position) {
-        holder.titulo.setText(datos.get(position).getNombreComun());
+        holder.titulo.setText(datos.get(position).getNombreCientifico());
         //holder.descrip.setText(datos.get(position).descripcion);
         Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
         holder.img.setImageBitmap(bMap);
