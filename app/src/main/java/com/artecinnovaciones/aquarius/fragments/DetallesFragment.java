@@ -38,8 +38,6 @@ public class DetallesFragment extends Fragment {
 
     Animation aparecer;
 
-    int Agresivosvisible=0;
-
     public static String tipo_Clic;
 
     @Override
@@ -53,9 +51,9 @@ public class DetallesFragment extends Fragment {
     public void detalles(View view) {
         recycler=ViewUtil.findViewById(view,R.id.recycler_peces);
         Cardagresivos=ViewUtil.findViewById(view,R.id.card_agresivos);
-        Cardpacificos=ViewUtil.findViewById(view,R.id.card_pacificos);
+        Cardpacificos=ViewUtil.findViewById(view, R.id.card_pacificos);
 
-        aparecer= AnimationUtils.loadAnimation(this.getActivity().getApplicationContext(), R.anim.transparencia);
+        aparecer= AnimationUtils.loadAnimation(this.getActivity().getApplicationContext(), R.anim.trasladar);
 
         if(MainActivity.tipo_pez.equals("dulce")){
             GridLayoutManager layoutRecycler = new GridLayoutManager(getActivity(),2);
@@ -65,7 +63,6 @@ public class DetallesFragment extends Fragment {
             recycler.setLayoutManager(layoutRecycler);
         }
 
-        recycler.setItemAnimator(new DefaultItemAnimator());
         recycler.setHasFixedSize(true);
 
         cargarBd();
@@ -100,16 +97,14 @@ public class DetallesFragment extends Fragment {
             Cardagresivos.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (Agresivosvisible == 0){
-                        Agresivosvisible=1;
-                        recycler.startAnimation(aparecer);
+                    if (MainActivity.Agresivosvisible == 0){
+                        MainActivity.Agresivosvisible=1;
                         recycler.setVisibility(View.VISIBLE);
-                    }else{
-                        Agresivosvisible=0;
                         recycler.startAnimation(aparecer);
+                    }else{
+                        MainActivity.Agresivosvisible=0;
                         recycler.setVisibility(View.GONE);
                     }
-
                 }
             });
         }else{

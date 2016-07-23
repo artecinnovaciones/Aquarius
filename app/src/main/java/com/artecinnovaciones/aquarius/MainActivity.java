@@ -24,6 +24,7 @@ import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesRespon
 public class MainActivity extends AppCompatActivity {
 
     public static String tipo_pez;
+    public static int Agresivosvisible=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

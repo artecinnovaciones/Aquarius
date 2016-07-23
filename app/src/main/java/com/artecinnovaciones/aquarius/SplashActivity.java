@@ -80,7 +80,6 @@ public class SplashActivity extends Activity {
 
             @Override
             protected PecesResponse doInBackground(Void... params) {
-                int progess = 0;
                 int banderaparawebservie = 0;
                 PecesResponse mPecesResponse = null;
                 int i=0;
@@ -93,11 +92,11 @@ public class SplashActivity extends Activity {
                             }
                             i++;
 
-                            if (i>=50){
+                            if (i>=40){
                                 SystemClock.sleep(200);
-                                if (i>=70){
+                                if (i>=60){
                                     SystemClock.sleep(300);
-                                    if (i>=85){
+                                    if (i>=75){
                                         SystemClock.sleep(400);
                                     }
                                 }
@@ -109,7 +108,7 @@ public class SplashActivity extends Activity {
                         }else{
                             while (i < 100) {
                                 i++;
-                                SystemClock.sleep(100);
+                                SystemClock.sleep(80);
                                 publishProgress(i);
                             }
                             break;
