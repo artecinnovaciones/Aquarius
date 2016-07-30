@@ -7,6 +7,10 @@
     android:fitsSystemWindows="true"
     tools:context="com.artecinnovaciones.aquarius.MainActivity">
 
-    <include layout="@layout/content_main" />
+    <!--<include layout="@layout/content_main" /> -->
+    <FrameLayout
+        android:id="@+id/frag_principal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

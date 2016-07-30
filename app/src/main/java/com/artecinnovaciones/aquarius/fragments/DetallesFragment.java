@@ -1,6 +1,7 @@
 package com.artecinnovaciones.aquarius.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.artecinnovaciones.aquarius.DetallesActivity;
 import com.artecinnovaciones.aquarius.MainActivity;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.DetallesAdapter;
@@ -38,7 +40,7 @@ public class DetallesFragment extends Fragment {
 
     Animation aparecer;
 
-    public static String tipo_Clic;
+    public static String tipo_Clic,nombre;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class DetallesFragment extends Fragment {
 
         aparecer= AnimationUtils.loadAnimation(this.getActivity().getApplicationContext(), R.anim.trasladar);
 
-        if(MainActivity.tipo_pez.equals("dulce")){
+        if(PrincipalFragment.tipo_pez.equals("dulce")){
             GridLayoutManager layoutRecycler = new GridLayoutManager(getActivity(),2);
             recycler.setLayoutManager(layoutRecycler);
         }else{
@@ -71,7 +73,7 @@ public class DetallesFragment extends Fragment {
     public void cargarBd() {
        // if (ArrayListPeces == null && MainActivity.tipo_pez.equals("salada")) {
 
-        if(MainActivity.tipo_pez.equals("dulce")){
+        if(PrincipalFragment.tipo_pez.equals("dulce")){
 
             try {
                 PecesDulceDao mPeces = BdController.getInstance(getActivity()).pecesdulce();
@@ -141,11 +143,18 @@ public class DetallesFragment extends Fragment {
 
     private void tipos(int position) {
         if (tipo_Clic.equalsIgnoreCase("pez")){
-            TiposFragment tiposFragment = new TiposFragment(mListpeces.get(position).getInformacion()
+            nombre=mListpeces.get(position).getNombreCientifico();
+            Intent i = new Intent(getActivity(), DetallesActivity.class);
+            i.putExtra("info",mListpeces.get(position).getInformacion());
+            i.putExtra("cuidados",mListpeces.get(position).getCuidados());
+            i.putExtra("alimentacion",mListpeces.get(position).getAlimentacion());
+            i.putExtra("img",mListpeces.get(position).getImagen());
+            startActivity(i);
+            /*TiposFragment tiposFragment = new TiposFragment(mListpeces.get(position).getInformacion()
                     ,mListpeces.get(position).getCuidados()
                     ,mListpeces.get(position).getAlimentacion());
             getFragmentManager().beginTransaction()
-                    .replace(R.id.frag_l,tiposFragment).addToBackStack(null).commit();
+                    .replace(R.id.frag_l,tiposFragment).addToBackStack(null).commit(); */
         }else{
             TiposFragment tiposFragment = new TiposFragment(mListEnfermedades.get(position).getSintomas()
                     ,mListEnfermedades.get(position).getCausas()

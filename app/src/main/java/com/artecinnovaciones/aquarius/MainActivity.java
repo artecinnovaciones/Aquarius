@@ -18,12 +18,12 @@ import android.view.animation.Interpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
+import com.artecinnovaciones.aquarius.fragments.PrincipalFragment;
 import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControlator;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String tipo_pez;
     public static int Agresivosvisible=0;
 
     @Override
@@ -31,25 +31,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinearLayout dul = (LinearLayout) findViewById(R.id.peces_dul);
-        dul.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tipo_pez="dulce";
-                Intent i = new Intent(MainActivity.this, DetallesActivity.class);
-                startActivity(i);
-            }
-        });
-
-        LinearLayout enfermedades = (LinearLayout) findViewById(R.id.enfermedades_btn);
-        enfermedades.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tipo_pez="enfermedades";
-                Intent i = new Intent(MainActivity.this, DetallesActivity.class);
-                startActivity(i);
-            }
-        });
+        PrincipalFragment mainFrag = new PrincipalFragment();
+        getFragmentManager().beginTransaction()
+                .add(R.id.frag_principal, mainFrag).commit();
     }
 
 

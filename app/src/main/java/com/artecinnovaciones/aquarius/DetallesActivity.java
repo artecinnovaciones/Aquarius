@@ -1,5 +1,10 @@
 package com.artecinnovaciones.aquarius;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +20,8 @@ import com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView;
 import com.artecinnovaciones.aquarius.adapters.SearchAdapter;
 import com.artecinnovaciones.aquarius.filter.CustomAutoCompleteTextChangedListener;
 import com.artecinnovaciones.aquarius.fragments.DetallesFragment;
+import com.artecinnovaciones.aquarius.fragments.PrincipalFragment;
+import com.artecinnovaciones.aquarius.fragments.TiposFragment;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
@@ -33,6 +40,11 @@ public class DetallesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalles);
         cargarBd();
 
+        String info=getIntent().getStringExtra("info");
+        String cuidados=getIntent().getStringExtra("cuidados");
+        String alimentacion=getIntent().getStringExtra("alimentacion");
+        String imagen=getIntent().getStringExtra("img");
+
         mCustomAutoCompleteView = (CustomAutoCompleteView) findViewById(R.id.autocomplete);
         mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
         mCustomAutoCompleteView.setVisibility(View.GONE);
@@ -42,9 +54,11 @@ public class DetallesActivity extends AppCompatActivity {
         mCustomAutoCompleteView.setAdapter(mSearchAdapter);
 
 
-        DetallesFragment DetFrag = new DetallesFragment();
+        /*DetallesFragment DetFrag = new DetallesFragment();
+        getFragmentManager().beginTransaction()*/
+        TiposFragment tiposFragment = new TiposFragment(info,cuidados,alimentacion);
         getFragmentManager().beginTransaction()
-                .add(R.id.frag_l, DetFrag).commit();
+                .add(R.id.frag_l, tiposFragment).commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,23 +71,25 @@ public class DetallesActivity extends AppCompatActivity {
 
         CollapsingToolbarLayout collapser =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        collapser.setTitle("");
+        collapser.setTitle(DetallesFragment.nombre);
 
-        if (MainActivity.tipo_pez.equals("salada")) {
-            loadImageParallax(R.drawable.peces_salada);
-        } else {
-            loadImageParallax(R.drawable.peces_dulce);
-        }
+        Bitmap bMap = BitmapFactory.decodeFile(imagen);
+
+        ImageView image = (ImageView) findViewById(R.id.image_paralax);
+        image.setImageBitmap(bMap);
+
+            //loadImageParallax(d);
     }
 
-    private void loadImageParallax(int id) {
+    /*private void loadImageParallax(int id) {
         ImageView image = (ImageView) findViewById(R.id.image_paralax);
         // Usando Glide para la carga asíncrona
+
         Glide.with(this)
                 .load(id)
                 .centerCrop()
                 .into(image);
-    }
+    } */
 
     AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
