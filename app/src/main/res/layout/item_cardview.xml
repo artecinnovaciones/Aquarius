@@ -10,12 +10,12 @@
     android:layout_marginLeft="16dp"
     android:layout_marginTop="7dp"
     android:layout_marginBottom="3dp"
+    android:background="@drawable/selector_btn_ir"
     app:cardCornerRadius="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_btn_ir">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:layout_width="130dp"

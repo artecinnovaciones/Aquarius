@@ -156,11 +156,17 @@ public class DetallesFragment extends Fragment {
             getFragmentManager().beginTransaction()
                     .replace(R.id.frag_l,tiposFragment).addToBackStack(null).commit(); */
         }else{
-            TiposFragment tiposFragment = new TiposFragment(mListEnfermedades.get(position).getSintomas()
+            Intent i = new Intent(getActivity(), DetallesActivity.class);
+            i.putExtra("info",mListEnfermedades.get(position).getSintomas());
+            i.putExtra("cuidados",mListEnfermedades.get(position).getCausas());
+            i.putExtra("alimentacion",mListEnfermedades.get(position).getTratamiento());
+            i.putExtra("img",mListEnfermedades.get(position).getImg());
+            startActivity(i);
+            /*TiposFragment tiposFragment = new TiposFragment(mListEnfermedades.get(position).getSintomas()
                     ,mListEnfermedades.get(position).getCausas()
                     ,mListEnfermedades.get(position).getTratamiento());
             getFragmentManager().beginTransaction()
-                    .replace(R.id.frag_l,tiposFragment).addToBackStack(null).commit();
+                    .replace(R.id.frag_l,tiposFragment).addToBackStack(null).commit(); */
         }
 
     }

@@ -25,6 +25,7 @@ import com.artecinnovaciones.aquarius.fragments.TiposFragment;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
+import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -52,8 +53,7 @@ public class DetallesActivity extends AppCompatActivity {
 
         mSearchAdapter = new SearchAdapter(this, R.layout.list_view_row, ArrayListPeces);
         mCustomAutoCompleteView.setAdapter(mSearchAdapter);
-
-
+        
         /*DetallesFragment DetFrag = new DetallesFragment();
         getFragmentManager().beginTransaction()*/
         TiposFragment tiposFragment = new TiposFragment(info,cuidados,alimentacion);

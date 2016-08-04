@@ -93,6 +93,7 @@ public class SplashActivity extends Activity {
 
                             if(i<40){
                                 SystemClock.sleep(100);
+                                i++;
                             }if (i>=40 && i<60){
                                 SystemClock.sleep(200);
                                 i++;
