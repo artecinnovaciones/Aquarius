@@ -90,18 +90,18 @@ public class SplashActivity extends Activity {
                                 mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces(getApplicationContext());
                                 banderaparawebservie = 1;
                             }
-                            i++;
 
-                            if (i>=40){
-                                SystemClock.sleep(200);
-                                if (i>=60){
-                                    SystemClock.sleep(300);
-                                    if (i>=75){
-                                        SystemClock.sleep(400);
-                                    }
-                                }
-                            }else {
+                            if(i<40){
                                 SystemClock.sleep(100);
+                            }if (i>=40 && i<60){
+                                SystemClock.sleep(200);
+                                i++;
+                            }if (i>=60 && i<75){
+                                SystemClock.sleep(300);
+                                i++;
+                            }if (i>=75 && i<98){
+                                SystemClock.sleep(400);
+                                i++;
                             }
 
                             publishProgress(i);
