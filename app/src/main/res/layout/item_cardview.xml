@@ -10,12 +10,12 @@
     android:layout_marginLeft="16dp"
     android:layout_marginTop="7dp"
     android:layout_marginBottom="3dp"
-    android:background="@drawable/selector_btn_ir"
     app:cardCornerRadius="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
 
         <ImageView
             android:layout_width="130dp"
@@ -50,6 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="titulo"
+                    android:textColor="#000000"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <View
@@ -63,6 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:textColor="#000000"
                     android:text="Los peces de agua salada, también conocidos como peces marinos, precisan de un cuidado diferente al que reciben los peces de agua dulce" />
 
             </LinearLayout>
