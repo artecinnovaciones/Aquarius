@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.artecinnovaciones.aquarius.DetallesActivity;
+import com.artecinnovaciones.aquarius.PecesActivity;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
@@ -34,9 +35,10 @@ public class PrincipalFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tipo_pez="dulce";
-                DetallesFragment detFrag = new DetallesFragment();
+                startActivity(new Intent(getActivity(), PecesActivity.class));
+             /*   DetallesFragment detFrag = new DetallesFragment();
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.frag_principal, detFrag).addToBackStack(null).commit();
+                        .replace(R.id.frag_principal, detFrag).addToBackStack(null).commit();*/
             }
         });
 
@@ -45,7 +47,7 @@ public class PrincipalFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tipo_pez="enfermedades";
-                DetallesFragment detFrag = new DetallesFragment();
+                EnfermedadesFragment detFrag = new EnfermedadesFragment();
                 getFragmentManager().beginTransaction()
                         .replace(R.id.frag_principal,detFrag).addToBackStack(null).commit();
             }
