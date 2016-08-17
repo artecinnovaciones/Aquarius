@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 
 import com.artecinnovaciones.aquarius.DetallesActivity;
 import com.artecinnovaciones.aquarius.R;
-import com.artecinnovaciones.aquarius.adapters.DetallesAdapter;
+import com.artecinnovaciones.aquarius.adapters.PecesAdapter;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
-import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedades;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
@@ -25,7 +24,7 @@ import java.util.List;
 /**
  * Created by LAP-NIDIA on 16/06/2016.
  */
-public class DetallesFragment extends Fragment {
+public class AgresivosFragment extends Fragment {
 
     RecyclerView recycler;
 
@@ -33,14 +32,14 @@ public class DetallesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_detalles, container, false);
+        View view = inflater.inflate(R.layout.fragment_agresivos, container, false);
         detalles(view);
 
         return view;
     }
 
     public void detalles(View view) {
-        recycler=ViewUtil.findViewById(view,R.id.recycler_peces_pacificos);
+        recycler=ViewUtil.findViewById(view,R.id.recycler_peces_agresivos);
 
         GridLayoutManager layoutRecycler = new GridLayoutManager(getActivity(),2);
         recycler.setLayoutManager(layoutRecycler);
@@ -64,7 +63,7 @@ public class DetallesFragment extends Fragment {
                 e.getStackTrace();
             }
 
-            DetallesAdapter adapter = new DetallesAdapter(mListpeces, new CustomItemClickListener() {
+            PecesAdapter adapter = new PecesAdapter(mListpeces, new CustomItemClickListener() {
                 @Override
                 public void onItemClick(View v, int position) {
                     tipo_Clic="pez";

@@ -14,7 +14,6 @@ import com.artecinnovaciones.aquarius.DetallesActivity;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.EnfermedadesAdapter;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
-import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedades;
 import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedadesDao;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
@@ -68,7 +67,7 @@ public class EnfermedadesFragment extends Fragment {
         EnfermedadesAdapter adapter = new EnfermedadesAdapter(mListEnfermedades, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                DetallesFragment.tipo_Clic="enfermedad";
+                AgresivosFragment.tipo_Clic="enfermedad";
                 tipos(position);
             }
         });

@@ -31,7 +31,7 @@ public class TiposFragment extends Fragment {
     }
 
     private void metodo(View view) {
-        if (DetallesFragment.tipo_Clic.equals("enfermedad")){
+        if (AgresivosFragment.tipo_Clic.equals("enfermedad")){
             TextView titulo1=ViewUtil.findViewById(view,R.id.informacionTitulo);
             TextView titulo2=ViewUtil.findViewById(view,R.id.cuidadosTitulo);
             TextView titulo3=ViewUtil.findViewById(view,R.id.alimentacionTitulo);

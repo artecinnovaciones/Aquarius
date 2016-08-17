@@ -18,9 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
+import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControlator;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
+
+import java.util.List;
 
 public class SplashActivity extends Activity {
 
@@ -51,6 +55,7 @@ public class SplashActivity extends Activity {
         pez_progress.setBackgroundResource(R.drawable.animacion_pez);
 
         animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
+
         getListPeces();
 
     }

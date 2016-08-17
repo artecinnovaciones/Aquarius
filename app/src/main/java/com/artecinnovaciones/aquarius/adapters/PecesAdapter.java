@@ -13,13 +13,12 @@ import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by LAP-NIDIA on 16/06/2016.
  */
-public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosViewHolder> {
+public class PecesAdapter extends RecyclerView.Adapter<PecesAdapter.DatosViewHolder> {
 
     CustomItemClickListener listener;
     List<PecesDulce> datos;
@@ -45,7 +44,7 @@ public class DetallesAdapter extends RecyclerView.Adapter<DetallesAdapter.DatosV
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public DetallesAdapter(List<PecesDulce> datos, CustomItemClickListener listener){
+    public PecesAdapter(List<PecesDulce> datos, CustomItemClickListener listener){
         this.datos = datos;
         this.listener = listener;
     }

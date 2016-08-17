@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.artecinnovaciones.aquarius.adapters.ViewPagerAdapter;
-import com.artecinnovaciones.aquarius.fragments.BlankFragment;
-import com.artecinnovaciones.aquarius.fragments.DetallesFragment;
+import com.artecinnovaciones.aquarius.fragments.PacificosFragment;
+import com.artecinnovaciones.aquarius.fragments.AgresivosFragment;
 
 public class PecesActivity extends AppCompatActivity {
 
@@ -26,8 +26,8 @@ public class PecesActivity extends AppCompatActivity {
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragments(new DetallesFragment(),"Agresivos");
-        viewPagerAdapter.addFragments(new BlankFragment(),"Pacíficos");
+        viewPagerAdapter.addFragments(new AgresivosFragment(),"Agresivos");
+        viewPagerAdapter.addFragments(new PacificosFragment(),"Pacíficos");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
