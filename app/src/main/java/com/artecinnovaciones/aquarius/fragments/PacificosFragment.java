@@ -74,6 +74,8 @@ public class PacificosFragment extends Fragment {
                 tipos(position);
             }
         });
+
+        recyclerPacificos.setAdapter(adapter);
     }
 
     private void tipos(int position) {
