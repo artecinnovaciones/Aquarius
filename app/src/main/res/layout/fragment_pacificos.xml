@@ -9,7 +9,7 @@
         android:id="@+id/recycler_peces_pacificos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="93dp">
+        android:layout_marginTop="103dp">
 
     </android.support.v7.widget.RecyclerView>
 
