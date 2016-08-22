@@ -133,7 +133,7 @@ public class PecesControlator {
                         pez.getInformacion(),
                         pez.getCuidados(),
                         pez.getAlimentacion(),
-                        pez.getMasBuscado(),
+                        pez.getTipo(),
                         imagen);
 
                 saveModelClient(mPecesDulce);

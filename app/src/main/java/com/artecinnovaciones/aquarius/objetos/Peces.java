@@ -18,8 +18,8 @@ public class Peces {
     public String Cuidados;
     @SerializedName("Alimentacion")
     public String Alimentacion;
-    @SerializedName("MasBuscado")
-    public int MasBuscado;
+    @SerializedName("Tipo")
+    public int Tipo;
     @SerializedName("Imagen")
     public String Imagen;
 
@@ -74,12 +74,12 @@ public class Peces {
         Imagen = imagen;
     }
 
-    public int getMasBuscado() {
-        return MasBuscado;
+    public int getTipo() {
+        return Tipo;
     }
 
-    public void setMasBuscado(int masBuscado) {
-        MasBuscado = masBuscado;
+    public void setTipo(int tipo) {
+        Tipo = tipo;
     }
 
     public int getId() {
