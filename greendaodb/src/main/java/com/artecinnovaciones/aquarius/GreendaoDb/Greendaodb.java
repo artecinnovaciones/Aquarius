@@ -16,7 +16,7 @@ public class Greendaodb {
             PecesAguaDulce.addStringProperty("Informacion");
             PecesAguaDulce.addStringProperty("Cuidados");
             PecesAguaDulce.addStringProperty("Alimentacion");
-            PecesAguaDulce.addIntProperty("MasBuscado");
+            PecesAguaDulce.addIntProperty("Tipo");
             PecesAguaDulce.addStringProperty("Imagen");
 
 

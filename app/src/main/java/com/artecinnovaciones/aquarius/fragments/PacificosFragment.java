@@ -54,7 +54,10 @@ public class PacificosFragment extends Fragment {
 
         try{
             PecesDulceDao peces = BdController.getInstance(getActivity()).pecesdulce();
-            List listaPeces = peces.queryBuilder().list();
+            List listaPeces = peces.queryBuilder()
+                    .where(PecesDulceDao.Properties.Tipo.eq(0))
+                    .list();
+
             ArrayListPeces = new ArrayList<PecesDulce>();
 
             for (Object Opeces : listaPeces){

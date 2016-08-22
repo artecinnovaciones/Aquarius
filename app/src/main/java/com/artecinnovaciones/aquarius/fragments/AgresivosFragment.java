@@ -15,6 +15,7 @@ import com.artecinnovaciones.aquarius.adapters.PecesAdapter;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
+import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedadesDao;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
@@ -53,7 +54,10 @@ public class AgresivosFragment extends Fragment {
 
             try {
                 PecesDulceDao mPeces = BdController.getInstance(getActivity()).pecesdulce();
-                List listpeces = mPeces.queryBuilder().list();
+                List listpeces = mPeces.queryBuilder()
+                        .where(PecesDulceDao.Properties.Tipo.eq(1))
+                        .list();
+
                 ArrayListPeces = new ArrayList<PecesDulce>();
                 for (Object peces : listpeces) {
                     ArrayListPeces.add((PecesDulce) peces);
