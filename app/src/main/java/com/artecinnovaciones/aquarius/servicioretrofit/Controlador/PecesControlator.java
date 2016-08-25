@@ -178,8 +178,6 @@ public class PecesControlator {
             e.getStackTrace();
         }
     }
-
-
     private static PecesControlator INSTANCE;
     private Context mContext;
     private PecesService mPecesService;
