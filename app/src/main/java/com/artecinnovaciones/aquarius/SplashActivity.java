@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControlator;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.CompararBd;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 
@@ -55,9 +56,36 @@ public class SplashActivity extends Activity {
         pez_progress.setBackgroundResource(R.drawable.animacion_pez);
 
         animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
+        validarBd();
+    }
 
-        getListPeces();
+    private void validarBd() {
+        validarBd = new AsyncTask<Void, Integer, CompararBd>() {
+            @Override
+            protected CompararBd doInBackground(Void... params) {
+                return PecesControlator.getInstance(getApplicationContext()).getCompararBd(getApplicationContext());
+            }
 
+            @Override
+            protected void onPostExecute(CompararBd mComparar) {
+                if (mComparar != null) {
+                    int bdexterna = 0, bdInterna = 0;
+                    bdexterna = mComparar.getmCompararBd().get(0).getIdPeces();
+                    bdInterna = mComparar.getBdinterna();
+                    if(bdexterna==bdInterna){
+                        SharedUtils.getInstance(getApplicationContext()).saveBandObjectEnfermedades(1);
+                        SharedUtils.getInstance(getApplicationContext()).saveBandObject(1);
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        SharedUtils.getInstance(getBaseContext()).getclear();
+                        finish();
+                    } else {
+                        getListPeces();
+                    }
+                } else {
+                    getListPeces();
+                }
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void mover(int mov) {
@@ -87,31 +115,34 @@ public class SplashActivity extends Activity {
             protected PecesResponse doInBackground(Void... params) {
                 int banderaparawebservie = 0;
                 PecesResponse mPecesResponse = null;
-                int i=0;
+                int i = 0;
                 try {
                     while (true) {
-                        if (mPecesResponse == null && SharedUtils.getInstance(getApplicationContext()).getIfDowload() == 0 &&SharedUtils.getInstance(getApplicationContext()).getIfDowloadEnfermedades() == 0) {
+                        if (SharedUtils.getInstance(getApplicationContext()).getIfDowload() == 0 && SharedUtils.getInstance(getApplicationContext()).getIfDowloadEnfermedades() == 0) {
                             if (banderaparawebservie < 1) {
-                                mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces(getApplicationContext());
+                                mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
                                 banderaparawebservie = 1;
                             }
 
-                            if(i<40){
+                            if (i < 40) {
                                 SystemClock.sleep(100);
                                 i++;
-                            }if (i>=40 && i<60){
+                            }
+                            if (i >= 40 && i < 60) {
                                 SystemClock.sleep(200);
                                 i++;
-                            }if (i>=60 && i<75){
+                            }
+                            if (i >= 60 && i < 75) {
                                 SystemClock.sleep(300);
                                 i++;
-                            }if (i>=75 && i<98){
+                            }
+                            if (i >= 75 && i < 98) {
                                 SystemClock.sleep(400);
                                 i++;
                             }
 
                             publishProgress(i);
-                        }else{
+                        } else {
                             while (i < 100) {
                                 i++;
                                 SystemClock.sleep(80);
@@ -120,11 +151,11 @@ public class SplashActivity extends Activity {
                             break;
                         }
                     }
-                   // publishProgress(100);
-
+                    // publishProgress(100)
                 } catch (Exception e) {
                     e.getMessage();
                 }
+
                 return mPecesResponse;
             }
 
@@ -185,6 +216,7 @@ public class SplashActivity extends Activity {
     }*/
 
     private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
+    private AsyncTask<Void, Integer, CompararBd> validarBd;
     private AsyncTask<Void, Integer, Void> mMoverPezAsyncTask;
     private AnimationDrawable animar_pez_progress;
 

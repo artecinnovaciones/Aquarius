@@ -1,7 +1,6 @@
 package com.artecinnovaciones.aquarius.servicioretrofit.Controlador;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
@@ -9,11 +8,12 @@ import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.PecesService;
-import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.CompararBd;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnfermedadesResponse;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,18 +34,30 @@ public class PecesControlator {
         return INSTANCE;
     }
 
-    public PecesResponse getListPeces(Context mContext) {
+    public CompararBd getCompararBd(Context mContext) {
+        CompararBd valor = null;
+        initPecesDao();
         initWebServiceController();
+        List listPeces = mPecesDulceDao.queryBuilder().list();
+        try {
+            valor = mPecesService.getCompararBd();
+            valor.setBdinterna(listPeces.size());
+            return valor;
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        valor.setBdinterna(listPeces.size());
+        return valor;
+    }
+
+
+    public PecesResponse getListPeces() {
         PecesResponse mPecesResponse = null;
         try {
             descargarEnfermedades();
             mPecesResponse = mPecesService.getlistPeces(mContext);
-            //  guardarpecesbd(mPecesResponse);
             return mPecesResponse;
-
-
         } catch (RuntimeException e) {
-
             e.printStackTrace();
         }
         return mPecesResponse;
@@ -72,33 +84,9 @@ public class PecesControlator {
             }
 
         } else {
-            mPecesDulceDao.deleteAll();
-            guardarpecesbd(mPecesResponse);
-
+            //  mPecesDulceDao.deleteAll();
+            //    guardarpecesbd(mPecesResponse);
         }
-      /*  initPecesDao();
-        mPecesDulce = null;
-        List listPeces = mPecesDulceDao.queryBuilder().list();
-        if (listPeces.size() == 0) {
-            for (Peces mPeces : mPecesResponse.getmListPeces()) {
-
-                mPecesDulce = new PecesDulce(null,
-                        mPeces.getNombreCientifico(),
-                        mPeces.getNombreComun(),
-                        mPeces.getInformacion(),
-                        mPeces.getCuidados(),
-                        mPeces.getAlimentacion(),
-                        mPeces.getMasBuscado(),
-                        descargaImagenes(mPeces, mPeces.getImagen()));
-
-                saveModelClient(mPecesDulce);
-
-            }
-            SharedUtils.getInstance(mContext).saveBandObject(1);
-        } else {
-            mPecesDulceDao.deleteAll();
-            guardarpecesbd(mPecesResponse);
-        }*/
     }
 
     private void descargaImagenes(final Peces pez, final String image, final int cantidadeimagenesdescargadas, final PecesResponse mPecesResponse) {
@@ -163,6 +151,7 @@ public class PecesControlator {
 
     private void saveModelClient(PecesDulce mPeces) {
         mPecesDulceDao.insert(mPeces);
+        SharedUtils.getInstance(mContext).ultimoIdBd(mPeces.getId());
     }
 
 
@@ -178,13 +167,14 @@ public class PecesControlator {
             e.getStackTrace();
         }
     }
+
     private static PecesControlator INSTANCE;
     private Context mContext;
     private PecesService mPecesService;
     private PecesDulceDao mPecesDulceDao;
     private AsyncTask<Void, Integer, String> mpecesImagenesAsyncTask;
     private AsyncTask<Void, Integer, PecesEnfermedadesResponse> mpecesEnfermedadesAsynkTask;
+    private AsyncTask<Void, Integer, CompararBd> mpecesCompararBd;
     private PecesDulce mPecesDulce;
-
-
+    int variable = 0;
 }

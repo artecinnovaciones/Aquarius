@@ -23,9 +23,6 @@ public class Peces {
     @SerializedName("Imagen")
     public String Imagen;
 
-
-
-
     public String getNombreCientifico() {
         return NombreCientifico;
     }

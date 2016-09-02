@@ -2,19 +2,12 @@ package com.artecinnovaciones.aquarius.servicioretrofit;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
-import com.artecinnovaciones.aquarius.SplashActivity;
-import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControlator;
 import com.artecinnovaciones.aquarius.servicioretrofit.WebService.PecesWebService;
-import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.CompararBd;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
-import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
-
-import java.io.File;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -34,22 +27,6 @@ public class PecesService extends BaseService<PecesWebService> {
 
     }
 
-   /* public PecesResponse getlistPeces() {
-        PecesResponse registrationResponse = null;
-        try {
-            Call<PecesResponse> call = getWebServiceClient().getListPeces();
-            Response<PecesResponse> response = call.execute();
-            if (response != null && response.errorBody() != null) {
-
-                return registrationResponse;
-            }
-            registrationResponse = response.body();
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        return registrationResponse;
-    }*/
-
     public PecesResponse getlistPeces(final Context mContext) {
         mPecesResponse = null;
 
@@ -64,10 +41,22 @@ public class PecesService extends BaseService<PecesWebService> {
 
             @Override
             public void onFailure(Call<PecesResponse> call, Throwable t) {
-
+                System.out.print(t);
+                System.out.print(call);
             }
         });
         return mPecesResponse;
+    }
+    public CompararBd getCompararBd() {
+        CompararBd mCompararBd = null;
+        try {
+            Call<CompararBd> call = getWebServiceClient().getCompara();
+            Response<CompararBd> response = call.execute();
+            mCompararBd = response.body();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return mCompararBd;
     }
 
     public String getImage(String image) {

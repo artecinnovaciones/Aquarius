@@ -1,20 +1,13 @@
 package com.artecinnovaciones.aquarius.servicioretrofit.WebService;
 
-import android.graphics.Bitmap;
-
-import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.CompararBd;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnfermedadesResponse;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 
-import java.util.List;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 /**
@@ -28,12 +21,11 @@ public interface PecesWebService {
     @GET
     Call<ResponseBody> getImagePeces(@Url String fileUrl);
 
-
-
     @GET(ConstantsService.GET.PECESENFERMEDADES)
     Call<PecesEnfermedadesResponse> getListPecesEnfermedades();
 
-
+    @GET(ConstantsService.GET.COMPARARBD)
+    Call<CompararBd> getCompara();
 
 }
 

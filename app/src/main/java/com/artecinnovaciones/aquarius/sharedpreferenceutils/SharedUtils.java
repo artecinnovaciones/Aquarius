@@ -47,6 +47,15 @@ public class SharedUtils {
         initPrefs();
     }
 
+    public void ultimoIdBd(Long Id) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putLong(IDBD, Id);
+        editor.commit();
+    }
+    public int getUltimoIdBd() {
+
+        return mPreferences.getInt(IDBD, 0);
+    }
     private void initPrefs() {
         mPreferences = mContext.getSharedPreferences(UTILS_PREFS,
                 Context.MODE_PRIVATE);
@@ -57,6 +66,7 @@ public class SharedUtils {
     private static final String UTILS_PREFS = TAG + "UtilsPreference";
     private static final String VALOR = "valor";
     private static final String ENFERMEDADES = "valor";
+    private static final String IDBD = "ultimoId";
     private SharedPreferences mPreferences;
 
 }

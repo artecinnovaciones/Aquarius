@@ -11,6 +11,7 @@ import com.artecinnovaciones.aquarius.objetos.Enfermedades;
 import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.EnfermedadesPecesService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnfermedadesResponse;
+import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 
 import java.util.List;
 
@@ -99,7 +100,7 @@ public class EnfermedadesControlator {
 
                 saveModelClient(mPecesEnfermedades);
                 if (mPecesResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {
-                  //  SharedUtils.getInstance(mContext).saveBandObject(1);
+                    SharedUtils.getInstance(mContext).saveBandObject(1);
                 }
 
             }

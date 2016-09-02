@@ -11,7 +11,6 @@ import java.util.List;
 public class PecesResponse {
     @SerializedName("Peces")
     public List<Peces> mListPeces;
-
     public List<Peces> getmListPeces() {
         return mListPeces;
     }
@@ -19,4 +18,5 @@ public class PecesResponse {
     public void setmListPeces(List<Peces> mListPeces) {
         this.mListPeces = mListPeces;
     }
+
 }
