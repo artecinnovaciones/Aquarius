@@ -45,7 +45,7 @@ public class EnfermedadesPecesService extends BaseService<PecesWebService> {
         return mPecesEnfermedadesResponse;
     }
 
-    public String getImage(String image) {
+    public String getImage(String image,Context mcontext) {
         String registrationImageBd = null;
         try {
 
@@ -53,8 +53,9 @@ public class EnfermedadesPecesService extends BaseService<PecesWebService> {
             Response<ResponseBody> response = call.execute();
 
             if (response != null) {
-                new ViewUtil().makeFile(response.body(), "IMG_TEMP_" + image);
-                return new ViewUtil().TEMP_DIRECTORY_PATH + "IMG_TEMP_" + image;
+                new ViewUtil().makeFile(mcontext ,response.body(),image);
+              //  return new ViewUtil().TEMP_DIRECTORY_PATH + "IMG_TEMP_" + image;
+                return mcontext.getFilesDir().getPath() + "/" + image;
             }
         } catch (Exception e) {
             e.getMessage();

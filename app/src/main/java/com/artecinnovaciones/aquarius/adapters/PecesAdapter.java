@@ -13,6 +13,8 @@ import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -66,7 +68,15 @@ public class PecesAdapter extends RecyclerView.Adapter<PecesAdapter.DatosViewHol
     public void onBindViewHolder(DatosViewHolder holder, int position) {
         holder.titulo.setText(datos.get(position).getNombreCientifico());
         //holder.descrip.setText(datos.get(position).descripcion);
-        Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
+    //    Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
+        FileInputStream fileInputStream =
+                null;
+        try {
+            fileInputStream = new FileInputStream(datos.get(position).getImagen());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Bitmap bMap = BitmapFactory.decodeStream(fileInputStream);
         holder.img.setImageBitmap(bMap);
     }
 

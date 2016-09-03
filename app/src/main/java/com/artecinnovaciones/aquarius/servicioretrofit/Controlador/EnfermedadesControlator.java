@@ -78,7 +78,7 @@ public class EnfermedadesControlator {
             protected String doInBackground(Void... params) {
                 String rutaBd = null;
                 try {
-                    rutaBd = mEnfermedadesPecesService.getImage(image);
+                    rutaBd = mEnfermedadesPecesService.getImage(image,mContext);
                 } catch (RuntimeException e) {
 
                     e.printStackTrace();

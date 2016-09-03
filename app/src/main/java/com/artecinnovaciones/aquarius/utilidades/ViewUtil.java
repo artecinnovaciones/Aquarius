@@ -2,6 +2,7 @@ package com.artecinnovaciones.aquarius.utilidades;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -12,6 +13,7 @@ import android.view.View;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,14 +67,32 @@ public class ViewUtil {
         }
     }
 
-    public void makeFile(ResponseBody body, String image) {
-        File fileDir = new File(TEMP_DIRECTORY_PATH);
+    public void makeFile(Context context, ResponseBody body, String image) {
+      /*  File fileDir = new File(TEMP_DIRECTORY_PATH);
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
 
-        DownloadandSaveImage(body,image);
+        DownloadandSaveImage(body,image);*/
+        Bitmap   bm = BitmapFactory.decodeStream(body.byteStream());
+        guardarImagen(context,image,bm);
+    }
+    private String guardarImagen (Context context, String nombre, Bitmap imagen){
+        ContextWrapper cw = new ContextWrapper(context);
+        File dirImages = cw.getDir("Imagenes", Context.MODE_PRIVATE);
+        File myPath = new File(dirImages, nombre);
 
+        FileOutputStream fos = null;
+        try{
+            fos = new FileOutputStream(myPath);
+            imagen.compress(Bitmap.CompressFormat.JPEG, 10, fos);
+            fos.flush();
+        }catch (FileNotFoundException ex){
+            ex.printStackTrace();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+        return myPath.getAbsolutePath();
     }
 
     public static final Boolean validateDataNetwork(Activity activity) {

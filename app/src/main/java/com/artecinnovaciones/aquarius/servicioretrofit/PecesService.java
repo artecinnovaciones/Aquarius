@@ -47,6 +47,7 @@ public class PecesService extends BaseService<PecesWebService> {
         });
         return mPecesResponse;
     }
+
     public CompararBd getCompararBd() {
         CompararBd mCompararBd = null;
         try {
@@ -59,7 +60,7 @@ public class PecesService extends BaseService<PecesWebService> {
         return mCompararBd;
     }
 
-    public String getImage(String image) {
+    public String getImage(String image, Context context) {
         String registrationImageBd = null;
         try {
 
@@ -67,8 +68,9 @@ public class PecesService extends BaseService<PecesWebService> {
             Response<ResponseBody> response = call.execute();
 
             if (response != null) {
-                new ViewUtil().makeFile(response.body(), "IMG_TEMP_" + image);
-                return new ViewUtil().TEMP_DIRECTORY_PATH + "IMG_TEMP_" + image;
+                new ViewUtil().makeFile(context, response.body(), "IMG_TEMP_" + image);
+                //  return new ViewUtil().TEMP_DIRECTORY_PATH + "IMG_TEMP_" + image;
+                return context.getFilesDir().getPath() + "/" + image;
             }
         } catch (Exception e) {
             e.getMessage();

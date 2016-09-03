@@ -2,6 +2,7 @@ package com.artecinnovaciones.aquarius.servicioretrofit.Controlador;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
@@ -79,6 +80,7 @@ public class PecesControlator {
         if (listPeces.size() == 0) {
             int cantidadeimagenesdescargadas = 1;
             for (Peces mPeces : mPecesResponse.getmListPeces()) {
+                Toast.makeText(mContext,mPeces.getImagen()+" "+  cantidadeimagenesdescargadas,Toast.LENGTH_LONG).show();
                 descargaImagenes(mPeces, mPeces.getImagen(), cantidadeimagenesdescargadas, mPecesResponse);
                 cantidadeimagenesdescargadas++;
             }
@@ -102,7 +104,7 @@ public class PecesControlator {
             protected String doInBackground(Void... params) {
                 String rutaBd = null;
                 try {
-                    rutaBd = mPecesService.getImage(image);
+                    rutaBd = mPecesService.getImage(image,mContext);
                 } catch (RuntimeException e) {
 
                     e.printStackTrace();
