@@ -38,7 +38,6 @@ public class SplashActivity extends Activity {
     boolean mNetworkDataWifi;
 
     int ancho = 0;
-
     LinearLayout Pez_Layout;
 
     @Override

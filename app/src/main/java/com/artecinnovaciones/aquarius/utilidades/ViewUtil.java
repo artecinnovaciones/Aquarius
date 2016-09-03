@@ -65,7 +65,6 @@ public class ViewUtil {
         }
     }
 
-
     public void makeFile(ResponseBody body, String image) {
         File fileDir = new File(TEMP_DIRECTORY_PATH);
         if (!fileDir.exists()) {
