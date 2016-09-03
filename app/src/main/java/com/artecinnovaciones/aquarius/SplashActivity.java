@@ -24,6 +24,7 @@ import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControla
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.CompararBd;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
+import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class SplashActivity extends Activity {
     Animation anim;
     ImageView logo, pez_progress;
     TextView porcentaje;
+
+    boolean mNetworkDataWifi;
 
     int ancho = 0;
 
@@ -56,7 +59,15 @@ public class SplashActivity extends Activity {
         pez_progress.setBackgroundResource(R.drawable.animacion_pez);
 
         animar_pez_progress = (AnimationDrawable) pez_progress.getBackground();
-        validarBd();
+
+        mNetworkDataWifi = ViewUtil.validateDataNetwork(SplashActivity.this);
+
+        if (mNetworkDataWifi) {
+            validarBd();
+        }else{
+            moverProgress();
+        }
+
     }
 
     private void validarBd() {
@@ -75,7 +86,8 @@ public class SplashActivity extends Activity {
                     if(bdexterna==bdInterna){
                         SharedUtils.getInstance(getApplicationContext()).saveBandObjectEnfermedades(1);
                         SharedUtils.getInstance(getApplicationContext()).saveBandObject(1);
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        //startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        moverProgress();
                         SharedUtils.getInstance(getBaseContext()).getclear();
                         finish();
                     } else {
@@ -177,7 +189,7 @@ public class SplashActivity extends Activity {
 
     }
 
-   /* private void moverProgress() {
+    private void moverProgress() {
         mMoverPezAsyncTask = new AsyncTask<Void, Integer, Void>() {
             int progess = 0;
 
@@ -190,7 +202,7 @@ public class SplashActivity extends Activity {
             protected Void doInBackground(Void... params) {
                 while (progess < 100) {
                     progess++;
-                    SystemClock.sleep(100);
+                    SystemClock.sleep(80);
                     publishProgress(progess);
                 }
                 return null;
@@ -213,7 +225,7 @@ public class SplashActivity extends Activity {
             }
         }.execute();
 
-    }*/
+    }
 
     private AsyncTask<Void, Integer, PecesResponse> mpecesAsyncTask;
     private AsyncTask<Void, Integer, CompararBd> validarBd;

@@ -1,8 +1,11 @@
 package com.artecinnovaciones.aquarius.utilidades;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
@@ -71,6 +74,18 @@ public class ViewUtil {
 
         DownloadandSaveImage(body,image);
 
+    }
+
+    public static final Boolean validateDataNetwork(Activity activity) {
+        ConnectivityManager connManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mMobile = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if (mWifi.isConnected() || mMobile.isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
