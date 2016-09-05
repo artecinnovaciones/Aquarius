@@ -67,7 +67,7 @@ public class ViewUtil {
         }
     } */
 
-    public String makeFile(Context context, ResponseBody body, String image) {
+    public void makeFile(Context context, ResponseBody body, String image) {
       /*  File fileDir = new File(TEMP_DIRECTORY_PATH);
         if (!fileDir.exists()) {
             fileDir.mkdirs();
@@ -75,7 +75,7 @@ public class ViewUtil {
 
         DownloadandSaveImage(body,image);*/
         Bitmap   bm = BitmapFactory.decodeStream(body.byteStream());
-        return guardarImagen(context,image,bm);
+        guardarImagen(context,image,bm);
     }
 
     public String guardarImagen (Context context, String nombre, Bitmap imagen){
