@@ -201,7 +201,7 @@ public class SplashActivity extends Activity {
             protected Void doInBackground(Void... params) {
                 while (progess < 100) {
                     progess++;
-                    SystemClock.sleep(30);
+                    SystemClock.sleep(5);
                     publishProgress(progess);
                 }
                 return null;

@@ -39,15 +39,20 @@ public class PecesControlator {
         CompararBd valor = null;
         initPecesDao();
         initWebServiceController();
-        List listPeces = mPecesDulceDao.queryBuilder().list();
         try {
+            List listPeces = mPecesDulceDao.queryBuilder().list();
+            System.out.print(listPeces);
+        }catch (RuntimeException e) {
+//            Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_LONG).show();
+        }
+       /* try {
             valor = mPecesService.getCompararBd();
             valor.setBdinterna(listPeces.size());
             return valor;
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        valor.setBdinterna(listPeces.size());
+        valor.setBdinterna(listPeces.size());*/
         return valor;
     }
 
@@ -76,7 +81,9 @@ public class PecesControlator {
 
     public void guardarpecesbd(PecesResponse mPecesResponse) {
         initPecesDao();
-        List listPeces = mPecesDulceDao.queryBuilder().list();
+        try {
+            List listPeces = mPecesDulceDao.queryBuilder().list();
+
         if (listPeces.size() == 0) {
             int cantidadeimagenesdescargadas = 1;
             for (Peces mPeces : mPecesResponse.getmListPeces()) {
@@ -88,6 +95,9 @@ public class PecesControlator {
         } else {
             //  mPecesDulceDao.deleteAll();
             //    guardarpecesbd(mPecesResponse);
+        }
+        }catch (Exception e){
+
         }
     }
 
