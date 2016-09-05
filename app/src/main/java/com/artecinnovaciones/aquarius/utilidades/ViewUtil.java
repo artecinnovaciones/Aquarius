@@ -35,7 +35,7 @@ public class ViewUtil {
     }
 
 
-    public boolean DownloadandSaveImage(ResponseBody body, String image) {
+  /*  public boolean DownloadandSaveImage(ResponseBody body, String image) {
         try {
 
             InputStream in = null;
@@ -65,9 +65,9 @@ public class ViewUtil {
         } catch (IOException e) {
             return false;
         }
-    }
+    } */
 
-    public void makeFile(Context context, ResponseBody body, String image) {
+    public String makeFile(Context context, ResponseBody body, String image) {
       /*  File fileDir = new File(TEMP_DIRECTORY_PATH);
         if (!fileDir.exists()) {
             fileDir.mkdirs();
@@ -75,9 +75,10 @@ public class ViewUtil {
 
         DownloadandSaveImage(body,image);*/
         Bitmap   bm = BitmapFactory.decodeStream(body.byteStream());
-        guardarImagen(context,image,bm);
+        return guardarImagen(context,image,bm);
     }
-    private String guardarImagen (Context context, String nombre, Bitmap imagen){
+
+    public String guardarImagen (Context context, String nombre, Bitmap imagen){
         ContextWrapper cw = new ContextWrapper(context);
         File dirImages = cw.getDir("Imagenes", Context.MODE_PRIVATE);
         File myPath = new File(dirImages, nombre);
@@ -108,7 +109,6 @@ public class ViewUtil {
     }
 
 
-    public static final String TEMP_DIRECTORY_PATH = Environment.getExternalStorageDirectory()+ "/Peces/Temp/";
-
+    //public static final String TEMP_DIRECTORY_PATH = Environment.getExternalStorageDirectory()+ "/Peces/Temp/";
 
 }

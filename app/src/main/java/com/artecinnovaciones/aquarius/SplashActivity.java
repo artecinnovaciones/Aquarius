@@ -88,7 +88,7 @@ public class SplashActivity extends Activity {
                         //startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         moverProgress();
                         SharedUtils.getInstance(getBaseContext()).getclear();
-                        finish();
+                        //finish();
                     } else {
                         getListPeces();
                     }
@@ -201,7 +201,7 @@ public class SplashActivity extends Activity {
             protected Void doInBackground(Void... params) {
                 while (progess < 100) {
                     progess++;
-                    SystemClock.sleep(80);
+                    SystemClock.sleep(30);
                     publishProgress(progess);
                 }
                 return null;

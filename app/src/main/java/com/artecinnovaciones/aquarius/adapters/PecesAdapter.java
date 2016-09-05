@@ -69,14 +69,14 @@ public class PecesAdapter extends RecyclerView.Adapter<PecesAdapter.DatosViewHol
         holder.titulo.setText(datos.get(position).getNombreCientifico());
         //holder.descrip.setText(datos.get(position).descripcion);
     //    Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
-        FileInputStream fileInputStream =
+        /*FileInputStream fileInputStream =
                 null;
         try {
             fileInputStream = new FileInputStream(datos.get(position).getImagen());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        Bitmap bMap = BitmapFactory.decodeStream(fileInputStream);
+        }*/
+        Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
         holder.img.setImageBitmap(bMap);
     }
 

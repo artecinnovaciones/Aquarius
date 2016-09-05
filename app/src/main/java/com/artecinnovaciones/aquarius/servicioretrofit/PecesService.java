@@ -68,9 +68,11 @@ public class PecesService extends BaseService<PecesWebService> {
             Response<ResponseBody> response = call.execute();
 
             if (response != null) {
-                new ViewUtil().makeFile(context, response.body(), "IMG_TEMP_" + image);
+                new ViewUtil().makeFile(context, response.body(), image);
+                String ruta = new ViewUtil().makeFile(context, response.body(), image);
                 //  return new ViewUtil().TEMP_DIRECTORY_PATH + "IMG_TEMP_" + image;
-                return context.getFilesDir().getPath() + "/" + image;
+
+                return ruta;
             }
         } catch (Exception e) {
             e.getMessage();
