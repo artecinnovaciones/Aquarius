@@ -37,8 +37,8 @@ public class EnfermedadesControlator {
         initWebServiceController();
         PecesEnfermedadesResponse mPecesEnfermedadesResponse = null;
         try {
-            mPecesEnfermedadesResponse = mEnfermedadesPecesService.getlistPecesEnfermedades(mContext);
-
+            mPecesEnfermedadesResponse = mEnfermedadesPecesService.getlistPecesEnfermedades();
+            guardarpecesEnfermedadesbd(mPecesEnfermedadesResponse);
             return mPecesEnfermedadesResponse;
         } catch (RuntimeException e) {
 
@@ -59,8 +59,8 @@ public class EnfermedadesControlator {
             }
 
         } else {
-            mPecesEnfermedadesDao.deleteAll();
-            guardarpecesEnfermedadesbd(mPecesEnfermedadesResponse);
+          //  mPecesEnfermedadesDao.deleteAll();
+          //  guardarpecesEnfermedadesbd(mPecesEnfermedadesResponse);
 
         }
     }

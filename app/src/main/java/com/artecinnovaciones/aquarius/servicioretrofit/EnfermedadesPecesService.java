@@ -24,8 +24,8 @@ public class EnfermedadesPecesService extends BaseService<PecesWebService> {
         super(baseUrl, PecesWebService.class);
 
     }
-
-    public PecesEnfermedadesResponse getlistPecesEnfermedades(final Context mContext) {
+@Deprecated
+    public PecesEnfermedadesResponse getlistPecesEnfermedades1(final Context mContext) {
         mPecesEnfermedadesResponse = null;
 
         Call<PecesEnfermedadesResponse> call = getWebServiceClient().getListPecesEnfermedades();
@@ -45,6 +45,17 @@ public class EnfermedadesPecesService extends BaseService<PecesWebService> {
         return mPecesEnfermedadesResponse;
     }
 
+    public PecesEnfermedadesResponse getlistPecesEnfermedades() {
+        mPecesEnfermedadesResponse = null;
+        try {
+            Call<PecesEnfermedadesResponse> call = getWebServiceClient().getListPecesEnfermedades();
+            Response<PecesEnfermedadesResponse> response = call.execute();
+            mPecesEnfermedadesResponse = response.body();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return mPecesEnfermedadesResponse;
+    }
     public String getImage(String image,Context mcontext) {
         String registrationImageBd = null;
         try {

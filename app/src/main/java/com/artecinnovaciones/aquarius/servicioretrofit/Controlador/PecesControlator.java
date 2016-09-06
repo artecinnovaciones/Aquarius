@@ -76,6 +76,15 @@ public class PecesControlator {
             protected PecesEnfermedadesResponse doInBackground(Void... params) {
                 return EnfermedadesControlator.getInstance(mContext).getListPecesEnfermedades(mContext);
             }
+/////////////////////////////////////Aumente esto
+    /*        @Override
+            protected void onPostExecute(PecesEnfermedadesResponse pecesEnfermedadesResponse) {
+                super.onPostExecute(pecesEnfermedadesResponse);
+                if(pecesEnfermedadesResponse.getmListPeces().size()>0){
+                    EnfermedadesControlator.getInstance(mContext).guardarpecesEnfermedadesbd(mPecesEnfermedadesResponse);
+                }
+
+            }*/
         }.execute();
     }
 
