@@ -78,6 +78,7 @@ public class PecesAdapter extends RecyclerView.Adapter<PecesAdapter.DatosViewHol
         }*/
         Bitmap bMap = BitmapFactory.decodeFile(datos.get(position).getImagen());
         holder.img.setImageBitmap(bMap);
+
     }
 
     @Override

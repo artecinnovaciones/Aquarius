@@ -26,8 +26,9 @@ public class PecesService extends BaseService<PecesWebService> {
         super(baseUrl, PecesWebService.class);
 
     }
-
-    public PecesResponse getlistPeces(final Context mContext) {
+    //metodo syncrono
+    @Deprecated
+    public PecesResponse getlistPeces1(final Context mContext) {
         mPecesResponse = null;
 
         Call<PecesResponse> call = getWebServiceClient().getListPeces();
@@ -68,11 +69,11 @@ public class PecesService extends BaseService<PecesWebService> {
             Response<ResponseBody> response = call.execute();
 
             if (response != null) {
-                new ViewUtil().makeFile(context, response.body(), image);
+                registrationImageBd = new ViewUtil().makeFile(context, response.body(), image);
                 //String ruta = new ViewUtil().makeFile(context, response.body(), image);
                 //  return new ViewUtil().TEMP_DIRECTORY_PATH + "IMG_TEMP_" + image;
 
-                return context.getFilesDir().getPath() + "/" + image;
+                return registrationImageBd;
                 //return ruta;
             }
         } catch (Exception e) {
@@ -81,26 +82,17 @@ public class PecesService extends BaseService<PecesWebService> {
         return registrationImageBd;
     }
 
-    @Deprecated//metodo Asyncrono
-    private PecesResponse getResponse(Call<PecesResponse> call) {
+    //metodo syncrono
+    public PecesResponse getlistPeces() {
         mPecesResponse = null;
-        call.enqueue(new Callback<PecesResponse>() {
-            @Override
-            public void onResponse(Call<PecesResponse> call, Response<PecesResponse> response) {
-                if (response != null) {
-                    mPecesResponse = response.body();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PecesResponse> call, Throwable t) {
-                t.getMessage();
-
-            }
-        });
-
+        try {
+            Call<PecesResponse> call = getWebServiceClient().getListPeces();
+            Response<PecesResponse> response = call.execute();
+            mPecesResponse = response.body();
+        } catch (Exception e) {
+            e.getMessage();
+        }
         return mPecesResponse;
     }
-
     public PecesResponse mPecesResponse;
 }

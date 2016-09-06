@@ -43,7 +43,7 @@ public class PecesControlator {
             List listPeces = mPecesDulceDao.queryBuilder().list();
             System.out.print(listPeces);
         }catch (RuntimeException e) {
-//            Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_LONG).show();
         }
        /* try {
             valor = mPecesService.getCompararBd();
@@ -60,8 +60,9 @@ public class PecesControlator {
     public PecesResponse getListPeces() {
         PecesResponse mPecesResponse = null;
         try {
+            mPecesResponse = mPecesService.getlistPeces();
+            guardarpecesbd(mPecesResponse);
             descargarEnfermedades();
-            mPecesResponse = mPecesService.getlistPeces(mContext);
             return mPecesResponse;
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -81,13 +82,11 @@ public class PecesControlator {
 
     public void guardarpecesbd(PecesResponse mPecesResponse) {
         initPecesDao();
-        try {
-            List listPeces = mPecesDulceDao.queryBuilder().list();
-
+        List listPeces = mPecesDulceDao.queryBuilder().list();
         if (listPeces.size() == 0) {
             int cantidadeimagenesdescargadas = 1;
             for (Peces mPeces : mPecesResponse.getmListPeces()) {
-                Toast.makeText(mContext,mPeces.getImagen()+" "+  cantidadeimagenesdescargadas,Toast.LENGTH_LONG).show();
+              //  Toast.makeText(mContext,mPeces.getImagen()+" "+  cantidadeimagenesdescargadas,Toast.LENGTH_LONG).show();
                 descargaImagenes(mPeces, mPeces.getImagen(), cantidadeimagenesdescargadas, mPecesResponse);
                 cantidadeimagenesdescargadas++;
             }
@@ -95,9 +94,6 @@ public class PecesControlator {
         } else {
             //  mPecesDulceDao.deleteAll();
             //    guardarpecesbd(mPecesResponse);
-        }
-        }catch (Exception e){
-
         }
     }
 
@@ -144,6 +140,7 @@ public class PecesControlator {
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
+
 
    /* private String descargadeimagen(String image) {
         initWebServiceController();

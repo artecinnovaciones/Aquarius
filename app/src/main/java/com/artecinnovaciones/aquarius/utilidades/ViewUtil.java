@@ -67,7 +67,7 @@ public class ViewUtil {
         }
     } */
 
-    public void makeFile(Context context, ResponseBody body, String image) {
+    public String makeFile(Context context, ResponseBody body, String image) {
       /*  File fileDir = new File(TEMP_DIRECTORY_PATH);
         if (!fileDir.exists()) {
             fileDir.mkdirs();
@@ -75,18 +75,17 @@ public class ViewUtil {
 
         DownloadandSaveImage(body,image);*/
         Bitmap   bm = BitmapFactory.decodeStream(body.byteStream());
-        guardarImagen(context,image,bm);
+        return  guardarImagen(context,image,bm);
     }
-
     public String guardarImagen (Context context, String nombre, Bitmap imagen){
         ContextWrapper cw = new ContextWrapper(context);
-        File dirImages = cw.getDir("Imagenes", Context.MODE_PRIVATE);
+        File dirImages = cw.getDir("Aquarius", Context.MODE_PRIVATE);
         File myPath = new File(dirImages, nombre);
 
         FileOutputStream fos = null;
         try{
             fos = new FileOutputStream(myPath);
-            imagen.compress(Bitmap.CompressFormat.JPEG, 10, fos);
+            imagen.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
         }catch (FileNotFoundException ex){
             ex.printStackTrace();

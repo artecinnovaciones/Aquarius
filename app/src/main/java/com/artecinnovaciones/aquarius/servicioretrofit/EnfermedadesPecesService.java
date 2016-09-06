@@ -53,9 +53,8 @@ public class EnfermedadesPecesService extends BaseService<PecesWebService> {
             Response<ResponseBody> response = call.execute();
 
             if (response != null) {
-                new ViewUtil().makeFile(mcontext ,response.body(),image);
-              //  return new ViewUtil().TEMP_DIRECTORY_PATH + "IMG_TEMP_" + image;
-                return mcontext.getFilesDir().getPath() + "/" + image;
+                registrationImageBd = new ViewUtil().makeFile(mcontext, response.body(), image);
+                return registrationImageBd;
             }
         } catch (Exception e) {
             e.getMessage();
