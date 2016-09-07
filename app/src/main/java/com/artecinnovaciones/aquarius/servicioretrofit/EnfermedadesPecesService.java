@@ -60,7 +60,6 @@ public class EnfermedadesPecesService extends BaseService<PecesWebService> {
         String registrationImageBd = null;
         try {
 
-
             Call<ResponseBody> call = getWebServiceClient().getImagePeces("/aquarius/uploads/" + image);
             Response<ResponseBody> response = call.execute();
 

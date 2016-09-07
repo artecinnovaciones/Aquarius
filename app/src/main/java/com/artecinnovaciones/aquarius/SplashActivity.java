@@ -135,7 +135,6 @@ public class SplashActivity extends Activity {
                                 mPecesResponse = PecesControlator.getInstance(getApplicationContext()).getListPeces();
                                 banderaparawebservie = 1;
                             }
-
                             if (i < 40) {
                                 SystemClock.sleep(100);
                                 i++;

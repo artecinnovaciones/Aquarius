@@ -37,7 +37,6 @@ public class EnfermedadesControlator {
         initWebServiceController();
         PecesEnfermedadesResponse mPecesEnfermedadesResponse = null;
         try {
-
             mPecesEnfermedadesResponse = mEnfermedadesPecesService.getlistPecesEnfermedades();
             guardarpecesEnfermedadesbd(mPecesEnfermedadesResponse);
             return mPecesEnfermedadesResponse;
