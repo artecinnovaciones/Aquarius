@@ -43,7 +43,7 @@ public class PecesControlator {
             List listPeces = mPecesDulceDao.queryBuilder().list();
             System.out.print(listPeces);
         }catch (RuntimeException e) {
-                Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_LONG).show();
         }
        /* try {
             valor = mPecesService.getCompararBd();
@@ -96,7 +96,7 @@ public class PecesControlator {
         if (listPeces.size() == 0) {
             int cantidadeimagenesdescargadas = 1;
             for (Peces mPeces : mPecesResponse.getmListPeces()) {
-                Toast.makeText(mContext,mPeces.getImagen()+" "+  cantidadeimagenesdescargadas,Toast.LENGTH_LONG).show();
+                //  Toast.makeText(mContext,mPeces.getImagen()+" "+  cantidadeimagenesdescargadas,Toast.LENGTH_LONG).show();
                 descargaImagenes(mPeces, mPeces.getImagen(), cantidadeimagenesdescargadas, mPecesResponse);
                 cantidadeimagenesdescargadas++;
             }
@@ -186,7 +186,6 @@ public class PecesControlator {
             e.getStackTrace();
         }
     }
-    
 
     private static PecesControlator INSTANCE;
     private Context mContext;
