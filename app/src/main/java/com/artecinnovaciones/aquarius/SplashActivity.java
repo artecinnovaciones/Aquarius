@@ -122,6 +122,7 @@ public class SplashActivity extends Activity {
                 //   mProgressDialog.show();
             }
 
+
             @Override
             protected PecesResponse doInBackground(Void... params) {
                 int banderaparawebservie = 0;

@@ -86,6 +86,7 @@ public class PecesService extends BaseService<PecesWebService> {
     public PecesResponse getlistPeces() {
         mPecesResponse = null;
         try {
+
             Call<PecesResponse> call = getWebServiceClient().getListPeces();
             Response<PecesResponse> response = call.execute();
             mPecesResponse = response.body();
