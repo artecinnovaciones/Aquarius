@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/azul"
     android:padding="10dp">
 
     <TextView
@@ -10,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="Escribe lo que quieres buscar"
+        android:textColor="@color/cardview_light_background"
         android:textSize="15dp" />
 
 </RelativeLayout>
