@@ -39,20 +39,20 @@ public class PecesControlator {
         CompararBd valor = null;
         initPecesDao();
         initWebServiceController();
-        try {
+      /*  try {
             List listPeces = mPecesDulceDao.queryBuilder().list();
             System.out.print(listPeces);
         }catch (RuntimeException e) {
             Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_LONG).show();
-        }
-       /* try {
+        }*/
+        try {
+            List listPeces = mPecesDulceDao.queryBuilder().list();
             valor = mPecesService.getCompararBd();
             valor.setBdinterna(listPeces.size());
             return valor;
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        valor.setBdinterna(listPeces.size());*/
         return valor;
     }
 

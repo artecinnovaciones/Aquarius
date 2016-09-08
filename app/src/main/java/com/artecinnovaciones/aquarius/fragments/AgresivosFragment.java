@@ -54,8 +54,11 @@ public class AgresivosFragment extends Fragment {
 
             try {
                 PecesDulceDao mPeces = BdController.getInstance(getActivity()).pecesdulce();
-                List listpeces = mPeces.queryBuilder()
+             /*   List listpeces = mPeces.queryBuilder()
                         .where(PecesDulceDao.Properties.Tipo.eq(1))
+                        .list();*/
+                List listpeces = mPeces.queryBuilder()
+                        .orderAsc(PecesDulceDao.Properties.NombreCientifico)
                         .list();
 
                 ArrayListPeces = new ArrayList<PecesDulce>();

@@ -1,8 +1,8 @@
 package com.artecinnovaciones.aquarius.fragments;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,11 +31,6 @@ public class PacificosFragment extends Fragment {
     private ArrayList<PecesDulce> ArrayListPeces;
     private List<PecesDulce> Listpeces;
 
-    public PacificosFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,7 +50,7 @@ public class PacificosFragment extends Fragment {
         try{
             PecesDulceDao peces = BdController.getInstance(getActivity()).pecesdulce();
             List listaPeces = peces.queryBuilder()
-                    .where(PecesDulceDao.Properties.Tipo.eq(0))
+                    .orderAsc(PecesDulceDao.Properties.NombreCientifico)
                     .list();
 
             ArrayListPeces = new ArrayList<PecesDulce>();

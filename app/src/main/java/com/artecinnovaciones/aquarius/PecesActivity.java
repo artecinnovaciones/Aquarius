@@ -34,7 +34,6 @@ public class PecesActivity extends AppCompatActivity {
 
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragments(new AgresivosFragment(),"Agresivos");
-        viewPagerAdapter.addFragments(new PacificosFragment(),"Pacíficos");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -47,13 +46,9 @@ public class PecesActivity extends AppCompatActivity {
 
     private void setupTabIcons() {
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.item_tabs, null);
-        tabOne.setText("Pacíficos");
+        tabOne.setText("Agresivos");
         tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_pacifico, 0, 0);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
-        TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.item_tabs, null);
-        tabTwo.setText("Agresivos");
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_agresivo, 0, 0);
-        tabLayout.getTabAt(1).setCustomView(tabTwo);
     }
 }

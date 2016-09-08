@@ -4,13 +4,11 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
-import com.artecinnovaciones.aquarius.DetallesActivity;
-import com.artecinnovaciones.aquarius.PecesActivity;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
@@ -35,10 +33,10 @@ public class PrincipalFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tipo_pez="dulce";
-                startActivity(new Intent(getActivity(), PecesActivity.class));
-             /*   DetallesFragment detFrag = new DetallesFragment();
+              //  startActivity(new Intent(getActivity(), PecesActivity.class));
+                PacificosFragment detFrag = new PacificosFragment();
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.frag_principal, detFrag).addToBackStack(null).commit();*/
+                        .replace(R.id.frag_principal,detFrag).addToBackStack(null).commit();
             }
         });
 
