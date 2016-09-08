@@ -8,10 +8,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.DetallesActivity;
 import com.artecinnovaciones.aquarius.R;
+
+import com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView;
 import com.artecinnovaciones.aquarius.adapters.PecesAdapter;
+import com.artecinnovaciones.aquarius.adapters.SearchAdapter;
+import com.artecinnovaciones.aquarius.filter.CustomAutoCompleteTextChangedListener;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
@@ -30,24 +38,28 @@ public class PacificosFragment extends Fragment {
 
     private ArrayList<PecesDulce> ArrayListPeces;
     private List<PecesDulce> Listpeces;
+    public CustomAutoCompleteView mCustomAutoCompleteView;
+    public SearchAdapter mSearchAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_pacificos, container, false);
+        View view = inflater.inflate(R.layout.fragment_pacificos, container, false);
         pacificos(view);
         return view;
     }
 
     private void pacificos(View view) {
-        recyclerPacificos= ViewUtil.findViewById(view,R.id.recycler_peces_pacificos);
-
-        GridLayoutManager gridLayout = new GridLayoutManager(getActivity(),2);
+        recyclerPacificos = ViewUtil.findViewById(view, R.id.recycler_peces_pacificos);
+        mCustomAutoCompleteView=ViewUtil.findViewById(view,R.id.filtrobusqueda);
+        mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
+    //    mCustomAutoCompleteView.addTextChangedListener(new CustomAutoCompleteTextChangedListener(getActivity()));
+        GridLayoutManager gridLayout = new GridLayoutManager(getActivity(), 2);
         recyclerPacificos.setLayoutManager(gridLayout);
         recyclerPacificos.setHasFixedSize(true);
 
-        try{
+        try {
             PecesDulceDao peces = BdController.getInstance(getActivity()).pecesdulce();
             List listaPeces = peces.queryBuilder()
                     .orderAsc(PecesDulceDao.Properties.NombreCientifico)
@@ -55,35 +67,47 @@ public class PacificosFragment extends Fragment {
 
             ArrayListPeces = new ArrayList<PecesDulce>();
 
-            for (Object Opeces : listaPeces){
-                ArrayListPeces.add((PecesDulce)Opeces);
+            for (Object Opeces : listaPeces) {
+                ArrayListPeces.add((PecesDulce) Opeces);
             }
 
             Listpeces = ArrayListPeces;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.getStackTrace();
         }
 
         PecesAdapter adapter = new PecesAdapter(Listpeces, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                AgresivosFragment.tipo_Clic="pez";
+                AgresivosFragment.tipo_Clic = "pez";
                 tipos(position);
             }
         });
 
         recyclerPacificos.setAdapter(adapter);
+
+        mSearchAdapter = new SearchAdapter(getActivity(), R.layout.list_view_row, ArrayListPeces);
+        mCustomAutoCompleteView.setAdapter(mSearchAdapter);
     }
 
     private void tipos(int position) {
-        AgresivosFragment.nombre=Listpeces.get(position).getNombreCientifico();
+        AgresivosFragment.nombre = Listpeces.get(position).getNombreCientifico();
         Intent i = new Intent(getActivity(), DetallesActivity.class);
-        i.putExtra("info",Listpeces.get(position).getInformacion());
-        i.putExtra("cuidados",Listpeces.get(position).getCuidados());
-        i.putExtra("alimentacion",Listpeces.get(position).getAlimentacion());
-        i.putExtra("img",Listpeces.get(position).getImagen());
+        i.putExtra("info", Listpeces.get(position).getInformacion());
+        i.putExtra("cuidados", Listpeces.get(position).getCuidados());
+        i.putExtra("alimentacion", Listpeces.get(position).getAlimentacion());
+        i.putExtra("img", Listpeces.get(position).getImagen());
         startActivity(i);
     }
-
+    AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+           /* RelativeLayout rl = (RelativeLayout) view;
+            TextView tv = (TextView) rl.getChildAt(0);
+            AgresivosFragment.nombre = Listpeces.get(position).getNombreCientifico();*/
+            mCustomAutoCompleteView.setText("");
+            tipos(position);
+        }
+    };
 }

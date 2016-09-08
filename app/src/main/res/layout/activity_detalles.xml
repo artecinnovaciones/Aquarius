@@ -54,18 +54,18 @@
                  android:background="@android:color/transparent"
                  app:layout_collapseMode="pin"
                  app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/> !-->
-            <com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView
-                android:id="@+id/autocomplete"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:completionThreshold="1" />
+            <!--   <com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView
+                   android:id="@+id/autocomplete"
+                   android:layout_width="fill_parent"
+                   android:layout_height="wrap_content"
+                   android:completionThreshold="1" />!-->
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <!--<include layout="@layout/content_scrolling" /> -->
 
-    <!-- Fab -->
+    <!-- Fab
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -73,6 +73,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/buscar"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchorGravity="bottom|end" />-->
 
 </android.support.design.widget.CoordinatorLayout>

@@ -45,12 +45,12 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher {
     public void onTextChanged(CharSequence userInput, int start, int before, int count) {
 
         try {
-            DetallesActivity mainActivity = ((DetallesActivity) context);
+        /*    DetallesActivity mainActivity = ((DetallesActivity) context);
             mainActivity.mSearchAdapter.notifyDataSetChanged();
             mainActivity.mSearchAdapter = new SearchAdapter(mainActivity, R.layout.list_view_row, read(userInput));
 
 
-            mainActivity.mCustomAutoCompleteView.setAdapter(mainActivity.mSearchAdapter);
+            mainActivity.mCustomAutoCompleteView.setAdapter(mainActivity.mSearchAdapter);*/
 
         } catch (NullPointerException e) {
             e.printStackTrace();

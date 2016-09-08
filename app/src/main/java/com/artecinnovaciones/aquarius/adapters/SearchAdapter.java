@@ -1,5 +1,6 @@
 package com.artecinnovaciones.aquarius.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,7 @@ public class SearchAdapter extends ArrayAdapter<PecesDulce> {
     int layoutResourceId;
     private ArrayList<PecesDulce> pecesList;
 
-    public SearchAdapter(DetallesActivity mContext, int layoutResourceId, ArrayList<PecesDulce> arrayListPeces) {
+    public SearchAdapter(Activity mContext, int layoutResourceId, ArrayList<PecesDulce> arrayListPeces) {
         super(mContext, layoutResourceId, arrayListPeces);
         this.layoutResourceId = layoutResourceId;
         this.mContext = mContext;
@@ -42,7 +43,7 @@ public class SearchAdapter extends ArrayAdapter<PecesDulce> {
 
         try {
             if (convertView == null) {
-                LayoutInflater inflater = ((DetallesActivity) mContext).getLayoutInflater();
+                LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
                 convertView = inflater.inflate(layoutResourceId, parent, false);
             }
 

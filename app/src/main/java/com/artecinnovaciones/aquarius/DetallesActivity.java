@@ -38,14 +38,14 @@ public class DetallesActivity extends AppCompatActivity {
         String cuidados=getIntent().getStringExtra("cuidados");
         String alimentacion=getIntent().getStringExtra("alimentacion");
         String imagen=getIntent().getStringExtra("img");
-
+/*
         mCustomAutoCompleteView = (CustomAutoCompleteView) findViewById(R.id.autocomplete);
         mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
         mCustomAutoCompleteView.setVisibility(View.GONE);
         mCustomAutoCompleteView.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
 
         mSearchAdapter = new SearchAdapter(this, R.layout.list_view_row, ArrayListPeces);
-        mCustomAutoCompleteView.setAdapter(mSearchAdapter);
+        mCustomAutoCompleteView.setAdapter(mSearchAdapter);*/
         
         /*DetallesFragment DetFrag = new DetallesFragment();
         getFragmentManager().beginTransaction()*/
@@ -53,14 +53,14 @@ public class DetallesActivity extends AppCompatActivity {
         getFragmentManager().beginTransaction()
                 .add(R.id.frag_l, tiposFragment).commit();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCustomAutoCompleteView.setVisibility(View.VISIBLE);
 
             }
-        });
+        });*/
 
         CollapsingToolbarLayout collapser =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
@@ -83,7 +83,7 @@ public class DetallesActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(image);
     } */
-
+/*
     AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -92,7 +92,7 @@ public class DetallesActivity extends AppCompatActivity {
             mCustomAutoCompleteView.setText(tv.getText().toString());
         }
     };
-
+*/
     public void cargarBd() {
         try {
             PecesDulceDao mPeces = BdController.getInstance(getApplication()).pecesdulce();
@@ -107,8 +107,8 @@ public class DetallesActivity extends AppCompatActivity {
         }
     }
 
-    public CustomAutoCompleteView mCustomAutoCompleteView;
+ //   public CustomAutoCompleteView mCustomAutoCompleteView;
     public ArrayList<PecesDulce> ArrayListPeces;
     private List<PecesDulce> mListpeces;
-    public SearchAdapter mSearchAdapter;
+//    public SearchAdapter mSearchAdapter;
 }
