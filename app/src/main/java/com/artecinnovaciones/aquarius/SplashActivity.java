@@ -87,11 +87,7 @@ public class SplashActivity extends Activity {
                         SharedUtils.getInstance(getApplicationContext()).saveBandObject(1);
                         //startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         moverProgress();
-                        SharedUtils.getInstance(getBaseContext()).getclear();
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                        finish();
-                    } else {
-                        getListPeces();
+
                     }
                 } else {
                     getListPeces();
@@ -221,6 +217,7 @@ public class SplashActivity extends Activity {
             protected void onPostExecute(Void aVoid) {
 
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                SharedUtils.getInstance(getBaseContext()).getclear();
                 finish();
             }
         }.execute();
