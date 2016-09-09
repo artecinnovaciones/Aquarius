@@ -64,15 +64,14 @@ public class EnfermedadesFragment extends Fragment {
             e.getStackTrace();
         }
 
-/*
+
         EnfermedadesAdapter adapter = new EnfermedadesAdapter(mListEnfermedades, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                AgresivosFragment.tipo_Clic="enfermedad";
                 tipos(position);
             }
         });
-        recycler.setAdapter(adapter);*/
+        recycler.setAdapter(adapter);
     }
 
     private void tipos(int position) {

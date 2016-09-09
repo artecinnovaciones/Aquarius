@@ -32,40 +32,16 @@ public class DetallesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
-        cargarBd();
+    //    cargarBd();
         try {
             String info = getIntent().getStringExtra("info");
             String cuidados = getIntent().getStringExtra("cuidados");
             String alimentacion = getIntent().getStringExtra("alimentacion");
             String imagen = getIntent().getStringExtra("img");
-
-/*
-        mCustomAutoCompleteView = (CustomAutoCompleteView) findViewById(R.id.autocomplete);
-        mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
-        mCustomAutoCompleteView.setVisibility(View.GONE);
-        mCustomAutoCompleteView.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
-
-        mSearchAdapter = new SearchAdapter(this, R.layout.list_view_row, ArrayListPeces);
-        mCustomAutoCompleteView.setAdapter(mSearchAdapter);*/
-        
-        /*DetallesFragment DetFrag = new DetallesFragment();
-        getFragmentManager().beginTransaction()*/
-            TiposFragment tiposFragment = new TiposFragment(info, cuidados, alimentacion);
+            int bandera = getIntent().getIntExtra("bandera",0);
+            TiposFragment tiposFragment = new TiposFragment(info, cuidados, alimentacion,bandera);
             getFragmentManager().beginTransaction()
                     .add(R.id.frag_l, tiposFragment).commit();
-
-      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCustomAutoCompleteView.setVisibility(View.VISIBLE);
-
-            }
-        });*/
-/*
-        CollapsingToolbarLayout collapser =
-                (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        collapser.setTitle(AgresivosFragment.nombre);*/
 
             Bitmap bMap = BitmapFactory.decodeFile(imagen);
 
@@ -74,29 +50,8 @@ public class DetallesActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.getMessage();
         }
-        //loadImageParallax(d);
     }
-
-    /*private void loadImageParallax(int id) {
-        ImageView image = (ImageView) findViewById(R.id.image_paralax);
-        // Usando Glide para la carga asíncrona
-
-        Glide.with(this)
-                .load(id)
-                .centerCrop()
-                .into(image);
-    } */
-/*
-    AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            RelativeLayout rl = (RelativeLayout) view;
-            TextView tv = (TextView) rl.getChildAt(0);
-            mCustomAutoCompleteView.setText(tv.getText().toString());
-        }
-    };
-*/
-    public void cargarBd() {
+   /* public void cargarBd() {
         try {
             PecesDulceDao mPeces = BdController.getInstance(getApplication()).pecesdulce();
             List listpeces = mPeces.queryBuilder().list();
@@ -104,14 +59,10 @@ public class DetallesActivity extends AppCompatActivity {
             for (Object peces : listpeces) {
                 ArrayListPeces.add((PecesDulce) peces);
             }
-            mListpeces = ArrayListPeces;
         } catch (Exception e) {
             e.getStackTrace();
         }
-    }
+    }*/
 
-    //   public CustomAutoCompleteView mCustomAutoCompleteView;
-    public ArrayList<PecesDulce> ArrayListPeces;
-    private List<PecesDulce> mListpeces;
-//    public SearchAdapter mSearchAdapter;
+    //public ArrayList<PecesDulce> ArrayListPeces;
 }

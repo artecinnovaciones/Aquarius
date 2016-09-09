@@ -54,7 +54,7 @@ public class PacificosFragment extends Fragment implements TextWatcher {
 
     private void pacificos(View view) {
         recyclerPacificos = ViewUtil.findViewById(view, R.id.recycler_peces_pacificos);
-        mCustomAutoCompleteView=ViewUtil.findViewById(view,R.id.filtrobusqueda);
+        mCustomAutoCompleteView = ViewUtil.findViewById(view, R.id.filtrobusqueda);
         mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
         GridLayoutManager gridLayout = new GridLayoutManager(getActivity(), 2);
         recyclerPacificos.setLayoutManager(gridLayout);
@@ -81,7 +81,6 @@ public class PacificosFragment extends Fragment implements TextWatcher {
         PecesAdapter adapter = new PecesAdapter(Listpeces, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                AgresivosFragment.tipo_Clic = "pez";
                 tipos(position);
             }
         });
@@ -93,14 +92,15 @@ public class PacificosFragment extends Fragment implements TextWatcher {
     }
 
     private void tipos(int position) {
-        AgresivosFragment.nombre = Listpeces.get(position).getNombreCientifico();
         Intent i = new Intent(getActivity(), DetallesActivity.class);
         i.putExtra("info", Listpeces.get(position).getInformacion());
         i.putExtra("cuidados", Listpeces.get(position).getCuidados());
         i.putExtra("alimentacion", Listpeces.get(position).getAlimentacion());
         i.putExtra("img", Listpeces.get(position).getImagen());
+        i.putExtra("bandera", 1);
         startActivity(i);
     }
+
     AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

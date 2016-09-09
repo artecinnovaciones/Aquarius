@@ -30,7 +30,6 @@ public class AgresivosFragment extends Fragment {
 
     RecyclerView recycler;
 
-    public static String tipo_Clic,nombre;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,7 +70,6 @@ public class AgresivosFragment extends Fragment {
             PecesAdapter adapter = new PecesAdapter(mListpeces, new CustomItemClickListener() {
                 @Override
                 public void onItemClick(View v, int position) {
-                    tipo_Clic="pez";
                     tipos(position);
                 }
             });
@@ -82,7 +80,6 @@ public class AgresivosFragment extends Fragment {
     }
 
     private void tipos(int position) {
-            nombre=mListpeces.get(position).getNombreCientifico();
             Intent i = new Intent(getActivity(), DetallesActivity.class);
             i.putExtra("info",mListpeces.get(position).getInformacion());
             i.putExtra("cuidados",mListpeces.get(position).getCuidados());
