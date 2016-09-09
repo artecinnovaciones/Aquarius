@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PacificosFragment extends Fragment {
+public class PacificosFragment extends Fragment implements TextWatcher {
 
     RecyclerView recyclerPacificos;
 
@@ -54,7 +56,6 @@ public class PacificosFragment extends Fragment {
         recyclerPacificos = ViewUtil.findViewById(view, R.id.recycler_peces_pacificos);
         mCustomAutoCompleteView=ViewUtil.findViewById(view,R.id.filtrobusqueda);
         mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
-    //    mCustomAutoCompleteView.addTextChangedListener(new CustomAutoCompleteTextChangedListener(getActivity()));
         GridLayoutManager gridLayout = new GridLayoutManager(getActivity(), 2);
         recyclerPacificos.setLayoutManager(gridLayout);
         recyclerPacificos.setHasFixedSize(true);
@@ -110,4 +111,19 @@ public class PacificosFragment extends Fragment {
             tipos(position);
         }
     };
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
 }

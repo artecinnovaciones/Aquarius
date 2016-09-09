@@ -25,6 +25,7 @@ import java.util.List;
 /**
  * Created by LAP-NIDIA on 16/06/2016.
  */
+
 public class AgresivosFragment extends Fragment {
 
     RecyclerView recycler;

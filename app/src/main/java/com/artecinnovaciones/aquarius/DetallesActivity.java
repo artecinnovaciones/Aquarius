@@ -33,11 +33,12 @@ public class DetallesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
         cargarBd();
+        try {
+            String info = getIntent().getStringExtra("info");
+            String cuidados = getIntent().getStringExtra("cuidados");
+            String alimentacion = getIntent().getStringExtra("alimentacion");
+            String imagen = getIntent().getStringExtra("img");
 
-        String info=getIntent().getStringExtra("info");
-        String cuidados=getIntent().getStringExtra("cuidados");
-        String alimentacion=getIntent().getStringExtra("alimentacion");
-        String imagen=getIntent().getStringExtra("img");
 /*
         mCustomAutoCompleteView = (CustomAutoCompleteView) findViewById(R.id.autocomplete);
         mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
@@ -49,9 +50,9 @@ public class DetallesActivity extends AppCompatActivity {
         
         /*DetallesFragment DetFrag = new DetallesFragment();
         getFragmentManager().beginTransaction()*/
-        TiposFragment tiposFragment = new TiposFragment(info,cuidados,alimentacion);
-        getFragmentManager().beginTransaction()
-                .add(R.id.frag_l, tiposFragment).commit();
+            TiposFragment tiposFragment = new TiposFragment(info, cuidados, alimentacion);
+            getFragmentManager().beginTransaction()
+                    .add(R.id.frag_l, tiposFragment).commit();
 
       /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,17 +62,19 @@ public class DetallesActivity extends AppCompatActivity {
 
             }
         });*/
-
+/*
         CollapsingToolbarLayout collapser =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        collapser.setTitle(AgresivosFragment.nombre);
+        collapser.setTitle(AgresivosFragment.nombre);*/
 
-        Bitmap bMap = BitmapFactory.decodeFile(imagen);
+            Bitmap bMap = BitmapFactory.decodeFile(imagen);
 
-        ImageView image = (ImageView) findViewById(R.id.image_paralax);
-        image.setImageBitmap(bMap);
-
-            //loadImageParallax(d);
+            ImageView image = (ImageView) findViewById(R.id.image_paralax);
+            image.setImageBitmap(bMap);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        //loadImageParallax(d);
     }
 
     /*private void loadImageParallax(int id) {
@@ -107,7 +110,7 @@ public class DetallesActivity extends AppCompatActivity {
         }
     }
 
- //   public CustomAutoCompleteView mCustomAutoCompleteView;
+    //   public CustomAutoCompleteView mCustomAutoCompleteView;
     public ArrayList<PecesDulce> ArrayListPeces;
     private List<PecesDulce> mListpeces;
 //    public SearchAdapter mSearchAdapter;
