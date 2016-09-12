@@ -43,6 +43,7 @@ public class CompararBd {
         this.success = success;
     }
 
+
     public List<CompararBd> getmCompararBd() {
         return mCompararBd;
     }

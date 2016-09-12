@@ -35,6 +35,7 @@ public class PecesControlator {
         return INSTANCE;
     }
 
+
     public CompararBd getCompararBd(Context mContext) {
         CompararBd valor = null;
         initPecesDao();

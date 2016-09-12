@@ -11,6 +11,7 @@ public class ConstantsService {
         public static final String COMPARARBD = "/aquarius/descarga_verificar.php";
      //   public static final String IMAGEDESCARGADA = "/aquarius/uploads";
 
+
     }
 /*
     public static class Constants {

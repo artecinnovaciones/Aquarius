@@ -38,7 +38,7 @@ public class PacificosFragment extends Fragment implements TextWatcher {
 
     RecyclerView recyclerPacificos;
 
-    private ArrayList<PecesDulce> ArrayListPeces;
+    private ArrayList<PecesDulce> ArrayListPeces, buscadorlist;
     private List<PecesDulce> Listpeces;
     public CustomAutoCompleteView mCustomAutoCompleteView;
     public SearchAdapter mSearchAdapter;
@@ -56,6 +56,7 @@ public class PacificosFragment extends Fragment implements TextWatcher {
         recyclerPacificos = ViewUtil.findViewById(view, R.id.recycler_peces_pacificos);
         mCustomAutoCompleteView = ViewUtil.findViewById(view, R.id.filtrobusqueda);
         mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
+        mCustomAutoCompleteView.addTextChangedListener(this);
         GridLayoutManager gridLayout = new GridLayoutManager(getActivity(), 2);
         recyclerPacificos.setLayoutManager(gridLayout);
         recyclerPacificos.setHasFixedSize(true);
@@ -87,8 +88,6 @@ public class PacificosFragment extends Fragment implements TextWatcher {
 
         recyclerPacificos.setAdapter(adapter);
 
-        mSearchAdapter = new SearchAdapter(getActivity(), R.layout.list_view_row, ArrayListPeces);
-        mCustomAutoCompleteView.setAdapter(mSearchAdapter);
     }
 
     private void tipos(int position) {
@@ -101,14 +100,25 @@ public class PacificosFragment extends Fragment implements TextWatcher {
         startActivity(i);
     }
 
+    private void tipos(PecesDulce mPeces) {
+        Intent i = new Intent(getActivity(), DetallesActivity.class);
+        i.putExtra("info", mPeces.getInformacion());
+        i.putExtra("cuidados", mPeces.getCuidados());
+        i.putExtra("alimentacion", mPeces.getAlimentacion());
+        i.putExtra("img", mPeces.getImagen());
+        i.putExtra("bandera", 1);
+        startActivity(i);
+    }
+
     AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-           /* RelativeLayout rl = (RelativeLayout) view;
-            TextView tv = (TextView) rl.getChildAt(0);
-            AgresivosFragment.nombre = Listpeces.get(position).getNombreCientifico();*/
             mCustomAutoCompleteView.setText("");
-            tipos(position);
+            for (PecesDulce comparar : ArrayListPeces) {
+                if (comparar.getId() == buscadorlist.get(position).getId()) {
+                    tipos(comparar);
+                }
+            }
         }
     };
 
@@ -124,6 +134,22 @@ public class PacificosFragment extends Fragment implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
+        cargarBd(s.toString());
+    }
 
+    public void cargarBd(String buscar) {
+        try {
+
+            PecesDulceDao mPeces = BdController.getInstance(getActivity()).pecesdulce();
+            List listpeces = mPeces.queryBuilder().where(PecesDulceDao.Properties.NombreCientifico.like(buscar + "%")).list();
+            buscadorlist = new ArrayList<PecesDulce>();
+            for (Object peces : listpeces) {
+                buscadorlist.add((PecesDulce) peces);
+            }
+            mSearchAdapter = new SearchAdapter(getActivity(), R.layout.list_view_row, buscadorlist);
+            mCustomAutoCompleteView.setAdapter(mSearchAdapter);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
     }
 }

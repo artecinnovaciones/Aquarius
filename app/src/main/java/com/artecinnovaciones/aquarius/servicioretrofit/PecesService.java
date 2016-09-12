@@ -49,6 +49,7 @@ public class PecesService extends BaseService<PecesWebService> {
         return mPecesResponse;
     }
 
+
     public CompararBd getCompararBd() {
         CompararBd mCompararBd = null;
         try {

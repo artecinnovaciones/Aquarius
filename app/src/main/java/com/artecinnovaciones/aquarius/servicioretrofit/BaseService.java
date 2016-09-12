@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by geovany.chin on 16/12/2015.
  */
 
+
 public abstract class BaseService<T> {
 
     protected BaseService(String baseUrl, Class<T> webService) {

@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class PecesEnfermedadesResponse {
 
+
     @SerializedName("Enfermedades")
     public List<Enfermedades> mListPeces;
 
