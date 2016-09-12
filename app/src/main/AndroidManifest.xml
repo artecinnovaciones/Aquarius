@@ -73,8 +73,15 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".PecesActivity"
-            android:label="Peces"></activity>
+        <activity
+            android:name=".PecesActivity"
+            android:label="Peces" />
+        <activity android:name=".PecerasActivity" />
+        <activity android:name=".GaleriaActivity" />
+        <activity
+            android:name=".PecerasDetallesActivity"
+            android:label="@string/title_activity_peceras_detalles"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -22,8 +22,7 @@
             android:layout_height="130dp"
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"
-            android:id="@+id/image_enfermedades"
-            android:src="@drawable/peces_dulce"/>
+            android:id="@+id/image_enfermedades"/>
 
         <RelativeLayout
             android:id="@+id/layout_info"
