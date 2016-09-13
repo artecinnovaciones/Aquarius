@@ -63,7 +63,7 @@ public class SplashActivity extends Activity {
 
         if (mNetworkDataWifi) {
             validarBd();
-        }else{
+        } else {
             moverProgress();
         }
 
@@ -82,12 +82,14 @@ public class SplashActivity extends Activity {
                     int bdexterna = 0, bdInterna = 0;
                     bdexterna = mComparar.getmCompararBd().get(0).getIdPeces();
                     bdInterna = mComparar.getBdinterna();
-                    if(bdexterna==bdInterna){
+                    if (bdexterna == bdInterna) {
                         SharedUtils.getInstance(getApplicationContext()).saveBandObjectEnfermedades(1);
                         SharedUtils.getInstance(getApplicationContext()).saveBandObject(1);
                         //startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         moverProgress();
 
+                    } else {
+                        getListPeces();
                     }
                 } else {
                     getListPeces();
