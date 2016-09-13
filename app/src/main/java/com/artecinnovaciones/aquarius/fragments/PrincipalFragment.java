@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.artecinnovaciones.aquarius.PecerasActivity;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
@@ -48,6 +50,14 @@ public class PrincipalFragment extends Fragment {
                 EnfermedadesFragment detFrag = new EnfermedadesFragment();
                 getFragmentManager().beginTransaction()
                         .replace(R.id.frag_principal,detFrag).addToBackStack(null).commit();
+            }
+        });
+
+        LinearLayout pecera = (LinearLayout) ViewUtil.findViewById(view, R.id.peceras_btn);
+        pecera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),PecerasActivity.class));
             }
         });
     }
