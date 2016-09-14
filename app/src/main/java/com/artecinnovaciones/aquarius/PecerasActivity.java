@@ -9,7 +9,6 @@ import android.view.View;
 public class PecerasActivity extends AppCompatActivity {
 
     CardView ideas, decorar, galeria;
-    public static int Peceras = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +22,18 @@ public class PecerasActivity extends AppCompatActivity {
         ideas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PecerasActivity.this, PecerasDetallesActivity.class));
+                Intent i = new Intent(PecerasActivity.this, PecerasDetallesActivity.class);
+                i.putExtra("tiposP", 0);
+                startActivity(i);
             }
         });
 
         decorar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Peceras=1;
-                startActivity(new Intent(PecerasActivity.this, PecerasDetallesActivity.class));
+                Intent i = new Intent(PecerasActivity.this, PecerasDetallesActivity.class);
+                i.putExtra("tiposP", 1);
+                startActivity(i);
             }
         });
 

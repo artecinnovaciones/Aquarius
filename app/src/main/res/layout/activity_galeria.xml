@@ -33,14 +33,14 @@
                 android:layout_width="100dp"
                 android:layout_height="75dp"
                 android:layout_marginRight="1dp"
-                android:src="@drawable/peces_salada"
+                android:src="@drawable/peces_peceras"
                 android:scaleType="centerCrop"/>
 
             <com.artecinnovaciones.aquarius.utilidades.TouchHighlightImageButton
                 android:id="@+id/thumb_button_2"
                 android:layout_width="100dp"
                 android:layout_height="75dp"
-                android:src="@drawable/peces_peceras"
+                android:src="@drawable/peces_salada"
                 android:scaleType="centerCrop" />
 
         </LinearLayout>

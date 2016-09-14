@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.artecinnovaciones.aquarius.fragments.DecoracionesFragment;
 import com.artecinnovaciones.aquarius.fragments.IdeasFragment;
 
 public class PecerasDetallesActivity extends AppCompatActivity {
@@ -19,13 +20,18 @@ public class PecerasDetallesActivity extends AppCompatActivity {
 
         ImageView image = (ImageView) findViewById(R.id.image_peceras);
 
-        if(PecerasActivity.Peceras==0){
+        int p = getIntent().getIntExtra("tiposP", 0);;
+
+        if(p==0){
             image.setImageResource(R.drawable.peces_salada);
             IdeasFragment ideasFRag = new IdeasFragment();
             getFragmentManager().beginTransaction()
                     .add(R.id.frag_Peceras,ideasFRag).commit();
         }else{
             image.setImageResource(R.drawable.peces_peceras);
+            DecoracionesFragment decoracionesFragment = new DecoracionesFragment();
+            getFragmentManager().beginTransaction()
+                    .add(R.id.frag_Peceras,decoracionesFragment).commit();
         }
 
     }
