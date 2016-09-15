@@ -10,7 +10,56 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="7dp"
         android:layout_marginLeft="7dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        card_view:cardCornerRadius="4dp"
+        android:elevation="3dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Antes de empezar..."
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="Investiga el tipo de peces y otra animales acuáticos que vayas a tener en tu acuario antes de elegir los elementos de decoración del acuario." />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="Recuerda que la mayoría de los peces son presas. Tener áreas para que puedan esconderse, como piedras grandes o adornos, ayudará a aliviar el estrés y hacerlos sentir más cómodos." />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="Ten en cuenta que a veces menos es mejor. Entre menos elementos tenga, más natural será el acuario." />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="Al elegir la decoración del acuario, ten en cuenta lo difícil que será cuando llegue el momento de limpiar el tanque." />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
         card_view:cardCornerRadius="4dp"
         android:elevation="3dp">
 
@@ -22,7 +71,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:src="@drawable/ideas_grava"
+                android:src="@drawable/punzante"
                 android:scaleType="centerCrop"/>
 
             <LinearLayout
@@ -34,14 +83,156 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Apariencia natural"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    android:paddingTop="16dp"
+                    android:text="Evita objetos punzantes ya que pueden lastimarse los peces de tu acuario. Evita que sea objetos con picos o que arañen, pueden incluso acabar con ellos." />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        card_view:cardCornerRadius="4dp"
+        android:elevation="3dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@drawable/escondite"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="16dp"
-                    android:text="Una forma de darle a tu pecera una apariencia verdaderamente natural es llenar la mitad con arena para acuarios y la otra mitad con arena común. Si consigues la arena en una playa o en una tienda de peces local, debes enjuagarla completamente de los materiales solubles que pueda tener con la ayuda de una malla fina." />
+                    android:text="Considera el mejor tipo de cobertura o zonas de escondite para los peces y otras criaturas a la hora de elegir la decoración del acuario." />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        card_view:cardCornerRadius="4dp"
+        android:elevation="3dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@drawable/pecestipo"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:text="Ten mucho cuidado con el tipo de peces que tienes en tu acuario, ya que no todos soportan los objetos de decoración. Para algunos, por su baja visión, son altamente peligrosos y poco recomendados." />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        card_view:cardCornerRadius="4dp"
+        android:elevation="3dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@drawable/colores"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:text="También el color, mucho cuidado con esto, ya que hay peces de color que se pierden entre los objetos si poseen un color similar. " />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        card_view:cardCornerRadius="4dp"
+        android:elevation="3dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@drawable/imitar"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:text="Lo mejor para decorar un acuario son objetos que imiten a plantas del fondo del mar con colores cálidos, texturas suaves, pero que no se coman mucho espacio en el acuario, ya que no quedaría mucho para los peces." />
             </LinearLayout>
 
         </LinearLayout>
