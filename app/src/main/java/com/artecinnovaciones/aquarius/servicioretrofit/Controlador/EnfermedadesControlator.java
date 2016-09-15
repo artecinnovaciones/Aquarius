@@ -97,7 +97,8 @@ public class EnfermedadesControlator {
                         pez.getSintomas(),
                         pez.getCausas(),
                         pez.getTratamiento(),
-                        imagen);
+                        imagen,
+                        false);
 
                 saveModelClient(mPecesEnfermedades);
                 if (mPecesResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {

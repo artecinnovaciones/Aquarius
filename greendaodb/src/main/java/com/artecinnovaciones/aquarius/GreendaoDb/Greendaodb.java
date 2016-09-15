@@ -18,6 +18,7 @@ public class Greendaodb {
             PecesAguaDulce.addStringProperty("Alimentacion");
             PecesAguaDulce.addIntProperty("Tipo");
             PecesAguaDulce.addStringProperty("Imagen");
+            PecesAguaDulce.addBooleanProperty("isSearch");
 
 
 
@@ -28,6 +29,7 @@ public class Greendaodb {
             PecesEnfermedades.addStringProperty("Causas");
             PecesEnfermedades.addStringProperty("Tratamiento");
             PecesEnfermedades.addStringProperty("img");
+            PecesEnfermedades.addBooleanProperty("isSearch");
 
 
             new DaoGenerator().generateAll(schema, "../app/src/main/java");

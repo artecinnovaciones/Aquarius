@@ -141,7 +141,8 @@ public class PecesControlator {
                         pez.getCuidados(),
                         pez.getAlimentacion(),
                         pez.getTipo(),
-                        imagen);
+                        imagen,
+                        false);
 
                 saveModelClient(mPecesDulce);
                 if (mPecesResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {

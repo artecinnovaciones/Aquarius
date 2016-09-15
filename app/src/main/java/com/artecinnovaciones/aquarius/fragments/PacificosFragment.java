@@ -101,6 +101,7 @@ public class PacificosFragment extends Fragment implements TextWatcher {
     }
 
     private void tipos(PecesDulce mPeces) {
+        bandera = false;
         Intent i = new Intent(getActivity(), DetallesActivity.class);
         i.putExtra("info", mPeces.getInformacion());
         i.putExtra("cuidados", mPeces.getCuidados());
@@ -113,12 +114,14 @@ public class PacificosFragment extends Fragment implements TextWatcher {
     AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            bandera = true;
             mCustomAutoCompleteView.setText("");
-            for (PecesDulce comparar : ArrayListPeces) {
-                if (comparar.getId() == buscadorlist.get(position).getId()) {
+            PecesDulce comparar= buscadorlist.get(position);
+        //    for (PecesDulce comparar : buscadorlist) {
+                if (comparar.getIsSearch()) {
                     tipos(comparar);
                 }
-            }
+         //   }
         }
     };
 
@@ -141,10 +144,16 @@ public class PacificosFragment extends Fragment implements TextWatcher {
         try {
 
             PecesDulceDao mPeces = BdController.getInstance(getActivity()).pecesdulce();
-            List listpeces = mPeces.queryBuilder().where(PecesDulceDao.Properties.NombreCientifico.like(buscar + "%")).list();
-            buscadorlist = new ArrayList<PecesDulce>();
-            for (Object peces : listpeces) {
-                buscadorlist.add((PecesDulce) peces);
+            List listpeces = mPeces.queryBuilder().whereOr(PecesDulceDao.Properties.NombreCientifico.like(buscar + "%"),
+                    (PecesDulceDao.Properties.NombreComun.like(buscar + "%"))).list();
+            if (listpeces.size() > 0 && !bandera) {
+                buscadorlist = new ArrayList<PecesDulce>();
+                for (Object peces : listpeces) {
+                    buscadorlist.add((PecesDulce) peces);
+                }
+                for (PecesDulce mod : buscadorlist) {
+                    mod.setIsSearch(true);
+                }
             }
             mSearchAdapter = new SearchAdapter(getActivity(), R.layout.list_view_row, buscadorlist);
             mCustomAutoCompleteView.setAdapter(mSearchAdapter);
@@ -152,4 +161,6 @@ public class PacificosFragment extends Fragment implements TextWatcher {
             e.getStackTrace();
         }
     }
+
+    private static boolean bandera = false;
 }
