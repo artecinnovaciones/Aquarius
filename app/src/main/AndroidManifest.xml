@@ -82,6 +82,7 @@
             android:name=".PecerasDetallesActivity"
             android:label="@string/title_activity_peceras_detalles"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name=".SwipeImageActivity" />
     </application>
 
 </manifest>
