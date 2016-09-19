@@ -7,9 +7,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:visibility="visible">
-
+        android:visibility="visible"
+        android:padding="10dp"
+        android:background="@color/colorPrimaryDark">
 
         <!--  <com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView
               android:id="@+id/filtrobusqueda"
@@ -34,13 +34,12 @@
             android:background="@drawable/bg_drawablesearch"
             android:completionThreshold="1"
             android:ems="10"
-            android:hint="Buscar Peces"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="5dp"
-            android:paddingTop="8dp"
+            android:hint="  Buscar Peces"
+            android:drawableLeft="@drawable/buscar"
+            android:padding="7dp"
+            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/colorPrimaryDark" />
+            android:textColorHint="@color/divider" />
 
 
     </RelativeLayout>

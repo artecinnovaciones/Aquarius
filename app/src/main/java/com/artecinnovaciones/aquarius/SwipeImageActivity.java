@@ -13,9 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.artecinnovaciones.aquarius.GaleriaActivity;
-import com.artecinnovaciones.aquarius.R;
-
 /**
  * Created by LAP-NIDIA on 15/09/2016.
  */
@@ -25,11 +22,14 @@ public class SwipeImageActivity extends Activity {
     public static Integer[] mImagesIds = {
             R.drawable.escondite, R.drawable.galeria,
             R.drawable.ideas_decoracion, R.drawable.ideas_fondo,
-            R.drawable.ideas_iluminacion, R.drawable.escondite
+            R.drawable.ideas_iluminacion, R.drawable.escondite,
+            R.drawable.escondite,R.drawable.fondo_splash,
+            R.drawable.ideas_grava,R.drawable.ideas_organiza,
+            R.drawable.ideas_plantas
     };
 
     private String[] imagesDescriptions = {
-            "image1", "Image2", "image3", "Image4", "Image5", "Image6"
+            "image1", "Image2", "image3", "Image4", "Image5", "Image6", "Image7", "image8", "Image9", "Image10", "Image11"
     };
 
     public void onCreate(Bundle savedInstanceState) {

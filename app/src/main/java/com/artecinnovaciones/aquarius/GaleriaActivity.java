@@ -20,7 +20,10 @@ public class GaleriaActivity extends Activity {
     public static Integer[] mImagesIds = {
             R.drawable.escondite, R.drawable.galeria,
             R.drawable.ideas_decoracion, R.drawable.ideas_fondo,
-            R.drawable.ideas_iluminacion, R.drawable.escondite
+            R.drawable.ideas_iluminacion, R.drawable.escondite,
+            R.drawable.escondite,R.drawable.fondo_splash,
+            R.drawable.ideas_grava,R.drawable.ideas_organiza,
+            R.drawable.ideas_plantas
     };
 
 
@@ -65,12 +68,12 @@ public class GaleriaActivity extends Activity {
             ImageView imageView;
             if (convertView == null) {  // if it's not recycled, initialize some attributes
                 imageView = new ImageView(mContext);
-                imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 130));
+                imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     imageView.setCropToPadding(true);
                 } else {
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    imageView.setScaleType(ImageView.ScaleType.CENTER);
                 }
                 imageView.setPadding(2, 2, 2, 2);
             } else {
