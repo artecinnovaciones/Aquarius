@@ -31,7 +31,7 @@
         android:id="@+id/recycler_enfermedades"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
         android:paddingBottom="7dp"/>
 
 </LinearLayout>

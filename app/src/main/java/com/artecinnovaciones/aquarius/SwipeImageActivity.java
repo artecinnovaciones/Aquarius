@@ -2,6 +2,11 @@ package com.artecinnovaciones.aquarius;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -13,10 +18,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.artecinnovaciones.aquarius.utilidades.GuardarImagen;
+import com.artecinnovaciones.aquarius.utilidades.TouchImageView;
+
+import java.io.File;
+import java.io.FileOutputStream;
+
 /**
  * Created by LAP-NIDIA on 15/09/2016.
  */
 public class SwipeImageActivity extends Activity {
+
+    TouchImageView imageView;
 
     //Hacemos referencia a nuestras imagenes originales de la carpeta de recursos
     public static Integer[] mImagesIds = {
@@ -66,6 +79,8 @@ public class SwipeImageActivity extends Activity {
 
             }
         });
+
+
     }
 
     //Creamos el SwipeImagePagerAdapter. Donde utilizaremos el layout "show_images"
@@ -87,7 +102,7 @@ public class SwipeImageActivity extends Activity {
          * need to be a View, but can be some other container of the page.
          */
         @Override
-        public Object instantiateItem(ViewGroup collection, int position) {
+        public Object instantiateItem(ViewGroup collection, final int position) {
 
             LayoutInflater inflater = (LayoutInflater) collection.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -95,7 +110,7 @@ public class SwipeImageActivity extends Activity {
             View view = inflater.inflate(R.layout.show_image, null);
 
             //Refereciamos el objeto ImageView del "show_images" layout
-            ImageView imageView = (ImageView) view.findViewById(R.id.gallery_image);
+            imageView = (TouchImageView) view.findViewById(R.id.gallery_image);
 
             //Asignamos a cada ImageView una imagen de nuestro "Array" de recursos
             //utilizamos "setImageResource" ya que nuestras imagenes estan almacenadas en una
@@ -111,6 +126,49 @@ public class SwipeImageActivity extends Activity {
 
             //Adicionamos el "view" que hemos creado con los objectos ImageView y TextView a la coleccion ViewGroup
             collection.addView(view, 0);
+
+            ImageView descargar = (ImageView) findViewById(R.id.descargar);
+            descargar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    imageView.buildDrawingCache();
+                    Bitmap imgBM = imageView.getDrawingCache();
+                    GuardarImagen guardar = new GuardarImagen();
+                    guardar.guardarImg(getApplicationContext(),imgBM);
+                }
+            });
+
+            ImageView compartir = (ImageView) findViewById(R.id.compartir);
+            compartir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    imageView.buildDrawingCache();
+                    Bitmap imgBM = imageView.getDrawingCache();
+
+                    try {
+
+                        File file = new File(imageView.getContext().getCacheDir(), imgBM + ".png");
+                        FileOutputStream fOut = null;
+                        fOut = new FileOutputStream(file);
+                        imgBM.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                        fOut.flush();
+                        fOut.close();
+                        file.setReadable(true, false);
+
+                        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        intent.putExtra(Intent.EXTRA_TEXT, "La mejor app para acuaristas... Aquarius, descárgala ya!!");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+                        intent.setType("image/png");
+                        startActivity(Intent.createChooser(intent, "Share with"));
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
 
             return view;
         }
