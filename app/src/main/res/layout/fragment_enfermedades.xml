@@ -4,9 +4,34 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondo_peces">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:padding="10dp"
+        android:background="@color/colorPrimaryDark">
+
+        <com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView
+            android:id="@+id/filtrobusqueda"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_drawablesearch"
+            android:completionThreshold="1"
+            android:ems="10"
+            android:hint="  Buscar enfermedades"
+            android:drawableLeft="@drawable/buscar"
+            android:padding="7dp"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/divider" />
+
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_enfermedades"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="7dp"/>
 
 </LinearLayout>

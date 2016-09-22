@@ -1,6 +1,6 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_peces">
 
@@ -34,13 +34,12 @@
             android:background="@drawable/bg_drawablesearch"
             android:completionThreshold="1"
             android:ems="10"
-            android:hint="  Buscar Peces"
+            android:hint="  Buscar peces"
             android:drawableLeft="@drawable/buscar"
             android:padding="7dp"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/divider" />
-
 
     </RelativeLayout>
     <!-- TODO: Update blank fragment layout -->
@@ -48,8 +47,9 @@
         android:id="@+id/recycler_peces_pacificos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp">
+        android:paddingTop="10dp"
+        android:paddingBottom="7dp">
 
     </android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+</LinearLayout>
