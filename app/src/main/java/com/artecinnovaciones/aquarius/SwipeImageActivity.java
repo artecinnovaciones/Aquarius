@@ -158,7 +158,7 @@ public class SwipeImageActivity extends Activity {
 
                         Intent intent = new Intent(android.content.Intent.ACTION_SEND);
                         intent.setType("text/plain");
-                        intent.putExtra(Intent.EXTRA_TEXT, "La mejor app para acuaristas... Aquarius, descárgala ya!!");
+                        intent.putExtra(Intent.EXTRA_TEXT, "La mejor app para acuaristas... Aquarius, descárgala ya desde Google Play!!");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
                         intent.setType("image/png");
