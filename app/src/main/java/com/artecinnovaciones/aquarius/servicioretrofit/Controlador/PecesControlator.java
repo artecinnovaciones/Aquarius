@@ -2,7 +2,6 @@ package com.artecinnovaciones.aquarius.servicioretrofit.Controlador;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
@@ -14,7 +13,6 @@ import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnferm
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

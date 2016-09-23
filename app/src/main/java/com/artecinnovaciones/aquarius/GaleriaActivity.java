@@ -3,6 +3,8 @@ package com.artecinnovaciones.aquarius;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,25 +14,46 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
+import com.artecinnovaciones.aquarius.modelodao.PecerasGaleria;
+import com.artecinnovaciones.aquarius.modelodao.PecerasGaleriaDao;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class GaleriaActivity extends Activity {
 
     public static int mSelected = 0;
     private GridView gridview;
     // Hacemos referencia a nuestras imagenes en miniatura de la carpeta de recursos
-    public static Integer[] mImagesIds = {
+  /*  public static Integer[] mImagesIds = {
             R.drawable.escondite, R.drawable.galeria,
             R.drawable.ideas_decoracion, R.drawable.ideas_fondo,
             R.drawable.ideas_iluminacion, R.drawable.escondite,
             R.drawable.escondite,R.drawable.fondo_splash,
             R.drawable.ideas_grava,R.drawable.ideas_organiza,
             R.drawable.ideas_plantas
-    };
+    }; */
 
+    private ArrayList<PecerasGaleria> ArrayListGaleria;
+    public static List<PecerasGaleria> mListGaleria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.images_gallery);
+
+        try {
+            PecerasGaleriaDao mEnfermedades = BdController.getInstance(GaleriaActivity.this).pecerasgaleria();
+            List listenfermedades = mEnfermedades.queryBuilder().list();
+            ArrayListGaleria = new ArrayList<PecerasGaleria>();
+            for (Object enfermedades : listenfermedades) {
+                ArrayListGaleria.add((PecerasGaleria) enfermedades);
+            }
+            mListGaleria = ArrayListGaleria;
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
 
         //Hacemos referncia nuestro GridView
         gridview = (GridView) findViewById(R.id.gridview);
@@ -54,7 +77,8 @@ public class GaleriaActivity extends Activity {
             mContext = c;
         }
         public int getCount() {
-            return mImagesIds.length;
+            return mListGaleria.size();
+            //return mImagesIds.length;
         }
         public Object getItem(int position) {
             return null;
@@ -83,7 +107,9 @@ public class GaleriaActivity extends Activity {
             //utilizamos "setImageResource" ya que nuestras imagenes estan almacenadas en una
             //carpeta de recursos en nuestro proyecto.
             // "mImagesIds" es un Array de enteros, ya que almacena el Id del recurso, no la imagen en si.
-            imageView.setImageResource(mImagesIds[position]);
+            Bitmap bMap = BitmapFactory.decodeFile(mListGaleria.get(position).getImg());
+            imageView.setImageBitmap(bMap);
+            //imageView.setImageResource(mImagesIds[position]);
 
             //En el evento click del ImageView obtenemos el indice de la imagen seleccionada
             imageView.setOnClickListener(new View.OnClickListener() {

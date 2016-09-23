@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -15,11 +16,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
+import com.artecinnovaciones.aquarius.modelodao.PecerasGaleria;
+import com.artecinnovaciones.aquarius.modelodao.PecerasGaleriaDao;
 import com.artecinnovaciones.aquarius.utilidades.TouchImageView;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LAP-NIDIA on 15/09/2016.
@@ -28,7 +34,7 @@ public class SwipeImageActivity extends Activity {
 
     TouchImageView imageView;
 
-    public static Integer[] mImagesIds = {
+   /* public static Integer[] mImagesIds = {
             R.drawable.escondite, R.drawable.galeria,
             R.drawable.ideas_decoracion, R.drawable.ideas_fondo,
             R.drawable.ideas_iluminacion, R.drawable.escondite,
@@ -39,11 +45,26 @@ public class SwipeImageActivity extends Activity {
 
     private String[] imagesDescriptions = {
             "image1", "Image2", "image3", "Image4", "Image5", "Image6", "Image7", "image8", "Image9", "Image10", "Image11"
-    };
+    };*/
+
+    private ArrayList<PecerasGaleria> ArrayListGaleria;
+    public static List<PecerasGaleria> mListGaleria;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.swipe_images_layout);
+
+        try {
+            PecerasGaleriaDao mGaleria = BdController.getInstance(SwipeImageActivity.this).pecerasgaleria();
+            List listenfermedades = mGaleria.queryBuilder().list();
+            ArrayListGaleria = new ArrayList<PecerasGaleria>();
+            for (Object enfermedades : listenfermedades) {
+                ArrayListGaleria.add((PecerasGaleria) enfermedades);
+            }
+            mListGaleria = ArrayListGaleria;
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
 
         String i = getIntent().getStringExtra("position");
         int index = Integer.parseInt(i);
@@ -70,7 +91,7 @@ public class SwipeImageActivity extends Activity {
     private class SwipeImagePagerAdapter extends PagerAdapter {
         @Override
         public int getCount() {
-            return GaleriaActivity.mImagesIds.length;
+            return GaleriaActivity.mListGaleria.size();
         }
 
         @Override
@@ -81,10 +102,12 @@ public class SwipeImageActivity extends Activity {
             View view = inflater.inflate(R.layout.show_image, null);
 
             imageView = (TouchImageView) view.findViewById(R.id.gallery_image);
-            imageView.setImageResource(mImagesIds[position]);
+            Bitmap bMap = BitmapFactory.decodeFile(mListGaleria.get(position).getImg());
+            imageView.setImageBitmap(bMap);
+            //imageView.setImageResource(mImagesIds[position]);
 
             TextView imageDescription = (TextView) view.findViewById(R.id.image_description);
-            imageDescription.setText(imagesDescriptions[position].toString());
+            imageDescription.setText(mListGaleria.get(position).getDescripcion().toString());
 
             collection.addView(view, 0);
 

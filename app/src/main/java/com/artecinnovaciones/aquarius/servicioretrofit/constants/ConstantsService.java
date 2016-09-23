@@ -9,9 +9,8 @@ public class ConstantsService {
         public static final String VALIDATE_LOGIN = "/aquarius/descarga_json.php";
         public static final String PECESENFERMEDADES = "/aquarius/descarga_json_enfermedades.php";
         public static final String COMPARARBD = "/aquarius/descarga_verificar.php";
+        public static final String PECERASGALERIA = "/aquarius/descarga_json_galeria.php";
      //   public static final String IMAGEDESCARGADA = "/aquarius/uploads";
-
-
     }
 /*
     public static class Constants {

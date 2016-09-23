@@ -15,7 +15,6 @@ import com.artecinnovaciones.aquarius.adapters.PecesAdapter;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
-import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedadesDao;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
 

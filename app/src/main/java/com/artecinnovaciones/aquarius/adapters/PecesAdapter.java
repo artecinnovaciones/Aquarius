@@ -13,8 +13,6 @@ import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 /**

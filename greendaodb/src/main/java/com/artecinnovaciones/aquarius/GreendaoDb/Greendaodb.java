@@ -20,8 +20,6 @@ public class Greendaodb {
             PecesAguaDulce.addStringProperty("Imagen");
             PecesAguaDulce.addBooleanProperty("isSearch");
 
-
-
             Entity PecesEnfermedades = schema.addEntity("PecesEnfermedades");
             PecesEnfermedades.addIdProperty();
             PecesEnfermedades.addStringProperty("Nombre");
@@ -31,6 +29,10 @@ public class Greendaodb {
             PecesEnfermedades.addStringProperty("img");
             PecesEnfermedades.addBooleanProperty("isSearch");
 
+            Entity Galeria = schema.addEntity("PecerasGaleria");
+            Galeria.addIdProperty();
+            Galeria.addStringProperty("Descripcion");
+            Galeria.addStringProperty("Img");
 
             new DaoGenerator().generateAll(schema, "../app/src/main/java");
         }

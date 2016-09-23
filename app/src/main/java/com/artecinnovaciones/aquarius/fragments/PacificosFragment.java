@@ -11,9 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.DetallesActivity;
 import com.artecinnovaciones.aquarius.R;
@@ -21,7 +18,6 @@ import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView;
 import com.artecinnovaciones.aquarius.adapters.PecesAdapter;
 import com.artecinnovaciones.aquarius.adapters.SearchAdapter;
-import com.artecinnovaciones.aquarius.filter.CustomAutoCompleteTextChangedListener;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;

@@ -4,11 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
-import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedades;
 import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedadesDao;
 import com.artecinnovaciones.aquarius.objetos.Enfermedades;
-import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.EnfermedadesPecesService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnfermedadesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;

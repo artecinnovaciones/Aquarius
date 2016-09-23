@@ -2,6 +2,7 @@ package com.artecinnovaciones.aquarius.servicioretrofit.WebService;
 
 import com.artecinnovaciones.aquarius.servicioretrofit.constants.ConstantsService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.CompararBd;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.GaleriaResponse;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnfermedadesResponse;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 
@@ -27,6 +28,9 @@ public interface PecesWebService {
 
     @GET(ConstantsService.GET.COMPARARBD)
     Call<CompararBd> getCompara();
+
+    @GET(ConstantsService.GET.PECERASGALERIA)
+    Call<GaleriaResponse> getListGaleria();
 
 }
 

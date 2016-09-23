@@ -5,9 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-import com.artecinnovaciones.aquarius.DetallesActivity;
-import com.artecinnovaciones.aquarius.R;
-import com.artecinnovaciones.aquarius.adapters.SearchAdapter;
 import com.artecinnovaciones.aquarius.modelodao.DaoMaster;
 import com.artecinnovaciones.aquarius.modelodao.DaoSession;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;

@@ -6,18 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.artecinnovaciones.aquarius.DetallesActivity;
-import com.artecinnovaciones.aquarius.MainActivity;
 import com.artecinnovaciones.aquarius.R;
-import com.artecinnovaciones.aquarius.filter.FilterPez;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Geovany.Chin on 29/06/2016.

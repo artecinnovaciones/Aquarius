@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.artecinnovaciones.aquarius.modelodao.DaoMaster;
 import com.artecinnovaciones.aquarius.modelodao.DaoSession;
+import com.artecinnovaciones.aquarius.modelodao.PecerasGaleriaDao;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedadesDao;
 
@@ -42,6 +43,15 @@ public class BdController {
         DaoSession daoSession = daoMaster.newSession();
 
         return daoSession.getPecesEnfermedadesDao();
+    }
+
+    public PecerasGaleriaDao pecerasgaleria() {
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(mContext, "galeria-db", null);
+        db = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        DaoSession daoSession = daoMaster.newSession();
+
+        return daoSession.getPecerasGaleriaDao();
     }
 
     private static BdController INSTANCE;
