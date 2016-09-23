@@ -6,9 +6,11 @@ import android.os.AsyncTask;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecerasGaleria;
 import com.artecinnovaciones.aquarius.modelodao.PecerasGaleriaDao;
+import com.artecinnovaciones.aquarius.objetos.Enfermedades;
 import com.artecinnovaciones.aquarius.objetos.Galeria;
 import com.artecinnovaciones.aquarius.servicioretrofit.GaleriaService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.GaleriaResponse;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnfermedadesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 
 import java.util.List;
@@ -35,78 +37,29 @@ public class GaleriaControlador {
         initWebServiceController();
         GaleriaResponse mGaleriaResponse = null;
         try {
-            mGaleriaResponse = mGaleriaService.getlistPecesEnfermedades();
-            guardarpecesEnfermedadesbd(mGaleriaResponse);
+            mGaleriaResponse = mGaleriaService.getlistGaleria();
+            guardarGaleria(mGaleriaResponse);
             return mGaleriaResponse;
         } catch (RuntimeException e) {
-
             e.printStackTrace();
         }
         return mGaleriaResponse;
     }
 
-
-    public void guardarpecesEnfermedadesbd(GaleriaResponse mGaleriaResponse) {
+    public void guardarGaleria(GaleriaResponse mGaleriaResponse) {
         initPecesDao();
-        List listPeces = mPecerasGaleriaDao.queryBuilder().list();
-        if (listPeces.size() == 0) {
-            int cantidadeimagenesdescargadas = 1;
-            for (Galeria mGaleria : mGaleriaResponse.getmListPeces()) {
-                descargaImagenesEnfermedades(mGaleria, mGaleria.getImg(), cantidadeimagenesdescargadas, mGaleriaResponse);
-                cantidadeimagenesdescargadas++;
-            }
+        PecerasGaleria mGaleria = null;
 
-        } else {
-            //  mPecerasGaleriaDao.deleteAll();
-            //  guardarpecesEnfermedadesbd(mGaleriaResponse);
-
+            for (Galeria mGa : mGaleriaResponse.getmListPeces()) {
+                    mGaleria.setDescripcion(mGa.getDescripcion());
+                    mGaleria.setImg(mGa.getImg());
+                    saveModelClient(mGaleria);
         }
     }
-
-    private void descargaImagenesEnfermedades(final Galeria gal, final String image, final int cantidadeimagenesdescargadas, final GaleriaResponse mGaleriaResponse) {
-
-        mpecesImagenesAsyncTask = new AsyncTask<Void, Integer, String>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                initWebServiceController();
-            }
-
-            @Override
-            protected String doInBackground(Void... params) {
-                String rutaBd = null;
-                try {
-                    rutaBd = mGaleriaService.getImage(image,mContext);
-                } catch (RuntimeException e) {
-
-                    e.printStackTrace();
-                }
-                return rutaBd;
-            }
-
-            @Override
-            protected void onPostExecute(String imagen) {
-                super.onPostExecute(imagen);
-                initPecesDao();
-
-                mPecerasGaleria = new PecerasGaleria(null,
-                        gal.getDescripcion(),
-                        imagen);
-
-                saveModelClient(mPecerasGaleria);
-                if (mGaleriaResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {
-                    SharedUtils.getInstance(mContext).saveBandObject(1);
-                }
-
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
 
     private void saveModelClient(PecerasGaleria mPecesGaleria) {
         mPecerasGaleriaDao.insert(mPecesGaleria);
     }
-
 
     private void initPecesDao() {
         mPecerasGaleriaDao = BdController.getInstance(mContext).pecerasgaleria();
