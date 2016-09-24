@@ -23,7 +23,7 @@ public class GaleriaService extends BaseService<PecesWebService> {
         super(baseUrl, PecesWebService.class);
 
     }
-    @Deprecated
+  /*  @Deprecated
     public GaleriaResponse getlistPecesEnfermedades1(final Context mContext) {
         mGaleriaResponse = null;
 
@@ -42,9 +42,9 @@ public class GaleriaService extends BaseService<PecesWebService> {
             }
         });
         return mGaleriaResponse;
-    }
+    }*/
 
-    public GaleriaResponse getlistPecesEnfermedades() {
+    public GaleriaResponse getlistPecerasGaleria() {
         mGaleriaResponse = null;
         try {
             Call<GaleriaResponse> call = getWebServiceClient().getListGaleria();
@@ -58,7 +58,6 @@ public class GaleriaService extends BaseService<PecesWebService> {
     public String getImage(String image,Context mcontext) {
         String registrationImageBd = null;
         try {
-
 
             Call<ResponseBody> call = getWebServiceClient().getImagePeces("/aquarius/uploads/" + image);
             Response<ResponseBody> response = call.execute();
