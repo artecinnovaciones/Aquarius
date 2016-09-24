@@ -9,6 +9,7 @@ import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.artecinnovaciones.aquarius.objetos.Peces;
 import com.artecinnovaciones.aquarius.servicioretrofit.PecesService;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.CompararBd;
+import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.GaleriaResponse;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesEnfermedadesResponse;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
@@ -62,6 +63,7 @@ public class PecesControlator {
             mPecesResponse = mPecesService.getlistPeces();
             guardarpecesbd(mPecesResponse);
             descargarEnfermedades();
+            descargarGaleria();
             return mPecesResponse;
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -88,7 +90,15 @@ public class PecesControlator {
         }.execute();
     }
 
+    private void descargarGaleria() {
+        mAsyncTaskGaleriaResponseAsyncTask = new AsyncTask<Void, Integer, GaleriaResponse>() {
+            @Override
+            protected GaleriaResponse doInBackground(Void... params) {
+                return GaleriaControlador.getInstance(mContext).getListGaleria();
+            }
 
+        }.execute();
+    }
     public void guardarpecesbd(PecesResponse mPecesResponse) {
         initPecesDao();
         List listPeces = mPecesDulceDao.queryBuilder().list();
@@ -193,6 +203,7 @@ public class PecesControlator {
     private PecesDulceDao mPecesDulceDao;
     private AsyncTask<Void, Integer, String> mpecesImagenesAsyncTask;
     private AsyncTask<Void, Integer, PecesEnfermedadesResponse> mpecesEnfermedadesAsynkTask;
+    private AsyncTask<Void, Integer, GaleriaResponse> mAsyncTaskGaleriaResponseAsyncTask;
     private AsyncTask<Void, Integer, CompararBd> mpecesCompararBd;
     private PecesDulce mPecesDulce;
     int variable = 0;
