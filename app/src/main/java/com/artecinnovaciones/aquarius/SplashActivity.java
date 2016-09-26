@@ -76,6 +76,7 @@ public class SplashActivity extends Activity {
                     if (bdexterna == bdInterna) {
                         SharedUtils.getInstance(getApplicationContext()).saveBandObjectEnfermedades(1);
                         SharedUtils.getInstance(getApplicationContext()).saveBandObject(1);
+                        SharedUtils.getInstance(getApplicationContext()).saveBandObjectGaleria(1);
                         //startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         moverProgress();
 

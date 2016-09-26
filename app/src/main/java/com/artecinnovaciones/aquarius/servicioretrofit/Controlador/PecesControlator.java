@@ -34,7 +34,6 @@ public class PecesControlator {
         return INSTANCE;
     }
 
-
     public CompararBd getCompararBd(Context mContext) {
         CompararBd valor = null;
         initPecesDao();
@@ -70,7 +69,6 @@ public class PecesControlator {
         }
         return mPecesResponse;
     }
-
 
     private void descargarEnfermedades() {
         mpecesEnfermedadesAsynkTask = new AsyncTask<Void, Integer, PecesEnfermedadesResponse>() {
@@ -154,7 +152,7 @@ public class PecesControlator {
 
                 saveModelClient(mPecesDulce);
                 if (mPecesResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {
-                    SharedUtils.getInstance(mContext).saveBandObjectEnfermedades(1);
+                    SharedUtils.getInstance(mContext).saveBandObject(1);
                 }
 
             }

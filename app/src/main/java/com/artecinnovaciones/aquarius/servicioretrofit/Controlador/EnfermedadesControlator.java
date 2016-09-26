@@ -100,7 +100,7 @@ public class EnfermedadesControlator {
 
                 saveModelClient(mPecesEnfermedades);
                 if (mPecesResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {
-                    SharedUtils.getInstance(mContext).saveBandObject(1);
+                    SharedUtils.getInstance(mContext).saveBandObjectEnfermedades(1);
                 }
 
             }

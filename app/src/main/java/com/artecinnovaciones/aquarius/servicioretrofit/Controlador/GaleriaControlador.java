@@ -51,10 +51,11 @@ public class GaleriaControlador {
         initPecesDao();
         List listPeces = mPecerasGaleriaDao.queryBuilder().list();
         if (listPeces.size() == 0) {
-            int cantidadeimagenesdescargadas = 1;
+           // int cantidadeimagenesdescargadas = 1;
             for (Galeria mGaleria : mGaleriaResponse.getmListPeces()) {
-                descargaImagenesGaleria(mGaleria, mGaleria.getImg(), cantidadeimagenesdescargadas, mGaleriaResponse);
-                cantidadeimagenesdescargadas++;
+               // descargaImagenesGaleria(mGaleria, mGaleria.getImg(), cantidadeimagenesdescargadas, mGaleriaResponse);
+                descargaImagenesGaleria(mGaleria, mGaleria.getImg(), mGaleriaResponse);
+             //   cantidadeimagenesdescargadas++;
             }
 
         } else {
@@ -64,7 +65,8 @@ public class GaleriaControlador {
         }
     }
 
-    private void descargaImagenesGaleria(final Galeria gal, final String image, final int cantidadeimagenesdescargadas, final GaleriaResponse mGaleriaResponse) {
+//    private void descargaImagenesGaleria(final Galeria gal, final String image, final int cantidadeimagenesdescargadas, final GaleriaResponse mGaleriaResponse) {
+    private void descargaImagenesGaleria(final Galeria gal, final String image, final GaleriaResponse mGaleriaResponse) {
 
         mpecesImagenesAsyncTask = new AsyncTask<Void, Integer, String>() {
             @Override
@@ -95,9 +97,9 @@ public class GaleriaControlador {
                         imagen);
 
                 saveModelClient(mPecerasGaleria);
-                if (mGaleriaResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {
-                    SharedUtils.getInstance(mContext).saveBandObject(1);
-                }
+               /* if (mGaleriaResponse.getmListPeces().size() == cantidadeimagenesdescargadas) {
+                    SharedUtils.getInstance(mContext).saveBandObjectGaleria(1);
+                }*/
 
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
