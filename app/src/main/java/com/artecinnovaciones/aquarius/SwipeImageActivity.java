@@ -34,19 +34,6 @@ public class SwipeImageActivity extends Activity {
 
     TouchImageView imageView;
 
-   /* public static Integer[] mImagesIds = {
-            R.drawable.escondite, R.drawable.galeria,
-            R.drawable.ideas_decoracion, R.drawable.ideas_fondo,
-            R.drawable.ideas_iluminacion, R.drawable.escondite,
-            R.drawable.escondite,R.drawable.fondo_splash,
-            R.drawable.ideas_grava,R.drawable.ideas_organiza,
-            R.drawable.ideas_plantas
-    };
-
-    private String[] imagesDescriptions = {
-            "image1", "Image2", "image3", "Image4", "Image5", "Image6", "Image7", "image8", "Image9", "Image10", "Image11"
-    };*/
-
     private ArrayList<PecerasGaleria> ArrayListGaleria;
     public static List<PecerasGaleria> mListGaleria;
 
@@ -117,7 +104,7 @@ public class SwipeImageActivity extends Activity {
                 public void onClick(View v) {
 
                     imageView.buildDrawingCache();
-                    Bitmap imgBM = imageView.getDrawingCache();
+                    Bitmap imgBM = BitmapFactory.decodeFile(mListGaleria.get(position).getImg());
                     new ViewUtil().guardarImg(getApplicationContext(),imgBM);
                 }
             });
@@ -126,8 +113,7 @@ public class SwipeImageActivity extends Activity {
             compartir.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imageView.buildDrawingCache();
-                    Bitmap imgBM = imageView.getDrawingCache();
+                    Bitmap imgBM = BitmapFactory.decodeFile(mListGaleria.get(position).getImg());
 
                     try {
 

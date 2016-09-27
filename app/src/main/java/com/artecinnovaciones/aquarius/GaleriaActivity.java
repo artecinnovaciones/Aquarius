@@ -25,15 +25,6 @@ public class GaleriaActivity extends Activity {
 
     public static int mSelected = 0;
     private GridView gridview;
-    // Hacemos referencia a nuestras imagenes en miniatura de la carpeta de recursos
-  /*  public static Integer[] mImagesIds = {
-            R.drawable.escondite, R.drawable.galeria,
-            R.drawable.ideas_decoracion, R.drawable.ideas_fondo,
-            R.drawable.ideas_iluminacion, R.drawable.escondite,
-            R.drawable.escondite,R.drawable.fondo_splash,
-            R.drawable.ideas_grava,R.drawable.ideas_organiza,
-            R.drawable.ideas_plantas
-    }; */
 
     private ArrayList<PecerasGaleria> ArrayListGaleria;
     public static List<PecerasGaleria> mListGaleria;

@@ -21,28 +21,7 @@ public class GaleriaService extends BaseService<PecesWebService> {
 
     public GaleriaService(String baseUrl) {
         super(baseUrl, PecesWebService.class);
-
     }
-  /*  @Deprecated
-    public GaleriaResponse getlistPecesEnfermedades1(final Context mContext) {
-        mGaleriaResponse = null;
-
-        Call<GaleriaResponse> call = getWebServiceClient().getListGaleria();
-        call.enqueue(new Callback<GaleriaResponse>() {
-            @Override
-            public void onResponse(Call<GaleriaResponse> call, Response<GaleriaResponse> response) {
-                mGaleriaResponse = response.body();
-
-                GaleriaControlador.getInstance(mContext).guardarpecesEnfermedadesbd(mGaleriaResponse);
-            }
-
-            @Override
-            public void onFailure(Call<GaleriaResponse> call, Throwable t) {
-
-            }
-        });
-        return mGaleriaResponse;
-    }*/
 
     public GaleriaResponse getlistPecerasGaleria() {
         mGaleriaResponse = null;
@@ -86,7 +65,6 @@ public class GaleriaService extends BaseService<PecesWebService> {
             @Override
             public void onFailure(Call<GaleriaResponse> call, Throwable t) {
                 t.getMessage();
-
             }
         });
 
