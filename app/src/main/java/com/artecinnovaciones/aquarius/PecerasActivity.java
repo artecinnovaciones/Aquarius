@@ -13,7 +13,11 @@ public class PecerasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_peceras);
+        try {
+            setContentView(R.layout.activity_peceras);
+        }catch(Exception e){
+            e.getMessage();
+        }
 
         ideas= (CardView)findViewById(R.id.card_ideas);
         decorar=(CardView)findViewById(R.id.card_decorar);
@@ -40,7 +44,7 @@ public class PecerasActivity extends AppCompatActivity {
         galeria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PecerasActivity.this,GaleriaActivity.class));
+                startActivity(new Intent(PecerasActivity.this, GaleriaActivity.class));
             }
         });
     }

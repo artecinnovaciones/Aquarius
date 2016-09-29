@@ -103,7 +103,6 @@ public class SwipeImageActivity extends Activity {
                 @Override
                 public void onClick(View v) {
 
-                    imageView.buildDrawingCache();
                     Bitmap imgBM = BitmapFactory.decodeFile(mListGaleria.get(position).getImg());
                     new ViewUtil().guardarImg(getApplicationContext(),imgBM);
                 }
