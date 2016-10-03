@@ -23,6 +23,10 @@ import com.artecinnovaciones.aquarius.modelodao.PecesDulce;
 import com.artecinnovaciones.aquarius.modelodao.PecesDulceDao;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,9 @@ public class PacificosFragment extends Fragment implements TextWatcher {
     public CustomAutoCompleteView mCustomAutoCompleteView;
     public SearchAdapter mSearchAdapter;
 
+    private InterstitialAd mInterstitialAd;
+    static int p=0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,6 +56,23 @@ public class PacificosFragment extends Fragment implements TextWatcher {
     }
 
     private void pacificos(View view) {
+
+        AdView mAdView = ViewUtil.findViewById(view,R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+        new ViewUtil().requestNewInterstitial(mInterstitialAd);
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                new ViewUtil().requestNewInterstitial(mInterstitialAd);
+                tipos(p);
+            }
+        });
+
         recyclerPacificos = ViewUtil.findViewById(view, R.id.recycler_peces_pacificos);
         mCustomAutoCompleteView = ViewUtil.findViewById(view, R.id.filtrobusqueda);
         mCustomAutoCompleteView.setOnItemClickListener(mOnItemClickListener);
@@ -78,7 +102,12 @@ public class PacificosFragment extends Fragment implements TextWatcher {
         PecesAdapter adapter = new PecesAdapter(Listpeces, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                tipos(position);
+                p=position;
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }else {
+                    tipos(position);
+                }
             }
         });
 

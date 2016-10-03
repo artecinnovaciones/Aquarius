@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -137,6 +140,14 @@ public class ViewUtil {
             Toast.makeText(context, "¡Error al guardar la imágen!", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void requestNewInterstitial(InterstitialAd mInterstitialAd) {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
     }
 
     //public static final String TEMP_DIRECTORY_PATH = Environment.getExternalStorageDirectory()+ "/Peces/Temp/";

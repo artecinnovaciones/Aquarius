@@ -1,55 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/fondo_peces">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:padding="10dp"
-        android:background="@color/colorPrimaryDark">
+        android:layout_height="match_parent"
+        android:background="@drawable/fondo_peces">
 
-        <!--  <com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView
-              android:id="@+id/filtrobusqueda"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:background="@drawable/bg_drawablesearch"
-              android:completionThreshold="1"
-              android:ems="10"
-              android:hint="Buscar Peces"
-              android:imeOptions="actionSearch"
-              android:inputType="textAutoComplete"
-              android:paddingBottom="8dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="5dp"
-              android:paddingTop="8dp"
-              android:textColor="@color/colorPrimaryDark"
-              android:textColorHint="@color/colorPrimaryDark" /> -->
-        <com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView
-            android:id="@+id/filtrobusqueda"
-            android:layout_width="fill_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_drawablesearch"
-            android:completionThreshold="1"
-            android:ems="10"
-            android:hint="  Buscar peces"
-            android:drawableLeft="@drawable/buscar"
-            android:padding="7dp"
-            android:singleLine="true"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/divider" />
+            android:visibility="visible"
+            android:padding="10dp"
+            android:background="@color/colorPrimaryDark">
 
-    </RelativeLayout>
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_peces_pacificos"
-        android:layout_width="match_parent"
+            <!--  <com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView
+                  android:id="@+id/filtrobusqueda"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/bg_drawablesearch"
+                  android:completionThreshold="1"
+                  android:ems="10"
+                  android:hint="Buscar Peces"
+                  android:imeOptions="actionSearch"
+                  android:inputType="textAutoComplete"
+                  android:paddingBottom="8dp"
+                  android:paddingLeft="10dp"
+                  android:paddingRight="5dp"
+                  android:paddingTop="8dp"
+                  android:textColor="@color/colorPrimaryDark"
+                  android:textColorHint="@color/colorPrimaryDark" /> -->
+            <com.artecinnovaciones.aquarius.adapters.CustomAutoCompleteView
+                android:id="@+id/filtrobusqueda"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_drawablesearch"
+                android:completionThreshold="1"
+                android:ems="10"
+                android:hint="  Buscar peces"
+                android:drawableLeft="@drawable/buscar"
+                android:padding="7dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/divider" />
+
+        </RelativeLayout>
+        <!-- TODO: Update blank fragment layout -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_peces_pacificos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="7dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="7dp">
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
 
-    </android.support.v7.widget.RecyclerView>
-
-</LinearLayout>
+</RelativeLayout>

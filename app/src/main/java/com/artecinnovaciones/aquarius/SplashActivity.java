@@ -18,6 +18,9 @@ import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.CompararBd;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class SplashActivity extends Activity {
 
@@ -30,6 +33,8 @@ public class SplashActivity extends Activity {
 
     int ancho = 0;
     LinearLayout Pez_Layout;
+
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,19 @@ public class SplashActivity extends Activity {
             moverProgress();
         }
 
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+        new ViewUtil().requestNewInterstitial(mInterstitialAd);
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                new ViewUtil().requestNewInterstitial(mInterstitialAd);
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                SharedUtils.getInstance(getBaseContext()).getclear();
+                finish();
+            }
+        });
     }
 
     private void validarBd() {
@@ -171,9 +189,13 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                SharedUtils.getInstance(getBaseContext()).getclear();
-                finish();
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    SharedUtils.getInstance(getBaseContext()).getclear();
+                    finish();
+                }
             }
         }.execute();
 
@@ -210,9 +232,13 @@ public class SplashActivity extends Activity {
             @Override
             protected void onPostExecute(Void aVoid) {
 
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                SharedUtils.getInstance(getBaseContext()).getclear();
-                finish();
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    SharedUtils.getInstance(getBaseContext()).getclear();
+                    finish();
+                }
             }
         }.execute();
 

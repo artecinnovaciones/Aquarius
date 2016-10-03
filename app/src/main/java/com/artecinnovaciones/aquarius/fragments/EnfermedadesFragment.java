@@ -11,13 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.artecinnovaciones.aquarius.DetallesActivity;
+import com.artecinnovaciones.aquarius.MainActivity;
 import com.artecinnovaciones.aquarius.R;
 import com.artecinnovaciones.aquarius.adapters.EnfermedadesAdapter;
 import com.artecinnovaciones.aquarius.modelodao.ControladorBd.BdController;
 import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedades;
 import com.artecinnovaciones.aquarius.modelodao.PecesEnfermedadesDao;
+import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 import com.artecinnovaciones.aquarius.utilidades.CustomItemClickListener;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +37,9 @@ public class EnfermedadesFragment extends Fragment {
     private ArrayList<PecesEnfermedades> ArrayListEnfermedades;
     private List<PecesEnfermedades> mListEnfermedades;
 
+    private InterstitialAd mInterstitialAd;
+    static int p=0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +50,23 @@ public class EnfermedadesFragment extends Fragment {
     }
 
     public void metodo (View v){
+
+        AdView mAdView = ViewUtil.findViewById(v,R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+        new ViewUtil().requestNewInterstitial(mInterstitialAd);
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                new ViewUtil().requestNewInterstitial(mInterstitialAd);
+                tipos(p);
+            }
+        });
+
         recycler= ViewUtil.findViewById(v,R.id.recycler_enfermedades);
 
         LinearLayoutManager linear= new LinearLayoutManager(getActivity());
@@ -68,7 +94,12 @@ public class EnfermedadesFragment extends Fragment {
         EnfermedadesAdapter adapter = new EnfermedadesAdapter(mListEnfermedades, new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                tipos(position);
+                p=position;
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }else {
+                    tipos(position);
+                }
             }
         });
         recycler.setAdapter(adapter);
