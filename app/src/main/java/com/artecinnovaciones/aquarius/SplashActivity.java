@@ -6,11 +6,13 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.artecinnovaciones.aquarius.servicioretrofit.Controlador.PecesControlator;
@@ -18,23 +20,20 @@ import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.CompararBd;
 import com.artecinnovaciones.aquarius.servicioretrofit.modelresponse.PecesResponse;
 import com.artecinnovaciones.aquarius.sharedpreferenceutils.SharedUtils;
 import com.artecinnovaciones.aquarius.utilidades.ViewUtil;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 
 public class SplashActivity extends Activity {
 
     ProgressBar progress;
     Animation anim;
     ImageView logo, pez_progress;
-    TextView porcentaje;
+    TextView porcentaje,error;
 
     boolean mNetworkDataWifi;
 
     int ancho = 0;
     LinearLayout Pez_Layout;
 
-    private InterstitialAd mInterstitialAd;
+    RelativeLayout layoutProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,25 +56,14 @@ public class SplashActivity extends Activity {
 
         mNetworkDataWifi = ViewUtil.validateDataNetwork(SplashActivity.this);
 
+        error = (TextView)findViewById(R.id.error_descarga);
+        layoutProgress = (RelativeLayout) findViewById(R.id.RelativeProgress);
+
         if (mNetworkDataWifi) {
             validarBd();
         } else {
-            moverProgress();
+            errorDescarga();
         }
-
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
-        new ViewUtil().requestNewInterstitial(mInterstitialAd);
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                new ViewUtil().requestNewInterstitial(mInterstitialAd);
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                SharedUtils.getInstance(getBaseContext()).getclear();
-                finish();
-            }
-        });
     }
 
     private void validarBd() {
@@ -130,7 +118,6 @@ public class SplashActivity extends Activity {
                 }
                 //   mProgressDialog.show();
             }
-
 
             @Override
             protected PecesResponse doInBackground(Void... params) {
@@ -189,13 +176,9 @@ public class SplashActivity extends Activity {
 
             @Override
             protected void onPostExecute(PecesResponse pecesResponse) {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                    SharedUtils.getInstance(getBaseContext()).getclear();
-                    finish();
-                }
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                SharedUtils.getInstance(getBaseContext()).getclear();
+                finish();
             }
         }.execute();
 
@@ -232,13 +215,42 @@ public class SplashActivity extends Activity {
             @Override
             protected void onPostExecute(Void aVoid) {
 
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     SharedUtils.getInstance(getBaseContext()).getclear();
                     finish();
-                }
+            }
+        }.execute();
+
+    }
+
+    private void errorDescarga() {
+        mMoverPezAsyncTask = new AsyncTask<Void, Integer, Void>() {
+            int progess = 0;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                error.setVisibility(View.VISIBLE);
+                layoutProgress.setVisibility(View.GONE);
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                SystemClock.sleep(5000);
+                return null;
+            }
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                SharedUtils.getInstance(getBaseContext()).getclear();
+                finish();
             }
         }.execute();
 

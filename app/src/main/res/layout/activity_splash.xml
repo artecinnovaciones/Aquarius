@@ -18,7 +18,18 @@
         android:layout_gravity="center"
         android:src="@drawable/logo_aquarium5" />
 
+    <TextView
+        android:id="@+id/error_descarga"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No cuenta con acceso a Internet, favor de intentar la descarga más tarde"
+        android:textColor="@color/icons"
+        android:textSize="16dp"
+        android:visibility="gone"/>
+
     <RelativeLayout
+        android:id="@+id/RelativeProgress"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
